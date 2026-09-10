@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "fiscal-rag-lab",
+  "version": "0.1.0",
+  "description": "Educational, evidence-based Brazilian fiscal-regulation research skill; MCP integration planned."
+}
