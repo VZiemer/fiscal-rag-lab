@@ -1,4 +1,4 @@
-# Architecture overview (proposal)
+# Architecture overview
 
 ## Intent and non-goals
 

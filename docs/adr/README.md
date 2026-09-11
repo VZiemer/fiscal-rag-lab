@@ -1,6 +1,6 @@
 # Architecture decision records
 
-All initial ADRs are **Proposed**, not final decisions. Review and accept them individually while building the lab.
+ADRs 0001–0005 foram revisados e aceitos em 14/11/2026: monólito modular, algoritmos próprios, MCP como adaptador, evidência versionada e fine-tuning condicionado à avaliação. A aceitação define a direção de implementação; não afirma que implantação ou treinamento já ocorreram. Não haverá inferência automática de vigência nem inclusão de textos oficiais em git sem revisão das condições de redistribuição.
 
 - [0001 – Modular monolith and ports/adapters](0001-modular-monolith.md)
 - [0002 – Implement vector indexes ourselves](0002-manual-vector-index.md)
