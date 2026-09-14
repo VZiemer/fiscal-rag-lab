@@ -5,11 +5,13 @@
     "moduleResolution": "NodeNext",
     "strict": true,
     "declaration": true,
-    "rootDir": "packages",
+    "rootDir": ".",
     "outDir": "dist",
     "skipLibCheck": true
   },
   "include": [
-    "packages/**/*.ts"
+    "packages/**/*.ts",
+    "apps/**/*.ts",
+    "scripts/**/*.ts"
   ]
 }

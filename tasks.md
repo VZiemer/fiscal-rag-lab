@@ -7,7 +7,7 @@
 
 ## Milestone 1 — Authoritative data ingestion
 - [x] Inventory official NF-e/CFOP/NCM sources and redistribution constraints. (`docs(sources): catalog official sources`)
-- [ ] Build source download + checksum + metadata persistence. (`feat(ingest): add source snapshots`)
+- [x] Build source download + checksum + metadata persistence. (`feat(ingest): add source snapshots`)
 - [ ] Parse structured CFOP source and implement strict code lookup. (`feat(fiscal): implement CFOP lookup`)
 - [ ] Add legal-aware text chunking with article/exception relationships. (`feat(ingest): add legal chunker`)
 - [ ] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
