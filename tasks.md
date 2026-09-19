@@ -13,7 +13,7 @@
 - [x] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
 
 ## Milestone 2 — Hand-built retrieval
-- [ ] Add exact vector index snapshot serialization. (`feat(vector): persist index`)
+- [x] Add exact vector index snapshot serialization. (`feat(vector): persist index`)
 - [ ] Implement BM25 lexical inverted index. (`feat(retrieval): add BM25`)
 - [ ] Implement K-Means and IVF. (`feat(vector): add IVF`)
 - [ ] Implement HNSW and benchmark. (`feat(vector): add HNSW`)

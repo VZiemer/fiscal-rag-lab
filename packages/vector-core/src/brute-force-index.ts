@@ -30,4 +30,29 @@ export class BruteForceIndex<T> implements VectorIndex<T> {
   }
 
   size(): number { return this.vectors.size; }
+
+  serialize(model: string): string {
+    if (!model.trim()) throw new Error('Embedding model required');
+    return JSON.stringify({ version: 1, algorithm: 'exact-cosine', model, dimensions: this.dimensions ?? null,
+      entries: [...this.vectors].map(([id, entry]) => ({ id, vector: Array.from(entry.vector), payload: entry.payload })) });
+  }
+
+  static deserialize<T>(json: string, model: string, validatePayload: (value: unknown) => T): BruteForceIndex<T> {
+    const snapshot = JSON.parse(json);
+    if (snapshot?.version !== 1 || snapshot.algorithm !== 'exact-cosine' || snapshot.model !== model ||
+        !Array.isArray(snapshot.entries) || (snapshot.dimensions !== null &&
+        (!Number.isSafeInteger(snapshot.dimensions) || snapshot.dimensions < 1))) throw new Error('Incompatible index snapshot');
+    const result = new BruteForceIndex<T>();
+    const seen = new Set<string>();
+    for (const entry of snapshot.entries) {
+      if (typeof entry?.id !== 'string' || seen.has(entry.id) || !Array.isArray(entry.vector) ||
+        entry.vector.length !== snapshot.dimensions || entry.vector.some((n: unknown) => typeof n !== 'number' || !Number.isFinite(n))) {
+        throw new Error('Corrupt index snapshot');
+      }
+      seen.add(entry.id);
+      result.add(entry.id, new Float32Array(entry.vector), validatePayload(entry.payload));
+    }
+    if (!snapshot.entries.length && snapshot.dimensions !== null) throw new Error('Inconsistent empty snapshot');
+    return result;
+  }
 }
