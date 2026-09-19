@@ -10,7 +10,7 @@
 - [x] Build source download + checksum + metadata persistence. (`feat(ingest): add source snapshots`)
 - [x] Parse structured CFOP source and implement strict code lookup. (`feat(fiscal): implement CFOP lookup`)
 - [x] Add legal-aware text chunking with article/exception relationships. (`feat(ingest): add legal chunker`)
-- [ ] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
+- [x] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
 
 ## Milestone 2 — Hand-built retrieval
 - [ ] Add exact vector index snapshot serialization. (`feat(vector): persist index`)
