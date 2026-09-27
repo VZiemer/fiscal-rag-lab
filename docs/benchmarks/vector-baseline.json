@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-11-14T13:08:22.214Z",
+  "codeSha256": "a25bc17d608ee8b386bd334335635e15f83341910486d70fd02ae7cd6789d75e",
+  "conditions": {
+    "seed": 20261114,
+    "count": 1000,
+    "dimensions": 32,
+    "queryCount": 100,
+    "k": 10,
+    "repeats": 3,
+    "warmupQueries": 5,
+    "dataset": "synthetic-uniform-v1; independent queries; no fiscal/semantic claims",
+    "node": "v22.17.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "AMD Ryzen 5 5600G with Radeon Graphics         ",
+    "logicalCpus": 12,
+    "totalMemoryBytes": 25013874688,
+    "gcExposed": true,
+    "memoryCaveat": "Sequential process deltas after GC; RSS includes runtime/JIT, not isolated index memory. JSON byte sizes are diagnostic; IVF size not measured."
+  },
+  "results": [
+    {
+      "name": "exact",
+      "params": {},
+      "buildMs": 1.9801999999999964,
+      "recallAt10": 1,
+      "meanMs": 0.2431006666666666,
+      "p50Ms": 0.2301999999999964,
+      "p95Ms": 0.32569999999998345,
+      "heapDeltaBytes": 268360,
+      "rssDeltaBytes": 839680,
+      "representationBytes": 670393
+    },
+    {
+      "name": "ivf",
+      "params": {
+        "nlist": 16,
+        "nprobe": 4,
+        "seed": 42
+      },
+      "buildMs": 60.70599999999999,
+      "recallAt10": 0.604,
+      "meanMs": 0.08444866666666694,
+      "p50Ms": 0.07670000000001664,
+      "p95Ms": 0.12179999999997904,
+      "heapDeltaBytes": 335280,
+      "rssDeltaBytes": 1957888,
+      "representationBytes": null
+    },
+    {
+      "name": "hnsw",
+      "params": {
+        "m": 12,
+        "efConstruction": 100,
+        "efSearch": 64,
+        "seed": 42
+      },
+      "buildMs": 754.5768999999999,
+      "recallAt10": 0.998,
+      "meanMs": 0.5155063333333374,
+      "p50Ms": 0.5072999999999865,
+      "p95Ms": 0.6306999999999334,
+      "heapDeltaBytes": 1117560,
+      "rssDeltaBytes": 29716480,
+      "representationBytes": 821602
+    }
+  ]
+}
