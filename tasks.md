@@ -21,7 +21,7 @@
 
 ## Milestone 3 — MCP and public demo
 - [x] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
-- [ ] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
+- [x] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
 - [ ] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
