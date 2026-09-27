@@ -20,7 +20,7 @@
 - [x] Implement exact/lexical/vector query routing + RRF. (`feat(retrieval): add hybrid search`)
 
 ## Milestone 3 — MCP and public demo
-- [ ] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
+- [x] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
 - [ ] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
 - [ ] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
