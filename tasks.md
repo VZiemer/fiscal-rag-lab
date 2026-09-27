@@ -17,7 +17,7 @@
 - [x] Implement BM25 lexical inverted index. (`feat(retrieval): add BM25`)
 - [x] Implement K-Means and IVF. (`feat(vector): add IVF`)
 - [x] Implement HNSW and benchmark. (`feat(vector): add HNSW`)
-- [ ] Implement exact/lexical/vector query routing + RRF. (`feat(retrieval): add hybrid search`)
+- [x] Implement exact/lexical/vector query routing + RRF. (`feat(retrieval): add hybrid search`)
 
 ## Milestone 3 — MCP and public demo
 - [ ] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
