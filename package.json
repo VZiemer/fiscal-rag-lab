@@ -9,6 +9,7 @@
     "ingest": "npm run build && node dist/apps/ingestion-worker/src/main.js",
     "benchmark:vectors": "npm run build && node --expose-gc dist/scripts/benchmark-vectors.js",
     "start": "npm run build && node dist/apps/mcp-server/src/main.js",
+    "plugin:prepare": "npm run build && node dist/scripts/prepare-plugin.js",
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
