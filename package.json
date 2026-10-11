@@ -13,13 +13,17 @@
     "demo:mcp": "npm run build && node dist/scripts/demo-mcp.js",
     "eval:retrieval": "npm run build && node --expose-gc dist/scripts/evaluate-retrieval.js",
     "training:prepare": "npm run build && node dist/scripts/prepare-training.js",
-    "test": "npm run build && node --test test/*.test.mjs",
+    "build:lambda": "npm run build && node dist/scripts/build-lambda.js",
     "corpus:build": "npm run build && node dist/apps/ingestion-worker/src/build-corpus.js",
-    "check:boundaries": "npm run build && node dist/scripts/check-boundaries.js"
+    "check:boundaries": "npm run build && node dist/scripts/check-boundaries.js",
+    "smoke:remote": "npm run build && node dist/scripts/smoke-remote.js",
+    "public:prepare": "npm run build && node dist/scripts/prepare-public-assets.js",
+    "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/client": "2.4.0",
     "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
     "typescript": "5.8.3"
   },
   "dependencies": {

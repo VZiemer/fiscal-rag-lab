@@ -13,4 +13,5 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run check:boundaries
+      - run: npm run build:lambda
       - run: npm audit --omit=dev

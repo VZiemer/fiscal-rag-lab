@@ -8,3 +8,9 @@ coverage/
 .data/
 .cache/
 __pycache__/
+# Local AWS credential exports must never enter repository history.
+/*.csv
+*.pem
+*.key
+*.p12
+.aws/

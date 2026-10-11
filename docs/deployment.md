@@ -2,7 +2,9 @@
 
 Implementado e testado localmente: `/mcp`, `/health`, `/privacy`, quota 60 requisições/minuto por conexão de origem, quota global 600/minuto, máximo 16 simultâneas, corpo 64 KiB, validação Host/Origin, logs sem conteúdo de consulta. Quotas contam chamadas HTTP, inclusive negociação e listagem de ferramentas.
 
-TODO externo: não existe provedor, domínio ou conta de deploy configurados. Docker não está instalado neste ambiente; o empacotamento foi preparado mas a imagem não foi construída. Não há endpoint público ativo nem teste de TLS realizado.
+Implantação realizada em 14/11/2026 na AWS: [MCP HTTPS](https://d2kvl1uo6lcsgz.cloudfront.net/mcp), [prontidão](https://d2kvl1uo6lcsgz.cloudfront.net/health) e [privacidade](https://d2kvl1uo6lcsgz.cloudfront.net/privacy). S3 privado + CloudFront + HTTP API + Lambda Node 22. Cliente MCP oficial remoto verificou as quatro ferramentas em modo anterior e moderno. Implementação e instruções em `deploy/aws/`. Contato autorizado do operador é inserido somente nos artefatos locais/publicados, não no Git.
+
+O pacote Docker abaixo é alternativa não utilizada: Docker não está instalado neste host e a imagem não foi construída. A demonstração AWS usa dez resumos editoriais de páginas oficiais, sem tabelas completas CFOP/NCM, sem embeddings aprendidos e com vigência desconhecida. Não é uma implantação de corpus fiscal completo.
 
 Para um host Linux com Docker Compose e DNS já apontado:
 

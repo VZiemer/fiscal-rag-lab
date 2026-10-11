@@ -1,0 +1,15 @@
+# AWS: S3 + CloudFront + Lambda
+
+S3 privado serve a página de demonstração e política de privacidade por CloudFront com OAC. `/mcp` e `/health` apontam a uma HTTP API com Lambda Node 22. S3 sozinho não executa MCP. Corpus público inicial: dez paráfrases editoriais de fontes oficiais da Receita, sem tabelas oficiais completas de códigos. Busca usa controle lexical, sem LLM remoto.
+
+A HTTP API aplica alvo de 5 req/s e burst 10; esses limites AWS são best-effort. Lambda tem timeout 28 s e memória 256 MiB, compartilhando a concorrência da conta. A reserva de concorrência foi rejeitada pela cota atual (mínimo de dez execuções não reservadas); uma futura revisão pode solicitar aumento. O código mantém quota por origem na instância. CloudFront desabilita cache para MCP e encaminha os cabeçalhos necessários. A origem verifica header secreto gerado na implantação; não há Function URL pública. IAM da função permite apenas escrever no seu log group, com retenção 7 dias.
+
+Escolhemos API Gateway em vez de OAC de Lambda Function URL: a [AWS exige hash de payload do cliente em POST com esse OAC](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-lambda.html), o que clientes MCP genéricos não fornecem. [Throttling HTTP API](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-throttling.html).
+
+Credenciais CSV ficam somente na raiz ignorada. Nunca passá-las em argumentos de linha de comando nem imprimi-las. O script lê os campos em memória e fornece env ao processo AWS. Parâmetro secreto é NoEcho e arquivos operacionais ficam em `.data/aws/`, fora do Git. Empacotamento ZIP contém somente `index.mjs` e `corpus.json`.
+
+Fluxo: `npm run build:lambda`; `npm run public:prepare` (contato autorizado em `.data/aws/contact.json`); `scripts/aws-deploy.ps1 -Action Validate`, `Start`, `Status`, `Finish`, `EnableOrigin`, `Status`, `Finish`. `EnableOrigin` fixa a origem HTTPS depois que CloudFront fornece seu hostname; não executar de novo sem mudança. `Retry` aceita somente rollback completo da stack identificada com a tag deste projeto. O estado e as referências de recursos ficam em `.data/aws/deployment.json`. A publicação final invalida os caminhos estáticos atualizados.
+
+Verificação independente: `npm run smoke:remote -- https://d2kvl1uo6lcsgz.cloudfront.net/mcp .data/aws/remote-smoke.json`. Não exige chaves AWS. O teste verifica HTTPS, quatro ferramentas, validação de entradas, procedência, ausência das tabelas não carregadas e estado de vigência desconhecida, nas duas negociações de protocolo. Isso não equivale a teste dentro de ChatGPT Work.
+
+Recursos são identificados por stack isolada `fiscal-rag-lab-demo` em us-east-1, sem alterar serviços existentes. O domínio padrão CloudFront fornece HTTPS sem depender de DNS próprio. S3, CloudFront, API Gateway, Lambda e logs podem gerar cobrança por uso; não há provisioned concurrency, NAT Gateway, EC2 ou treinamento de modelo. Para desligar, remover objetos dos buckets exclusivos desta implantação e excluir a stack após conferir os identificadores em `.data/aws/deployment.json`.
