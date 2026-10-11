@@ -4,6 +4,7 @@
 - [x] Establish public-ready repository scaffold, C4 model, proposed ADRs and contributor rules. (`docs: initialize architecture and governance`)
 - [x] Implement brute-force cosine vector index with automated tests. (`feat(vector): add exact-search reference implementation`)
 - [x] Review and accept/revise ADR-0001 to ADR-0005. (`docs(adr): accept initial decisions`)
+- [x] Enforce dependency boundaries, reproducible installs and runtime audit in CI. (`ci: verify architecture and runtime`)
 
 ## Milestone 1 — Authoritative data ingestion
 - [x] Inventory official NF-e/CFOP/NCM sources and redistribution constraints. (`docs(sources): catalog official sources`)
