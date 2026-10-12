@@ -1,0 +1,13 @@
+Fiscal RAG Lab — condições de uso experimental — 14/11/2026
+
+Demonstração educativa de recuperação documental, sem garantia de disponibilidade ou adequação a decisões fiscais. Não substitui consulta à legislação aplicável e revisão profissional. Similaridade de texto ou presença de um código não determina sua aplicabilidade a uma operação.
+
+Não use o serviço para emitir documentos fiscais, calcular obrigações, processar dados confidenciais ou obter uma classificação definitiva de produto. Não envie dados pessoais, credenciais ou XML de notas. A aplicação oferece somente consultas de leitura e pode aplicar limites de tráfego.
+
+O corpus desta edição é restrito: dez paráfrases editoriais de páginas da Receita sobre NCM/Classif. Não contém tabelas oficiais completas CFOP/NCM. Vigência desconhecida permanece desconhecida. Confira as fontes oficiais referenciadas e seu contexto antes de usar qualquer informação.
+
+Código do projeto sob MIT; materiais de terceiros conservam suas condições próprias. A política de privacidade descreve o processamento técnico. Estas condições descrevem o uso experimental, sem declarar correção fiscal ou conformidade jurídica integral.
+
+Responsável: {{OPERATOR_NAME}}
+Contato: {{OPERATOR_EMAIL}}
+Site: {{OPERATOR_SITE}}

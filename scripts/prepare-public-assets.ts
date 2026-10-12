@@ -18,7 +18,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const contact: PublicContact = JSON.parse(await readFile(process.argv[2] ?? '.data/aws/contact.json', 'utf8'));
   const output = process.argv[3] ?? '.data/aws/public';
   await mkdir(output, { recursive: true });
-  for (const [name, html] of [['index.html', true], ['privacy.txt', false]] as const) {
+  for (const [name, html] of [['index.html', true], ['privacy.txt', false], ['support.txt', false], ['terms.txt', false]] as const) {
     const template = await readFile(join('deploy/aws/public', name), 'utf8');
     await writeFile(join(output, name), renderContact(template, contact, html));
   }

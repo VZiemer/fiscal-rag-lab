@@ -103,7 +103,9 @@ try {
     $state | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath '.data/aws/deployment.json' -Encoding utf8
     $null = Invoke-ProjectAws @('s3api', 'put-object', '--bucket', $outputs.PublicBucket, '--key', 'index.html', '--body', '.data/aws/public/index.html', '--content-type', 'text/html; charset=utf-8', '--cache-control', 'max-age=300')
     $null = Invoke-ProjectAws @('s3api', 'put-object', '--bucket', $outputs.PublicBucket, '--key', 'privacy', '--body', '.data/aws/public/privacy.txt', '--content-type', 'text/plain; charset=utf-8', '--cache-control', 'max-age=300')
-    $null = Invoke-ProjectAws @('cloudfront', 'create-invalidation', '--distribution-id', $outputs.DistributionId, '--paths', '/', '/index.html', '/privacy')
+    $null = Invoke-ProjectAws @('s3api', 'put-object', '--bucket', $outputs.PublicBucket, '--key', 'support', '--body', '.data/aws/public/support.txt', '--content-type', 'text/plain; charset=utf-8', '--cache-control', 'max-age=300')
+    $null = Invoke-ProjectAws @('s3api', 'put-object', '--bucket', $outputs.PublicBucket, '--key', 'terms', '--body', '.data/aws/public/terms.txt', '--content-type', 'text/plain; charset=utf-8', '--cache-control', 'max-age=300')
+    $null = Invoke-ProjectAws @('cloudfront', 'create-invalidation', '--distribution-id', $outputs.DistributionId, '--paths', '/', '/index.html', '/privacy', '/support', '/terms')
     Write-Output $outputs.Endpoint
   }
 } finally {
