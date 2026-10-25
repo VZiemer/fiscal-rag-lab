@@ -2,6 +2,8 @@
 
 O plugin privado já foi salvo. Abra o link retornado pelo Plugin Creator, instale **Fiscal RAG Lab** e inicie uma conversa nova no Work com esse plugin selecionado. Instalar o Plugin Creator não instala automaticamente o Fiscal RAG Lab. Se a sessão continuar sem as quatro ferramentas, conferir a conexão do MCP do plugin; uma resposta obtida por navegação na Receita não valida a conexão.
 
+No host Codex, o endpoint também foi registrado diretamente como `fiscal_rag_lab` pela CLI. Veja `docs/codex-connection.md`. A leitura do registro confirmou habilitação; as ferramentas devem ser verificadas após recarregar o catálogo. Esse registro não torna o plugin público nem comprova execução no Work hospedado.
+
 O controle de interface falhou na inicialização deste ambiente, antes de acessar janelas. Não existe gravação automática concluída. Para uma demonstração manual, iniciar a captura de tela do sistema antes dos passos abaixo, mantendo credenciais e conversas privadas fora da imagem.
 
 1. Mostrar o plugin selecionado e perguntar: “Quais formatos de download NCM existem?”. Verificar chamada de `search_regulations`, evidência `ncm-formats`, URL oficial, resumo editorial e vigência desconhecida.
