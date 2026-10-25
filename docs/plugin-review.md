@@ -20,6 +20,7 @@ Casos para o revisor: código exato → ferramenta de lookup; texto ambíguo →
 - **Not run:** seleção de ferramenta e respostas do agente no Work, incluindo os três cenários negativos. Ensaio do cliente oficial não é evidência desses comportamentos.
 - **Blocked:** instalação/captura de walkthrough pelo runtime de interface — falha `setup refresh had errors` antes de acessar janelas. O controle disponível não ofereceu uma gravação concluída; não existe URL de vídeo a declarar.
 - **Confirmed:** Brasil (`BR`) como disponibilidade para uma eventual publicação; plugin atual continua `USER` / `PRIVATE`.
-- **Pending:** confirmação de ausência de comércio; verificação de identidade/domínio e atestações pelo desenvolvedor no portal. O campo de comércio foi omitido da cópia de preparação enquanto aguarda confirmação.
+- **Confirmed:** plugin gratuito, sem compras ou pagamentos; `review.commerce=false` e descrição explícita incluídos após confirmação do usuário.
+- **Pending:** vídeo real, testes das ferramentas no host, verificação de identidade/domínio e atestações pelo desenvolvedor no portal.
 
 Rascunho de listagem mantém a descrição educativa e declara o corpus restrito; o ZIP não está pronto para submissão enquanto esses itens estiverem pendentes. O pacote privado continua privado; não houve upload em portal de submissão nem publicação no diretório.
