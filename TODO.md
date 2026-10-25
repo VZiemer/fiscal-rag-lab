@@ -11,6 +11,8 @@
 
 ## Melhorias contornáveis
 
+- [ ] Avaliar no host a política RAG-only: citar apenas evidências retornadas e recusar fallback para web/memória em perguntas sem suporte. Skill privada 0.1.1 salva; configuração de projeto desativa busca web. Não confundir isso com isolamento de todas as ferramentas ou validação semântica de cada afirmação.
+
 - [ ] Revisar cota de concorrência Lambda antes de reservar capacidade. A conta rejeitou reserva de 2 por exigir mínimo de 10 não reservadas; o deploy usa throttling HTTP API e concorrência compartilhada, sem alterar recursos existentes.
 
 - [ ] Medir memória isolada por processo, variância e tamanho serializado de IVF; substituir filas ordenadas de HNSW por heaps se perfis justificarem.
