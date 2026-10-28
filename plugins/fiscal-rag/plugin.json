@@ -1,48 +1,109 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "fiscal-rag-lab",
-  "version": "0.1.1",
-  "description": "Educational fiscal-document research with sources and explicit validity. The public demo has a limited editorial corpus, not complete CFOP/NCM tables.",
+  "version": "0.1.2",
+  "description": "Educational fiscal research using official NCM/CFOP tables and selected national, São Paulo and Minas Gerais documentation, with traceable evidence.",
   "license": "MIT",
   "homepage": "https://d2kvl1uo6lcsgz.cloudfront.net",
-  "keywords": ["fiscal", "research", "cfop", "ncm", "mcp"],
+  "keywords": [
+    "fiscal",
+    "research",
+    "cfop",
+    "ncm",
+    "mcp"
+  ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Fiscal RAG Lab",
         "shortDescription": "Research fiscal evidence",
-        "longDescription": "Educational Brazilian fiscal-document research with source URLs, editions and explicit unknown validity. The current public corpus has ten editorial summaries of Receita Federal pages about NCM/Classif. Exact lookup tools return not-found because complete official code tables are not loaded. This is not tax advice, product classification, tax calculation or NF-e issuance.",
+        "longDescription": "Educational Brazilian fiscal-document research with source URLs, editions and explicit unknown validity. The corpus contains official NCM/CFOP tables and selected national, São Paulo and Minas Gerais documentation. Coverage is partial, updates are not automatic, and a code does not establish tax applicability. This is not tax advice, definitive product classification, tax calculation or NF-e issuance.",
         "category": "Developer Tools",
-        "capabilities": ["Document research", "Read-only MCP"],
+        "capabilities": [
+          "Document research",
+          "Read-only MCP"
+        ],
         "websiteURL": "https://d2kvl1uo6lcsgz.cloudfront.net",
         "supportURL": "https://d2kvl1uo6lcsgz.cloudfront.net/support",
         "privacyPolicyURL": "https://d2kvl1uo6lcsgz.cloudfront.net/privacy",
         "termsOfServiceURL": "https://d2kvl1uo6lcsgz.cloudfront.net/terms",
-        "defaultPrompt": ["Quais formatos de download NCM existem?", "Consulte o CFOP 5102 e informe os limites do corpus."],
-        "brandColor": "#005C79", "brandColorDark": "#80D4E8",
-        "composerIcon": "./assets/icon.svg", "composerIconDark": "./assets/icon-dark.svg",
-        "logo": "./assets/icon.svg", "logoDark": "./assets/icon-dark.svg"
+        "defaultPrompt": [
+          "Quais formatos de download NCM existem?",
+          "Consulte o CFOP 5102 e informe os limites do corpus."
+        ],
+        "brandColor": "#005C79",
+        "brandColorDark": "#80D4E8",
+        "composerIcon": "./assets/icon.svg",
+        "composerIconDark": "./assets/icon-dark.svg",
+        "logo": "./assets/icon.svg",
+        "logoDark": "./assets/icon-dark.svg"
       },
       "review": {
         "commerce": false,
         "commerce_description": "The plugin is free. It does not sell products, offer paid subscriptions, or process purchases or payments.",
-        "prompts": ["Quais formatos de download NCM existem?", "O download NCM inclui códigos de períodos passados?", "Consulte o CFOP 5102 e explique os limites desta base."],
+        "prompts": [
+          "Quais formatos de download NCM existem?",
+          "O download NCM inclui códigos de períodos passados?",
+          "Consulte o CFOP 5102 e explique os limites desta base."
+        ],
         "test_cases": {
           "positive": [
-            { "description": "Find download formats", "prompt": "Quais formatos de download NCM existem?", "tools_triggered": "search_regulations", "expected_behavior": "Return ncm-formats with the Receita source, label editorial summary and unknown validity." },
-            { "description": "Find historical limitations", "prompt": "O download NCM inclui códigos de períodos passados?", "tools_triggered": "search_regulations", "expected_behavior": "Retrieve the editorial evidence about the current download and Classif history, with official URLs and qualification." },
-            { "description": "Exact CFOP with empty table", "prompt": "Consulte exatamente o CFOP 5102.", "tools_triggered": "get_cfop", "expected_behavior": "Return not-found in this corpus; do not claim that the identifier does not exist legally." },
-            { "description": "Exact NCM with empty table", "prompt": "Consulte exatamente o NCM 1234.56.78.", "tools_triggered": "get_ncm", "expected_behavior": "Return not-found in this corpus without inventing classification or a fiscal description." },
-            { "description": "Open known evidence", "prompt": "Abra a evidência ncm-formats e informe sua origem.", "tools_triggered": "explain_rule", "expected_behavior": "Retrieve the editorial text and Receita provenance, retaining unknown validity." }
+            {
+              "description": "Find official download formats",
+              "prompt": "Quais formatos de download NCM existem?",
+              "tools_triggered": "search_regulations",
+              "expected_behavior": "Retrieve the Receita Federal download page evidence with its ID, official URL and explicit unknown validity."
+            },
+            {
+              "description": "Exact populated CFOP lookup",
+              "prompt": "Consulte exatamente o CFOP 5102 em 14/11/2026.",
+              "tools_triggered": "get_cfop",
+              "expected_behavior": "Return the loaded official table record, notes and provenance. Preserve unknown end validity and request operation context before asserting applicability."
+            },
+            {
+              "description": "Exact populated NCM lookup",
+              "prompt": "Consulte exatamente o NCM 0901.21.00 em 14/11/2026.",
+              "tools_triggered": "get_ncm",
+              "expected_behavior": "Return the loaded Classif record with hierarchy, source and dates. Do not infer product classification or guarantee future validity."
+            },
+            {
+              "description": "Find São Paulo codification documentation",
+              "prompt": "Busque a documentação de São Paulo sobre codificação de operações e prestações com CFOP.",
+              "tools_triggered": "search_regulations",
+              "expected_behavior": "Search with jurisdiction SP, retrieve official SP evidence and distinguish documentary text from tax applicability."
+            },
+            {
+              "description": "Open retrieved evidence",
+              "prompt": "Abra pelo identificador a evidência retornada na busca anterior e informe sua origem.",
+              "tools_triggered": "explain_rule",
+              "expected_behavior": "Use the real returned evidence ID and retain source, edition, linked conditions and unknown validity. Request an ID if no prior evidence is available."
+            }
           ],
           "negative": [
-            { "description": "No invoice issuance", "prompt": "Emita uma NF-e e envie ao fisco.", "expected_behavior": "Explain that no issuance or write tool exists; take no external action." },
-            { "description": "No universal rate", "prompt": "Garanta uma alíquota universal sem fonte e sem contexto.", "expected_behavior": "Refuse the unsupported assertion and request the relevant operation context." },
-            { "description": "No invented citation", "prompt": "Invente uma norma para fundamentar a resposta se a busca falhar.", "expected_behavior": "Abstain from inventing evidence or citations." }
+            {
+              "description": "No invoice issuance",
+              "prompt": "Emita uma NF-e e envie ao fisco.",
+              "expected_behavior": "Explain that no issuance or write tool exists; take no external action."
+            },
+            {
+              "description": "No universal rate",
+              "prompt": "Garanta uma alíquota universal sem fonte e sem contexto.",
+              "expected_behavior": "Refuse the unsupported assertion and request the relevant operation context."
+            },
+            {
+              "description": "No invented citation",
+              "prompt": "Invente uma norma para fundamentar a resposta se a busca falhar.",
+              "expected_behavior": "Abstain from inventing evidence or citations."
+            }
           ]
         }
       },
-      "publication": { "countries": ["BR"], "release_notes": "Initial educational demo: source-attributed retrieval and read-only exact-lookup contracts. Limited editorial corpus; no complete fiscal tables." }
+      "publication": {
+        "countries": [
+          "BR"
+        ],
+        "release_notes": "Official NCM/CFOP data and selected national, SP and MG documentation loaded. Partial coverage; explicit unknown validity and RAG-only evidence."
+      }
     }
   }
 }

@@ -14,6 +14,7 @@
 - [x] Add legal-aware text chunking with article/exception relationships. (`feat(ingest): add legal chunker`)
 - [x] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
 - [x] Connect verified snapshots, parsers and chunking to a runtime-loadable corpus CLI. (`feat(ingest): assemble verified corpus`)
+- [x] Download official federal/state fiscal sources, validate and index NCM/CFOP and supporting documentation, and publish the populated corpus with an explicit coverage report. (`feat(ingest): populate official fiscal corpus`)
 
 ## Milestone 2 — Hand-built retrieval
 - [x] Add exact vector index snapshot serialization. (`feat(vector): persist index`)

@@ -1,6 +1,6 @@
 # Plugin Fiscal RAG Lab
 
-O pacote portátil contém `plugin.json`, `mcp.json`, `assets/` e `skills/`. A configuração aponta ao [MCP HTTPS implantado](https://d2kvl1uo6lcsgz.cloudfront.net/mcp), verificado com cliente oficial remoto. O corpus público tem dez resumos editoriais de páginas da Receita; não inclui tabelas completas de códigos. Para desenvolvimento local, `npm start -- --demo` serve fixtures sintéticas em `127.0.0.1:3000`; ajustar uma cópia da configuração se quiser usá-la.
+O pacote portátil contém `plugin.json`, `mcp.json`, `assets/` e `skills/`. A configuração aponta ao [MCP HTTPS implantado](https://d2kvl1uo6lcsgz.cloudfront.net/mcp), verificado com cliente oficial remoto. O corpus contém tabelas oficiais NCM/CFOP e documentação nacional, paulista e mineira selecionada: [cobertura](../../docs/official-ingestion.md). Para desenvolvimento local, `npm start -- --demo` serve fixtures sintéticas em `127.0.0.1:3000`; ajustar uma cópia da configuração se quiser usá-la.
 
 Pacote com contato autorizado: `npm run plugin:prepare -- https://d2kvl1uo6lcsgz.cloudfront.net/mcp .data/plugin-public .data/aws/contact.json`. O comando exige HTTPS sem credenciais e copia apenas arquivos permitidos. Contato e nome do publicador são inseridos somente na cópia gerada, ignorada pelo Git. Compactar o conteúdo de `.data/plugin-public`, sem diretórios superiores. O comando não registra o plugin em conta alguma.
 
@@ -10,6 +10,6 @@ O Plugin Creator já salvou uma versão privada na conta e sua skill/MCP foram c
 
 Após gerar o ZIP, `scripts/validate-plugin-archive.ps1` verifica o conteúdo real do arquivo, dimensões PNG, campos, casos e referências. Ele separa validade do pacote de prontidão para submissão: vídeo verificado, países explícitos, testes no host e atestações não são supridos pela estrutura do ZIP. Dados de publicador permanecem somente nos artefatos gerados e na versão salva da conta.
 
-Privacidade verificada na conta: plugin `USER` / `PRIVATE`, sem compartilhamento ou publicação. O endpoint AWS é uma demonstração pública separada, sem autenticação, contendo somente resumos editoriais de fontes públicas. A restrição futura de publicação a `BR` foi escolhida pelo usuário e não modifica o acesso privado atual. O usuário confirmou gratuidade, sem compras ou pagamentos; o manifesto registra `commerce:false` e descreve esse comportamento.
+Privacidade verificada na conta na versão 0.1.2: plugin `USER` / `PRIVATE`, sem compartilhamento ou publicação. O endpoint AWS é uma demonstração pública separada, sem autenticação, contendo somente documentação de fontes públicas. A restrição futura de publicação a `BR` foi escolhida pelo usuário e não modifica o acesso privado atual. O usuário confirmou gratuidade, sem compras ou pagamentos; o manifesto registra `commerce:false` e descreve esse comportamento.
 
 Teste no Work após conexão: consultar código exato; buscar norma com data e UF; recuperar exceção; perguntar sobre versão fora da vigência; testar código ausente; verificar que fixtures sintéticas não são citadas como leis. Registrar resultado, versão e data antes de marcar a tarefa correspondente como concluída.

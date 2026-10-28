@@ -18,8 +18,8 @@ function dateCell(value: Cell): string | null {
 export function parseCfopRows(rows: Cell[][], provenance: Provenance): FiscalCode[] {
   assertProvenance(provenance);
   const aliases = {
-    code: ['cfop', 'codigo'], title: ['titulo', 'descricaocfop'],
-    notes: ['descricao', 'notasexplicativas'], from: ['iniciovigencia', 'iniciodevigencia', 'datainiciovigencia'],
+    code: ['cfop', 'codigo'], title: ['titulo', 'titulodocfop', 'descricaocfop'],
+    notes: ['descricao', 'descricaonotaexplicativa', 'notasexplicativas'], from: ['iniciovigencia', 'iniciodevigencia', 'datainiciovigencia'],
     to: ['fimvigencia', 'fimdevigencia', 'datafimvigencia']
   };
   const headerRow = rows.findIndex(row => row.some(c => header(c) === 'cfop') && row.some(c => aliases.title.includes(header(c))));
@@ -77,16 +77,28 @@ export function parseNcmJson(text: string, provenance: Provenance): FiscalCode[]
   if (!Array.isArray(data.Nomenclaturas)) throw new Error('Invalid Classif JSON');
   const records: FiscalCode[] = [];
   const seen = new Set<string>();
+  const ancestors: { code: string; description: string }[] = [];
   for (const row of data.Nomenclaturas) {
     if (typeof row.Codigo !== 'string' || typeof row.Descricao !== 'string') throw new Error('Invalid NCM row');
     // Classif includes chapter and heading nodes; only eight-digit leaf codes are lookup entries.
-    if (/^\d{2}(?:\.\d{2}(?:\.\d{2})?)?$/.test(row.Codigo) || /^\d{4}(?:\.\d{2})?$/.test(row.Codigo)) continue;
+    const digits = row.Codigo.replaceAll('.', '');
+    if (/^\d{2,7}$/.test(digits) && /^(?:\d{2}|\d{2}\.\d{2}|\d{4}\.\d{1,2}(?:\.\d)?)$/.test(row.Codigo)) {
+      while (ancestors.length && !digits.startsWith(ancestors.at(-1)!.code)) ancestors.pop();
+      ancestors.push({ code: digits, description: row.Descricao });
+      continue;
+    }
     const code = normalizeCode('ncm', row.Codigo);
     if (!row.Descricao.trim() || seen.has(code)) throw new Error('Missing description or duplicate NCM');
     seen.add(code);
-    const p = { ...provenance, validFrom: dateCell((row.Data_Inicio ?? null) as Cell), validTo: dateCell((row.Data_Fim ?? null) as Cell) };
+    while (ancestors.length && !code.startsWith(ancestors.at(-1)!.code)) ancestors.pop();
+    // Classif's 9999 sentinel means no stated end, not a guarantee of future tax validity.
+    const end = dateCell((row.Data_Fim ?? null) as Cell);
+    const p = { ...provenance, validFrom: dateCell((row.Data_Inicio ?? null) as Cell), validTo: end === '9999-12-31' ? null : end };
     assertProvenance(p);
-    records.push({ kind: 'ncm', code, description: row.Descricao, notes: null, provenance: p });
+    const notes = ancestors.map(a => `${a.code}: ${a.description}`);
+    if (row.Tipo_Ato_Ini && row.Numero_Ato_Ini && row.Ano_Ato_Ini) notes.push(`Ato de início informado na tabela: ${row.Tipo_Ato_Ini} ${row.Numero_Ato_Ini}/${row.Ano_Ato_Ini}.`);
+    if (end === '9999-12-31') notes.push('Data_Fim original: 31/12/9999 (sem término informado; não comprova vigência futura).');
+    records.push({ kind: 'ncm', code, description: row.Descricao, notes: notes.join('\n') || null, provenance: p });
   }
   if (!records.length) throw new Error('Empty NCM table');
   return records;

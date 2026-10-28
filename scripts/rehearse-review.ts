@@ -11,24 +11,25 @@ try {
   assert.equal(tools.length, 4);
   assert.ok(tools.every(t => t.annotations?.readOnlyHint === true && t.annotations?.openWorldHint === false && t.annotations?.destructiveHint === false));
   const calls = [
-    { name: 'search_regulations', arguments: { query: 'Quais formatos de download NCM existem?', topK: 5 } },
-    { name: 'search_regulations', arguments: { query: 'O download NCM inclui códigos de períodos passados?', topK: 5 } },
+    { name: 'search_regulations', arguments: { query: 'download NCM JSON XLSX', mode: 'lexical', topK: 5 } },
+    { name: 'search_regulations', arguments: { query: 'codificadas Código Fiscal Operações Prestações', jurisdiction: 'SP', mode: 'lexical', topK: 5 } },
     { name: 'get_cfop', arguments: { code: '5102' } },
-    { name: 'get_ncm', arguments: { code: '1234.56.78' } },
-    { name: 'explain_rule', arguments: { id: 'ncm-formats' } }
+    { name: 'get_ncm', arguments: { code: '0901.21.00' } },
+    { name: 'explain_rule', arguments: { id: '' } }
   ];
-  const results = [];
+  const results: { case: number; status: string; level: string; call: (typeof calls)[number]; response: Record<string, unknown> }[] = [];
   for (let i = 0; i < calls.length; i++) {
     const call = calls[i];
+    if (i === 4) call.arguments.id = ((results[0].response.evidence as { id: string }[])[0]).id;
     const response = await client.callTool(call);
     assert.ok(!response.isError);
     const data = response.structuredContent as Record<string, unknown>;
     if (i === 0 || i === 1) {
-      const evidence = data.evidence as { id: string; temporalStatus: string }[];
-      assert.ok(evidence.some(e => e.id === (i === 0 ? 'ncm-formats' : 'ncm-current')));
+      const evidence = data.evidence as { id: string; temporalStatus: string; provenance: {sourceId: string; jurisdiction: string} }[];
+      assert.ok(evidence.some(e => i === 0 ? e.provenance.sourceId === 'rfb-download-ncm' : e.provenance.jurisdiction === 'SP'));
       assert.ok(evidence.every(e => e.temporalStatus === 'unknown'));
-    } else if (i === 2 || i === 3) assert.equal(data.status, 'not-found');
-    else assert.equal((data.evidence as { id: string }).id, 'ncm-formats');
+    } else if (i === 2 || i === 3) assert.equal(data.status, 'found');
+    else assert.equal((data.evidence as { id: string }).id, call.arguments.id);
     results.push({ case: i + 1, status: 'Passed', level: 'MCP tool contract only', call, response: data });
   }
   const output = process.argv[2] ?? '.data/review-rehearsal.json';

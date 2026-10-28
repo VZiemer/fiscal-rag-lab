@@ -6,4 +6,4 @@ Site: {{OPERATOR_SITE}}
 
 Ao relatar um problema, informe a ferramenta, data aproximada e ID de requisição, quando disponível. Não envie XML de notas, dados pessoais de contribuintes, credenciais ou informações confidenciais.
 
-O serviço é experimental. O corpus inicial contém somente resumos editoriais de páginas da Receita sobre NCM/Classif, sem tabelas completas de códigos. Ausência de um registro no corpus não comprova sua inexistência legal. Não há atendimento de consultoria fiscal por este serviço.
+O serviço é experimental. A base contém tabelas NCM/CFOP e documentação oficial nacional, paulista e mineira selecionada. Cobertura parcial e sem atualização automática; ausência de um registro não comprova sua inexistência legal. Não há atendimento de consultoria fiscal por este serviço.

@@ -1,5 +1,5 @@
 param(
-  [ValidateSet('Validate', 'Start', 'Status', 'Finish', 'EnableOrigin', 'Failure', 'Retry')][string]$Action = 'Validate',
+  [ValidateSet('Validate', 'Start', 'Update', 'Status', 'Finish', 'EnableOrigin', 'Failure', 'Retry')][string]$Action = 'Validate',
   [string]$CredentialCsv = '.\cursor_accessKeys.csv',
   [string]$Region = 'us-east-1'
 )
@@ -85,6 +85,29 @@ try {
   }
   if ($stack.StackStatus -notin @('CREATE_COMPLETE','UPDATE_COMPLETE')) { throw "Stack is $($stack.StackStatus); wait before continuing." }
   $outputs = @{}; foreach ($entry in $stack.Outputs) { $outputs[$entry.OutputKey] = $entry.OutputValue }
+  if ($Action -eq 'Update') {
+    if (!($stack.Tags | Where-Object { $_.Key -eq 'Project' -and $_.Value -eq 'fiscal-rag-lab' })) { throw 'Refusing update outside this project stack.' }
+    $state = Get-Content -LiteralPath '.data/aws/deployment.json' -Raw | ConvertFrom-Json
+    if ($state.stack -ne $stackName -or $state.region -ne $Region) { throw 'Deployment state does not match target stack.' }
+    $null = Invoke-ProjectAws @('cloudformation', 'validate-template', '--template-body', 'file://deploy/aws/template.json')
+    $suffix = [Guid]::NewGuid().ToString('N')
+    $zip = Join-Path $root ".data/aws/lambda-$suffix.zip"
+    Compress-Archive -LiteralPath @('.data/aws/package/index.mjs', '.data/aws/package/corpus.json') -DestinationPath $zip
+    $codeKey = "lambda-$suffix.zip"
+    $null = Invoke-ProjectAws @('s3api', 'put-object', '--bucket', $state.artifactBucket, '--key', $codeKey, '--body', $zip)
+    @(
+      @{ ParameterKey = 'CodeBucket'; UsePreviousValue = $true },
+      @{ ParameterKey = 'CodeKey'; ParameterValue = $codeKey },
+      @{ ParameterKey = 'OriginSecret'; UsePreviousValue = $true },
+      @{ ParameterKey = 'PublicOrigin'; UsePreviousValue = $true }
+    ) | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath '.data/aws/update-parameters.json' -Encoding utf8
+    $null = Invoke-ProjectAws @('cloudformation', 'update-stack', '--stack-name', $stackName, '--template-body', 'file://deploy/aws/template.json', '--parameters', 'file://.data/aws/update-parameters.json', '--capabilities', 'CAPABILITY_IAM')
+    $state | Add-Member -NotePropertyName previousCodeKey -NotePropertyValue $state.codeKey -Force
+    $state | Add-Member -NotePropertyName codeKey -NotePropertyValue $codeKey -Force
+    $state | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath '.data/aws/deployment.json' -Encoding utf8
+    Write-Output 'Project Lambda/corpus update started; previous artifact retained for rollback.'
+    return
+  }
   if ($Action -eq 'EnableOrigin') {
     @(
       @{ ParameterKey = 'CodeBucket'; UsePreviousValue = $true },

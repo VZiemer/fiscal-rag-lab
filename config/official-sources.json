@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "scope": ["BR", "SP", "MG"],
+  "sources": [
+    {"sourceId":"rfb-ncm-current","sourceUrl":"https://portalunico.siscomex.gov.br/classif/api/publico/nomenclatura/download/json?perfil=PUBLICO","authority":"Receita Federal / Siscomex Classif","jurisdiction":"BR","edition":"tabela-vigente-consultada","format":"ncm-json","required":true},
+    {"sourceId":"nfe-cfop-20260904","sourceUrl":"https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=74KmX8poGpM=","authority":"Portal Nacional NF-e / ENCAT","jurisdiction":"BR","edition":"IT-2023.002-v2.10-2026-09-04","publishedAt":"2026-09-04","format":"cfop-xlsx","required":true},
+    {"sourceId":"rfb-download-ncm","sourceUrl":"https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul","authority":"Receita Federal","jurisdiction":"BR","edition":"pagina-consultada","format":"official-html","htmlProfile":"rfb"},
+    {"sourceId":"rfb-classif","sourceUrl":"https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif","authority":"Receita Federal","jurisdiction":"BR","edition":"pagina-consultada","format":"official-html","htmlProfile":"rfb"},
+    {"sourceId":"confaz-sinief-1970","sourceUrl":"https://www.confaz.fazenda.gov.br/legislacao/ajustes/sinief/cvsn_70","authority":"CONFAZ","jurisdiction":"BR","edition":"consolidacao-consultada","format":"official-html","htmlProfile":"confaz"},
+    {"sourceId":"confaz-nfe-0705","sourceUrl":"https://www.confaz.fazenda.gov.br/legislacao/ajustes/2005/AJ_007_05","authority":"CONFAZ","jurisdiction":"BR","edition":"consolidacao-consultada","format":"official-html","htmlProfile":"confaz"},
+    {"sourceId":"confaz-st-14218","sourceUrl":"https://www.confaz.fazenda.gov.br/legislacao/convenios/2018/CV142_18","authority":"CONFAZ","jurisdiction":"BR","edition":"consolidacao-consultada","format":"official-html","htmlProfile":"confaz"},
+    {"sourceId":"nfe-ncm-utrib-20260902","sourceUrl":"https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=aG9hbbgK%2FJM=","authority":"Portal Nacional NF-e / ENCAT","jurisdiction":"BR","edition":"publicada-2026-09-02","publishedAt":"2026-09-02","format":"archive"},
+    {"sourceId":"nfe-cclasstrib-20261030","sourceUrl":"https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=Lt6DZCZap0g=","authority":"Portal Nacional NF-e / ENCAT","jurisdiction":"BR","edition":"publicada-2026-10-30","publishedAt":"2026-10-30","format":"archive"},
+    {"sourceId":"confaz-moc7-visao","sourceUrl":"https://www.confaz.fazenda.gov.br/legislacao/arquivo-manuais/moc7-visao-geral.pdf","authority":"CONFAZ / Portal Nacional NF-e","jurisdiction":"BR","edition":"MOC-7.0-visao-geral","format":"archive"},
+    {"sourceId":"confaz-moc7-leiaute","sourceUrl":"https://www.confaz.fazenda.gov.br/legislacao/arquivo-manuais/moc7-anexo-i-leiaute-e-rv.pdf","authority":"CONFAZ / Portal Nacional NF-e","jurisdiction":"BR","edition":"MOC-7.0-anexo-I","format":"archive"},
+    {"sourceId":"sp-ricms-books","sourceUrl":"https://legislacao.fazenda.sp.gov.br/Paginas/textoricms.aspx","authority":"SEFAZ-SP","jurisdiction":"SP","edition":"RICMS-2000-livros-I-V-consolidacao-consultada","format":"official-html","htmlProfile":"sp-books"},
+    {"sourceId":"sp-ricms-annexes","sourceUrl":"https://legislacao.fazenda.sp.gov.br/Paginas/textoricms.aspx","authority":"SEFAZ-SP","jurisdiction":"SP","edition":"RICMS-2000-anexos-I-III-consolidacao-consultada","format":"official-html","htmlProfile":"sp-annexes"},
+    {"sourceId":"mg-ricms-index","sourceUrl":"https://www.fazenda.mg.gov.br/empresas/legislacao_tributaria/ricms_2023_seco/sumario2023_1.html","authority":"SEF-MG","jurisdiction":"MG","edition":"RICMS-2023-sem-dispositivos-revogados-consultado","format":"archive","crawlMg":true}
+  ]
+}

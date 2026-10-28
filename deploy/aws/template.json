@@ -26,7 +26,7 @@
     "McpFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
-        "Runtime": "nodejs22.x", "Handler": "index.handler", "Architectures": ["arm64"], "MemorySize": 256, "Timeout": 28,
+        "Runtime": "nodejs22.x", "Handler": "index.handler", "Architectures": ["arm64"], "MemorySize": 1024, "Timeout": 28,
         "Role": { "Fn::GetAtt": ["LambdaRole", "Arn"] },
         "Code": { "S3Bucket": { "Ref": "CodeBucket" }, "S3Key": { "Ref": "CodeKey" } },
         "Environment": { "Variables": { "ORIGIN_SECRET": { "Ref": "OriginSecret" }, "MCP_CORPUS": "/var/task/corpus.json", "PUBLIC_ORIGIN": { "Ref": "PublicOrigin" } } },

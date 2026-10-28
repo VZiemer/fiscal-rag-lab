@@ -1,7 +1,7 @@
 import { createMcpHandler } from '@modelcontextprotocol/server';
 import { timingSafeEqual, randomUUID } from 'node:crypto';
 import { buildMcpServer } from './server.js';
-import { loadServices } from './runtime.js';
+import { loadServices, type LoadedServices } from './runtime.js';
 import { FixedWindowLimiter, privacyPolicy } from './operations.js';
 
 interface HttpEvent {
@@ -9,7 +9,7 @@ interface HttpEvent {
   requestContext: { http: { method: string; sourceIp: string }; requestId?: string };
 }
 const limiter = new FixedWindowLimiter(120);
-let handlerPromise: Promise<ReturnType<typeof createMcpHandler>> | undefined;
+let handlerPromise: Promise<{ mcp: ReturnType<typeof createMcpHandler>; stats: LoadedServices['stats'] }> | undefined;
 const reply = (statusCode: number, body: string, contentType = 'application/json') => ({ statusCode,
   headers: { 'content-type': contentType, 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' }, body, isBase64Encoded: false });
 
@@ -28,10 +28,10 @@ export async function handler(event: HttpEvent) {
     }
     if (route !== 'mcp' && route !== 'health') { status = 404; return reply(status, '{"error":"Not found"}'); }
     handlerPromise ??= loadServices(process.env.MCP_CORPUS ?? '/var/task/corpus.json')
-      .then(services => createMcpHandler(() => buildMcpServer(services), { maxRequestBodySize: 64 * 1024 }));
-    const mcp = await handlerPromise;
+      .then(services => ({ mcp: createMcpHandler(() => buildMcpServer(services), { maxRequestBodySize: 64 * 1024 }), stats: services.stats }));
+    const { mcp, stats } = await handlerPromise;
     if (route === 'health' && event.requestContext.http.method === 'GET') {
-      status = 200; return reply(status, '{"status":"ok","readOnly":true,"corpus":"editorial-reference-v1","learnedEmbeddings":false}');
+      status = 200; return reply(status, JSON.stringify({ status: 'ok', readOnly: true, corpus: stats, learnedEmbeddings: false }));
     }
     if (!limiter.allow(event.requestContext.http.sourceIp)) { status = 429; return { ...reply(status, '{"error":"Rate limited"}'), headers: { ...reply(status, '').headers, 'retry-after': '60' } }; }
     const method = event.requestContext.http.method;
