@@ -101,8 +101,8 @@ Em [server.ts](apps/mcp-server/src/server.ts), o registro da ferramenta de busca
 ```ts
 server.registerTool('search_regulations', {
   description: 'Busca documental com fonte, vigência e exceções. Não determina tratamento tributário.',
-  inputSchema: searchInput,
-  outputSchema: searchOutput,
+  inputSchema: toMcpSchema(searchInput),
+  outputSchema: toMcpSchema(searchOutput),
   annotations: readOnlyAnnotations
 }, input => structured(searchOutput, () => services.retriever.search(input)));
 ```
@@ -111,7 +111,16 @@ Leia de dentro para fora: `services.retriever.search(input)` faz a pesquisa; `st
 
 **É aí que “o MCP chama o RAG”: uma chamada de método dentro do mesmo processo Node.js.** Não há um segundo servidor chamado “RAG” sendo consultado por HTTP nesta implantação. O salto de rede é entre o cliente e o endpoint MCP; a recuperação usa as classes e os dados carregados pela Lambda.
 
-Os [contratos](apps/mcp-server/src/contracts.ts) limitam, por exemplo, a consulta a 2.000 caracteres e `topK` a um inteiro entre 1 e 50. Zod valida estruturas e tipos; essa validação não comprova que uma conclusão fiscal esteja correta.
+Os [contratos](apps/mcp-server/src/contracts.ts) limitam, por exemplo, a consulta a 2.000 caracteres e `topK` a um inteiro entre 1 e 50. No código, eles são instâncias de `ObjectContract`, com campos definidos por `Field`:
+
+```ts
+const searchInput = new ObjectContract({
+  query: Field.text({ trim: true, minLength: 1, maxLength: 2000 }),
+  topK: Field.integer({ min: 1, max: 50 }).optional()
+});
+```
+
+O exemplo omite os demais campos para destacar a leitura das regras. `toMcpSchema` adapta o contrato para a interface do SDK; a [classe de validação](packages/validation/README.md) mantém Zod encapsulado internamente. Validar estruturas e tipos não comprova que uma conclusão fiscal esteja correta. Essa organização corresponde ao código refatorado no repositório; a refatoração não exige alteração do formato das mensagens MCP.
 
 ### 2.4 As quatro ferramentas têm caminhos diferentes
 

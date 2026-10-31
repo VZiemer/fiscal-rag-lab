@@ -1,6 +1,6 @@
 # Contratos MCP somente leitura
 
-Esquemas executáveis: `apps/mcp-server/src/contracts.ts` (Zod, entradas estritas sem propriedades extras). Os contratos não emitem notas, calculam tributos ou inferem uma classificação a partir da descrição do produto.
+Esquemas executáveis: `apps/mcp-server/src/contracts.ts`, com `ObjectContract` e `Field`, entradas estritas sem propriedades extras. [Validação encapsulada](../packages/validation/README.md): Zod fica privado no módulo de validação; `schema-adapter.ts` integra os contratos ao MCP por Standard Schema. Os contratos não emitem notas, calculam tributos ou inferem uma classificação a partir da descrição do produto.
 
 | Ferramenta | Entrada | Saída estruturada |
 | --- | --- | --- |

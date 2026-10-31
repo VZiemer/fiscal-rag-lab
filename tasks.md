@@ -25,6 +25,7 @@
 - [x] Implement exact/lexical/vector query routing + RRF. (`feat(retrieval): add hybrid search`)
 
 ## Milestone 3 — MCP and public demo
+- [x] Encapsulate validation in project-owned schema classes, isolate Zod and preserve MCP/CLI/evaluation contracts. (`refactor(validation): encapsulate schema contracts`)
 - [x] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
 - [x] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
 - [x] Prepare deployment package, rate limits, privacy and sanitized request logs locally. (`ops: prepare MCP demo deployment`)

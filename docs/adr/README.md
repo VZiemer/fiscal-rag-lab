@@ -8,3 +8,4 @@ ADRs 0001–0005 foram revisados e aceitos em 14/11/2026: monólito modular, alg
 - [0004 – Versioned legal provenance](0004-versioned-legal-corpus.md)
 - [0005 – Fine-tuning deferred until evaluation](0005-fine-tuning-strategy.md)
 - [0010 – Extração de documentação oficial HTML](0010-official-html-ingestion.md)
+- [0011 – Contratos próprios e encapsulamento de Zod](0011-validation-facade.md)

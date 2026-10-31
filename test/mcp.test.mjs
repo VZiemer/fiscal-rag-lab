@@ -16,6 +16,10 @@ for (const era of ['legacy', 'auto']) test(`MCP ${era}: independent official cli
     const tools = (await client.listTools()).tools;
     assert.deepEqual(tools.map(t => t.name).sort(), ['explain_rule', 'get_cfop', 'get_ncm', 'search_regulations']);
     assert.ok(tools.every(t => t.annotations.readOnlyHint && !t.annotations.destructiveHint && t.outputSchema));
+    const searchContract = tools.find(t => t.name === 'search_regulations');
+    assert.equal(searchContract.inputSchema.additionalProperties, false);
+    assert.equal(searchContract.inputSchema.properties.topK.maximum, 50);
+    assert.deepEqual(searchContract.inputSchema.required, ['query']);
     if (era === 'auto') assert.equal(client.getProtocolEra(), 'modern');
     for (const name of ['get_cfop', 'get_ncm']) {
       const response = await client.callTool({ name, arguments: { code: name === 'get_cfop' ? '5102' : '1234.56.78', date: '2026-11-14' } });
@@ -31,6 +35,9 @@ for (const era of ['legacy', 'auto']) test(`MCP ${era}: independent official cli
     assert.equal(old.structuredContent.evidence, null);
     for (const args of [{ code: '510' }, { code: '5102', extra: 'reject' }, { code: '5102', date: '2026-02-30' }]) {
       const invalid = await client.callTool({ name: 'get_cfop', arguments: args }); assert.equal(invalid.isError, true);
+    }
+    for (const args of [{ query: ' ' }, { query: 'x', topK: 51 }, { query: 'x', topK: '5' }, { query: 'x', date: '2026-02-30' }]) {
+      const invalid = await client.callTool({ name: 'search_regulations', arguments: args }); assert.equal(invalid.isError, true);
     }
     const badBody = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json', accept: 'application/json, text/event-stream' }, body: '{' });
     assert.ok(badBody.status >= 400);
