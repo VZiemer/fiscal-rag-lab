@@ -1,0 +1,48 @@
+{
+  "testedAt": "2026-11-14T15:51:05.442Z",
+  "endpoint": "https://d2kvl1uo6lcsgz.cloudfront.net/mcp",
+  "scenario": "initial-hardware-sale-sp-mg-20261114",
+  "status": "passed-documentary-contract",
+  "checks": [
+    {
+      "name": "cfop:6102",
+      "evidence": {
+        "sourceId": "nfe-cfop-20260904",
+        "checksum": "577e05eec452294945d0e9df1f9bb9b21a4af115938e75ec74cf6a541ae4dacf",
+        "temporalStatus": "unknown"
+      }
+    },
+    {
+      "name": "cfop:6108",
+      "evidence": {
+        "sourceId": "nfe-cfop-20260904",
+        "checksum": "577e05eec452294945d0e9df1f9bb9b21a4af115938e75ec74cf6a541ae4dacf",
+        "temporalStatus": "unknown"
+      }
+    },
+    {
+      "name": "ncm:83021000",
+      "evidence": {
+        "sourceId": "rfb-ncm-current",
+        "checksum": "98062c04f4e90e408c90d2347d2f5dcf57f937358670991b3d15078c75e9ab46",
+        "temporalStatus": "unknown"
+      }
+    },
+    {
+      "name": "st-review-required",
+      "evidence": {
+        "id": "mg-anexovii2023_4:section:2:unit:41:part:1",
+        "sourceUrl": "https://www.fazenda.mg.gov.br/empresas/legislacao_tributaria/ricms_2023_seco/anexovii2023_4.html",
+        "checksum": "99d73c3f055a9d34da9698ac62319e34a595544bce3bfd82f1880bdf38102e6f"
+      }
+    }
+  ],
+  "answerStatus": "conditional",
+  "legalApplicability": "not-certified",
+  "humanFiscalReview": "not-run",
+  "limitations": [
+    "Ausência de ST declarada pelo usuário não foi confirmada.",
+    "Vigência desconhecida não comprova aplicabilidade na data.",
+    "Não avalia a resposta ou escolha de ferramentas de uma LLM."
+  ]
+}

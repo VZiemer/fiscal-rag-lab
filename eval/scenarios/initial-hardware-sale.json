@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "id": "initial-hardware-sale-sp-mg-20261114",
+  "priority": 1,
+  "purpose": "Primeira pergunta de aceitação definida pelo usuário; não integra o benchmark heldout nem constitui parecer tributário.",
+  "question": "Sou revendedor de ferragens para móveis em SP e preciso emitir uma NF de venda para um CNPJ contribuinte em MG. NCM 8302.10.00, dobradiça de metal. O cliente vai comprar para uso próprio. Minha empresa é do Simples Nacional e não tem ST. A emissão será em 14/11/2026. Qual CFOP?",
+  "userSuppliedContext": {
+    "sellerActivity": "revenda de ferragens para móveis",
+    "originUF": "SP",
+    "destinationUF": "MG",
+    "sellerRegime": "Simples Nacional",
+    "buyerIsCnpj": true,
+    "buyerIsIcmsTaxpayer": true,
+    "buyerPurpose": "uso próprio",
+    "ncm": "83021000",
+    "productDescription": "dobradiça de metal",
+    "sellerDeclaresNoST": true,
+    "operationSTLegallyVerified": false,
+    "issueDate": "2026-11-14"
+  },
+  "acceptanceCriteria": [
+    "Consultar o NCM informado sem presumir classificação definitiva somente pela descrição do usuário.",
+    "Buscar a descrição e as notas do CFOP candidato no RAG e explicar a correspondência com o contexto informado.",
+    "Distinguir a finalidade de uso próprio da condição de contribuinte informada, sem inventar regras para essa distinção.",
+    "Tratar a ausência de ST como premissa declarada pelo usuário, separada de uma verificação legal da operação e do produto.",
+    "Citar identificadores, URLs oficiais, edição, vigência e exceções efetivamente retornados pelas ferramentas.",
+    "Não declarar adequação definitiva à data da emissão quando as evidências retornarem vigência desconhecida.",
+    "Não consultar fontes externas nem preencher lacunas com memória da LLM.",
+    "Responder com evidência insuficiente quando a conclusão ou uma ressalva essencial não puder ser sustentada."
+  ],
+  "expectedCfop": "6102",
+  "expectedAnswerStatus": "conditional",
+  "requiresSTReview": true,
+  "requiresTemporalQualification": true,
+  "comparisonCfop": "6108",
+  "evidenceReferences": [
+    {"tool":"get_cfop","code":"6102","sourceId":"nfe-cfop-20260904","sourceUrl":"https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=74KmX8poGpM=","edition":"IT-2023.002-v2.10-2026-09-04-2026-11-14","checksum":"577e05eec452294945d0e9df1f9bb9b21a4af115938e75ec74cf6a541ae4dacf","temporalStatus":"unknown"},
+    {"tool":"get_cfop","code":"6108","sourceId":"nfe-cfop-20260904","sourceUrl":"https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=74KmX8poGpM=","temporalStatus":"unknown"},
+    {"tool":"get_ncm","code":"83021000","sourceId":"rfb-ncm-current","sourceUrl":"https://portalunico.siscomex.gov.br/classif/api/publico/nomenclatura/download/json?perfil=PUBLICO","temporalStatus":"unknown"},
+    {"tool":"explain_rule","id":"mg-anexovii2023_4:section:2:unit:41:part:1","sourceUrl":"https://www.fazenda.mg.gov.br/empresas/legislacao_tributaria/ricms_2023_seco/anexovii2023_4.html","edition":"RICMS-2023-sem-dispositivos-revogados-consultado-2026-11-14","checksum":"99d73c3f055a9d34da9698ac62319e34a595544bce3bfd82f1880bdf38102e6f","temporalStatus":"unknown"}
+  ],
+  "reviewStatus": "Consulta autorizada ao RAG executada. Expectativa documental condicional; não aprovada como orientação tributária definitiva e sem revisão fiscal humana."
+}

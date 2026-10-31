@@ -1,0 +1,15 @@
+# Primeiro caso de aceitação: revenda de ferragens SP → MG
+
+Pergunta e contexto em `eval/scenarios/initial-hardware-sale.json`. São dados declarados pelo usuário, sem identificação de empresas ou números de documentos. A expressão “minha empresa não tem ST” não foi convertida em uma verificação jurídica de que a operação inteira está fora de ST.
+
+O usuário autorizou expressamente, nesta conversa, o acesso às quatro ferramentas do próprio RAG por cliente MCP do projeto. Não houve consulta externa, download de novas fontes ou uso de descrições fiscais memorizadas para sustentar a resposta. Consultas completas ficam em `.data/initial-scenario-results-*.json`; o Git conserva referências e hashes, sem espelhar os documentos.
+
+Resultado documental: **CFOP candidato 6.102, condicionado à operação estar efetivamente fora de ST e às demais características de revenda informadas**. O registro retornado pela ferramenta `get_cfop` descreve venda de mercadoria adquirida ou recebida de terceiros, sem industrialização pelo estabelecimento. O registro 6.108 é destinado a não contribuinte; o cenário declara destinatário contribuinte, ainda que compre para uso próprio. Fonte: `nfe-cfop-20260904`, IT 2023.002 v2.10, publicada em 04/09/2026, [planilha NF-e](https://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=74KmX8poGpM=). Os registros completos e ressalvas foram retornados pelo RAG.
+
+O NCM 8302.10.00 foi encontrado no Classif com descrição de dobradiças e hierarquia de ferragens de metais comuns. Isso não certifica classificação do produto concreto. A busca também retornou o item 76.0, CEST 10.076.00, NCM 8302.10.00 na tabela mineira, evidência `mg-anexovii2023_4:section:2:unit:41:part:1`, [Anexo VII/MG](https://www.fazenda.mg.gov.br/empresas/legislacao_tributaria/ricms_2023_seco/anexovii2023_4.html). Essa presença exige revisão das condições de aplicação; isoladamente não comprova ST devida nem sua ausência nesta operação.
+
+Todas essas consultas retornaram vigência desconhecida para 14/11/2026. O resultado é condicional, sem aprovação fiscal humana ou instrução definitiva para emitir a NF-e. Não deduzir CSOSN, alíquotas, DIFAL ou dispensa de ST a partir desse teste.
+
+`npm run eval:initial` verifica com cliente MCP remoto: presença dos códigos, descrições/notas pertinentes, procedência, hash fixado da tabela CFOP, vigência desconhecida, recuperação do alerta documental de ST e abertura pelo ID. O relatório de execução fica em `docs/data/initial-scenario-contract.json`. O comando valida contratos e recuperação, não o raciocínio de uma LLM nem a correção tributária final. O caso é de desenvolvimento/aceitação, separado do benchmark `heldout`.
+
+Lacunas observadas: consultas genéricas de revenda ranquearam devoluções/transferências acima do candidato pertinente; a definição explícita do grupo interestadual não foi recuperada nas buscas feitas. Há textos históricos do CONFAZ com datas no corpo que ainda não viraram intervalos por dispositivo. As pendências foram registradas no `TODO.md`; esse cenário não deve ser rotulado como orientação fiscal completa já homologada.

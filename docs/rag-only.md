@@ -2,6 +2,8 @@
 
 Política solicitada pelo usuário: consultar somente o Fiscal RAG Lab para fatos fiscais. A skill e o `AGENTS.md` exigem consulta às quatro ferramentas, citações de evidências/edições e abstenção quando o corpus não sustenta a resposta. Não há fallback para web, navegadores, outros conectores ou requests por código. Conhecimento memorizado não pode preencher lacunas fiscais. URLs retornadas servem como atribuição; não são buscadas automaticamente.
 
+Exceção de transporte autorizada expressamente pelo usuário nesta conversa: consultar as mesmas quatro ferramentas do RAG pelo cliente MCP do projeto quando não expostas no catálogo nativo. `scripts/query-rag.ts` restringe chamadas a essas ferramentas e ao endpoint existente. Essa autorização não permite busca externa, fetch de fontes ou substituição de evidências por memória. Foi usada para o [primeiro cenário de aceitação](initial-scenario.md); não representa disponibilidade de ferramentas nativas nesta sessão nem altera a política de outros usuários.
+
 Exemplos esperados:
 
 - Código sem registro: “Evidência insuficiente no RAG; a tabela completa não está carregada”, sem inventar descrição e sem declarar inexistência legal.
