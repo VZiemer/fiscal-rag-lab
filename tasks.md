@@ -5,6 +5,7 @@
 - [x] Implement brute-force cosine vector index with automated tests. (`feat(vector): add exact-search reference implementation`)
 - [x] Review and accept/revise ADR-0001 to ADR-0005. (`docs(adr): accept initial decisions`)
 - [x] Enforce dependency boundaries, reproducible installs and runtime audit in CI. (`ci: verify architecture and runtime`)
+- [x] Run the full CI on every push and pull request, with manual dispatch, pinned Actions, read-only permissions and bounded execution. (`ci: run checks on pushes and pull requests`)
 - [x] Document the implemented runtime, published demo and explicit remaining dependencies. (`docs: document implemented lab`)
 - [x] Explain the complete MCP/RAG call flow, current hash vectors, cosine/BM25/RRF search and experimental indexes in a reproducible beginner guide. (`docs: explain MCP and RAG step by step`)
 - [x] Expand the main README with technologies and ADR links, and publish reproducible C4 PNG views aligned with the implementation. (`docs: expand project overview and C4 diagrams`)

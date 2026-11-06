@@ -242,7 +242,9 @@ O projeto distingue três tipos de verificação:
 | Benchmark vetorial | Recall e custo dos índices comparados à busca exata em dados fixos. | Desempenho garantido em outro corpus ou escala. |
 | Avaliação documental | Recuperação de evidências e critérios definidos em casos fixos. | Qualidade geral de geração por uma LLM ou aprovação fiscal humana. |
 
-A suíte local passou com **50 testes** na refatoração de validação, incluindo integração MCP nas negociações anterior/moderna e teste do adaptador Lambda. A [CI](.github/workflows/ci.yml) executa instalação pelo lockfile, testes, verificação de fronteiras, empacotamento com fixture explícita e auditoria de dependências.
+A suíte local passou com **50 testes** na refatoração de validação, incluindo integração MCP nas negociações anterior/moderna e teste do adaptador Lambda. A [CI](.github/workflows/ci.yml) roda a cada push e pull request, em qualquer branch, e pode ser iniciada manualmente pela aba Actions. Ela usa Node.js 22 e executa instalação pelo lockfile, testes, verificação de fronteiras, empacotamento com fixture explícita e auditoria das dependências de runtime.
+
+O workflow tem permissão somente de leitura, Actions fixadas por commit e timeout de 15 minutos. Uma nova execução para a mesma branch ou pull request cancela a anterior. Os testes usam fixtures públicas e não precisam de credenciais AWS nem do corpus local de produção.
 
 Comandos de reprodução:
 
