@@ -8,7 +8,7 @@ export function validatePublicEndpoint(endpoint: string): URL {
   const url = new URL(endpoint);
   if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash || url.pathname !== '/mcp' ||
       ['localhost', '127.0.0.1', '[::1]', 'example.com', 'example.org'].includes(url.hostname) || url.hostname.endsWith('.invalid')) {
-    throw new Error('Informe um endpoint público HTTPS real, sem credenciais ou query, terminando em /mcp');
+    throw new Error('Provide a real public HTTPS endpoint ending in /mcp, without credentials or a query string');
   }
   return url;
 }
@@ -46,8 +46,8 @@ export async function preparePlugin(endpoint: string, output = '.data/plugin-pub
   }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  if (!process.argv[2]) throw new Error('Uso: npm run plugin:prepare -- https://seu-dominio/mcp [diretorio]');
+  if (!process.argv[2]) throw new Error('Usage: npm run plugin:prepare -- https://your-domain/mcp [directory]');
   const contact = process.argv[4] ? JSON.parse(await readFile(process.argv[4], 'utf8')) as PublicContact : undefined;
   await preparePlugin(process.argv[2], process.argv[3], contact);
-  console.log('Pacote preparado; conectividade, política pública e teste em ChatGPT Work ainda precisam de validação.');
+  console.log('Package prepared; connectivity, public policy and testing in ChatGPT Work still require validation.');
 }

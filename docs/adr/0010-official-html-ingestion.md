@@ -1,11 +1,11 @@
-# ADR-0010 — Extração de documentação oficial HTML
+# ADR-0010 — Official HTML document extraction
 
-Status: aceito, 14/11/2026.
+Status: accepted, 2026-11-14.
 
-Usamos Cheerio 1.1.2 para interpretar HTML e iconv-lite 0.7.0 para decodificar Windows-1252, apenas no adaptador de ingestão. O domínio, os índices e o MCP não dependem deles. Seletores explícitos identificam conteúdo da Receita Federal, CONFAZ, SEFAZ-SP e SEF-MG; falhas de seleção, encoding ou integridade impedem indexação daquele documento. Seções com caracteres de controle corrompidos na própria fonte são omitidas e contadas no relatório, sem adivinhar letras ou condições legais.
+Use Cheerio 1.1.2 for HTML and iconv-lite 0.7.0 for Windows-1252 decoding, only in the ingestion adapter. Domain, indexes and MCP do not depend on them. Explicit selectors identify Receita Federal, CONFAZ, SEFAZ-SP and SEF-MG content; selector, encoding or integrity failures prevent that document's indexing. Sections with corrupted control characters in the source are omitted and counted, without guessing letters or legal conditions.
 
-Snapshots preservam bytes, URL, SHA-256, observação e datas conhecidas. A extração remove navegação, scripts e marcações explícitas de redação revogada. O recorte paulista integral contém os livros I–V; anexos selecionados são documentos separados. Em MG seguimos apenas páginas HTML do RICMS/2023 sem dispositivos revogados, no mesmo diretório oficial, com limite de páginas. Não fazemos crawling da internet nem consultas externas durante respostas fiscais.
+Snapshots preserve bytes, URL, SHA-256, observation and known dates. Extraction removes navigation, scripts and explicit revoked-text markup. The full SP selection contains books I–V; selected annexes are separate documents. MG follows only official RICMS/2023 HTML pages without revoked provisions, in the same official directory, with a page limit. There is no general web crawling or external consultation during fiscal answers.
 
-Encoding segue o cabeçalho HTTP, inclusive Windows-1252 das páginas legais mineiras. Seções de tamanho limitado evitam crescimento quadrático dos vínculos entre fragmentos de tabelas extensas. Isto limita a reconstrução automática entre seções: a resposta deve consultar a fonte integral se uma condição depender de trecho não recuperado. A vigência de consolidações não é inferida da data de download. O sentinela NCM 31/12/9999 é retido nas notas e convertido em término desconhecido.
+Encoding follows HTTP headers, including Windows-1252 on MG legal pages. Bounded sections avoid quadratic growth of links across large tables. This limits automatic reconstruction across sections: missing dependencies require separately requested source maintenance rather than invented context. Consolidation validity is not inferred from download time. The NCM sentinel 31/12/9999 is retained in notes and converted to an unknown end date.
 
-Redirecionamentos têm limite e ficam na mesma origem HTTPS governamental. Cookies de sessão ficam somente na memória. Planilhas auxiliares ainda sem parser são arquivadas e identificadas como não indexadas. Atualização não é automática: cada execução gera relatório de cobertura e a troca do corpus publicado exige build e verificação.
+Redirects are limited to the same government HTTPS origin. Session cookies stay in memory. Auxiliary spreadsheets without parsers are archived and marked unindexed. Updates are not automatic: each run reports coverage; replacing the published corpus requires a build and verification.

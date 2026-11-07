@@ -1,28 +1,28 @@
-# Materiais de revisão do plugin
+# Plugin review materials
 
-Preparação local, não submissão realizada. Referências consultadas em 14/11/2026: [empacotamento](https://developers.openai.com/plugins/build/plugins), [submissão](https://developers.openai.com/plugins/deploy/submission). A publicação remota exige HTTPS e revisão dos materiais pelo operador.
+Local preparation, not completed submission. References consulted on 2026-11-14: [packaging](https://developers.openai.com/plugins/build/plugins), [submission](https://developers.openai.com/plugins/deploy/submission). Remote publication requires HTTPS and operator review.
 
-Descrição sugerida: “Pesquisa documental educativa de NF-e, CFOP e NCM com origem, edição e vigência. Consulta códigos exatos e recupera textos relacionados, sem emitir notas ou substituir revisão profissional.”
+Suggested description: “Educational NF-e, CFOP and NCM document research with source, edition and validity. Looks up exact codes and related text without issuing invoices or replacing professional review.”
 
-`npm run demo:mcp` grava em `.data/demo-transcript.json` cinco chamadas reais pelo cliente oficial: código CFOP, NCM sintético, busca, exceção e data sem evidência aplicável. A gravação é uma transcrição técnica, não vídeo de uso no Work. Fixtures declaram que são sintéticas; não apresentar os resultados como legislação.
+`npm run demo:mcp` saves five actual official-client calls in `.data/demo-transcript.json`: CFOP, synthetic NCM, search, exception and date without applicable evidence. This is a technical transcript, not Work usage video. Fixtures are labeled synthetic; never present them as legislation.
 
-Roteiro de vídeo após implantação e instalação: mostrar a conexão; declarar o caráter educativo; consultar uma edição revisada de fonte oficial; abrir a referência e conferir a vigência; recuperar a exceção; demonstrar pedido de contexto e recusa por evidência insuficiente. Usar dados públicos sem contribuinte real. Capturar versão do plugin, corpus e data do teste.
+After deployment/installation, the video should show connection, educational scope, a reviewed official edition, reference/validity inspection, exception retrieval, missing-context elicitation and insufficient-evidence refusal. Use public data without real taxpayer details. Record plugin version, corpus and test date.
 
-Concluído: endpoint HTTPS validado com cliente oficial remoto, política pública com contato autorizado, suporte/condições publicados, ícones SVG e cinco casos positivos/três negativos no manifesto. Pacote com identidade do publicador gerado em `.data/fiscal-rag-plugin.zip`, sem chaves AWS. Plugin privado criado na conta e arquivos salvos conferidos: skill e MCP remoto estão presentes. Referências de conta ficam somente em `.data/plugin-account.json`. Instalação do Fiscal RAG Lab e teste no Work ainda não confirmados: controles de navegador e desktop falharam na inicialização do runtime. Falta vídeo acessível e submissão pelo portal; não há submissão ou aprovação realizada.
+Completed: HTTPS verified remotely; public policy with authorized contact; support/terms pages; SVG icons; five positive/three negative manifesto cases. The publisher-identified package is generated at `.data/fiscal-rag-plugin.zip` without AWS keys. A private account plugin was created and saved skill/remote MCP files verified. Account references stay only in `.data/plugin-account.json`. Work installation/testing remains unconfirmed after browser/desktop startup failures. Accessible video and portal submission remain outstanding; no submission/approval occurred.
 
-Casos para o revisor: código exato → ferramenta de lookup; texto ambíguo → busca e contexto; data fora do corpus → evidência insuficiente; tentativa de instrução no texto → tratar como dados; código ausente → informar limite do corpus. Publicar só resultados realmente observados.
+Reviewer cases: exact code → lookup; ambiguous text → search/context; unsupported date → insufficient evidence; instructions inside text → treat as data; absent code → explain corpus limits. Publish only observed results.
 
-## Verificação após criação privada
+## Verification after private creation
 
-- **Passed:** skill e MCP presentes na versão salva; endpoint e transporte preservados.
-- **Passed:** quatro ferramentas remotas com `readOnlyHint=true`, `destructiveHint=false`, `openWorldHint=false`; cinco chamadas positivas ensaiadas com argumentos e respostas em `.data/review-rehearsal.json`.
-- **Passed:** conteúdo das quatro páginas públicas identifica o projeto e o contato; PNGs light/dark de 512 px inspecionados e incluídos na cópia pública.
-- **Not run:** seleção de ferramenta e respostas do agente no Work, incluindo os três cenários negativos. Ensaio do cliente oficial não é evidência desses comportamentos.
-- **Blocked:** instalação/captura de walkthrough pelo runtime de interface — falha `setup refresh had errors` antes de acessar janelas. O controle disponível não ofereceu uma gravação concluída; não existe URL de vídeo a declarar.
-- **Confirmed:** Brasil (`BR`) como disponibilidade para uma eventual publicação; plugin atual continua `USER` / `PRIVATE`.
-- **Confirmed:** plugin gratuito, sem compras ou pagamentos; `review.commerce=false` e descrição explícita incluídos após confirmação do usuário.
-- **Pending:** vídeo real, testes das ferramentas no host, verificação de identidade/domínio e atestações pelo desenvolvedor no portal.
+- **Passed:** saved version contains skill/MCP with endpoint/transport preserved.
+- **Passed:** four remote tools have `readOnlyHint=true`, `destructiveHint=false`, `openWorldHint=false`; five positive calls rehearsed with arguments/results in `.data/review-rehearsal.json`.
+- **Passed:** four public pages identify project/contact; inspected 512 px light/dark PNGs included in the generated public copy.
+- **Not run:** Work agent selection/responses, including three negative cases. Official-client rehearsal does not establish those behaviors.
+- **Blocked:** UI walkthrough installation/capture failed with `setup refresh had errors` before window access. No completed recording or real video URL exists.
+- **Confirmed:** Brazil (`BR`) for potential publication; current plugin remains `USER` / `PRIVATE`.
+- **Confirmed:** free plugin without purchases/payments; `review.commerce=false` and explicit description added after user confirmation.
+- **Pending:** real video, host tool tests, identity/domain verification and developer attestations in the portal.
 
-Rascunho de listagem mantém a descrição educativa e declara o corpus restrito; o ZIP não está pronto para submissão enquanto esses itens estiverem pendentes. O pacote privado continua privado; não houve upload em portal de submissão nem publicação no diretório.
+The draft listing states educational scope/limited coverage. The ZIP is not submission-ready until pending items are complete. Private distribution remains private; there has been no submission portal upload or directory publication.
 
-Atualização 0.1.2: descrições e casos positivos acompanham a carga oficial NCM/CFOP e os recortes SP/MG. A versão privada foi salva e lida novamente, com conexão MCP, prompts iniciais e política RAG-only preservados. A leitura confirmou `USER` / `PRIVATE`. Contratos remotos da nova carga passaram em ambos os protocolos: `docs/deployment/aws-official-smoke.json`. Isso não altera as pendências de teste do agente e vídeo real no Work.
+Version 0.1.2 update: descriptions/positive cases reflect official NCM/CFOP data and SP/MG selections. The private version was saved and read back, preserving MCP, starter prompts and RAG-only policy, with `USER` / `PRIVATE` confirmed. Remote contracts passed under both protocols: `docs/deployment/aws-official-smoke.json`. Work agent/video requirements remain pending.

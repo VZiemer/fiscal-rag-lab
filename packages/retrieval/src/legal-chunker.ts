@@ -13,6 +13,7 @@ export function chunkLegalDocument(document: LegalDocument, maxChars = 1600): Ev
   let current: Unit | undefined;
   for (const line of document.text.replaceAll('\r\n', '\n').split('\n').map(s => s.trim()).filter(Boolean)) {
     const articleMatch = /^(?:\(\d+\)\s*)?(?:Art\.?|Artigo)\s*(\d+[º°o]?(?:-[A-Z])?)\s*[.\-–:]?/i.exec(line);
+    // Match original Portuguese legal headings and exception wording without translating source evidence.
     const subordinate = /^(?:\(\d+\)\s*)?(?:§\s*\d+[º°o]?|Parágrafo único|[IVXLCDM]+\s*[-–]|[a-z]\))/i.test(line);
     const exception = /\b(?:exceto|salvo|ressalvad[oa]s?|não se aplica|exceç(?:ão|ões))\b/i.test(line);
     if (articleMatch || subordinate || exception || !current) {

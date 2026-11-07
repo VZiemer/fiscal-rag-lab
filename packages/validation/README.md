@@ -1,6 +1,6 @@
-# Contratos de validação
+# Validation contracts
 
-A aplicação declara campos com `ObjectContract` e `Field`. Zod é um detalhe privado de `src/schema.ts`; seus tipos e erros não fazem parte da API pública.
+The application declares fields with `ObjectContract` and `Field`. Zod is a private implementation detail of `src/schema.ts`; its types and errors are not part of the public API.
 
 ```ts
 const searchInput = new ObjectContract({
@@ -10,27 +10,27 @@ const searchInput = new ObjectContract({
 });
 
 const input = searchInput.parse(receivedJson);
-// input.query é string; topK e mode são opcionais e tipados.
+// input.query is a string; topK and mode are optional and typed.
 ```
 
-`ObjectContract` rejeita campos extras por padrão. Os limites usam opções nomeadas para facilitar a leitura, sem encadear vários métodos de uma biblioteca. Contratos compostos reutilizam campos por `...outroContrato.fields` ou recebem outro contrato como campo.
+`ObjectContract` rejects extra fields by default. Limits use named options for readability without chaining library methods. Composite contracts reuse fields through `...otherContract.fields` or accept another contract as a field.
 
-| Operação | Resultado |
+| Operation | Result |
 |---|---|
-| `parse(value)` | Devolve os dados validados ou lança `ValidationError`. |
-| `safeParse(value)` | Devolve `{success: true, data}` ou `{success: false, issues}`. |
-| `optional()` | Permite ausência/`undefined`; não permite `null` por si só. |
-| `nullable()` | Permite `null`; não torna o campo opcional. |
-| `withDefault(value)` | Preenche valores ausentes, mantendo o tipo de saída obrigatório e cópias independentes de listas/objetos. |
-| `toJsonSchema({io, target})` | Descreve a forma dos dados para clientes e documentação. |
-| `Infer<typeof contrato>` | Obtém o tipo TypeScript da saída validada. |
+| `parse(value)` | Returns validated data or throws `ValidationError`. |
+| `safeParse(value)` | Returns `{success: true, data}` or `{success: false, issues}`. |
+| `optional()` | Allows absence/`undefined`; does not itself allow `null`. |
+| `nullable()` | Allows `null`; does not make the field optional. |
+| `withDefault(value)` | Fills missing values while retaining required output types and independent copies of lists/objects. |
+| `toJsonSchema({io, target})` | Describes the data shape for clients and documentation. |
+| `Infer<typeof contract>` | Infers the TypeScript type of validated output. |
 
-`Field` oferece somente os formatos utilizados no projeto: texto, número, inteiro, URL, timestamp, enumeração, literal, lista e união. `check` permite uma verificação adicional, como a validade de uma data do calendário. Essas verificações continuam executadas em runtime, mesmo quando não podem ser expressas em JSON Schema. Uma interface TypeScript sozinha não verifica JSON recebido pela rede.
+`Field` provides only the formats used by this project: text, number, integer, URL, timestamp, enum, literal, list and union. `check` adds validation such as calendar-date correctness. These checks still run at runtime even when JSON Schema cannot express them. A TypeScript interface alone does not validate JSON received over the network.
 
-O [adaptador MCP](../../apps/mcp-server/src/schema-adapter.ts) converte `Schema<T>` para Standard Schema, interface aceita pelo SDK instalado. Ele fornece a validação e os JSON Schemas de entrada/saída. O pacote de validação não importa MCP, e o servidor não precisa importar Zod.
+The [MCP adapter](../../apps/mcp-server/src/schema-adapter.ts) converts `Schema<T>` to Standard Schema, the interface accepted by the installed SDK. It provides validation and input/output JSON Schemas. The validation package does not import MCP, and the server does not need to import Zod.
 
-O plano do cliente RAG e as respostas dos experimentos de avaliação usam a mesma API. Erros expõem somente `message` e `path`, sem exigir que consumidores conheçam `ZodError`. A redação exata das mensagens de validação não é um contrato estável; a aplicação deve usar `ValidationError` e os caminhos dos campos. Erros de ferramenta continuam sanitizados pelo servidor.
+RAG client plans and evaluation experiment responses use the same API. Errors expose only `message` and `path`, without requiring consumers to understand `ZodError`. Exact validation wording is not a stable contract; applications should use `ValidationError` and field paths. Tool errors remain sanitized by the server.
 
-Zod continua instalado como motor interno e também é dependência do SDK MCP. Esta abstração isola o acoplamento do código consumidor; não remove a biblioteca da árvore de dependências. Uma troca futura do motor requer adaptar este módulo e preservar validação, tipos inferidos e JSON Schema, com os mesmos testes.
+Zod remains installed as the internal engine and is also an MCP SDK dependency. This abstraction isolates coupling in consumer code; it does not remove the library from the dependency tree. Replacing the engine requires adapting this module while preserving validation, inferred types and JSON Schema under the same tests.
 
-`npm run check:boundaries` impede imports de Zod fora de `src/schema.ts`. `npm test` verifica entradas inválidas, objetos aninhados, defaults, planos de ferramentas, inferência TypeScript e chamadas MCP nas duas negociações de protocolo. Decisão arquitetural: [ADR-0011](../../docs/adr/0011-validation-facade.md).
+`npm run check:boundaries` prevents Zod imports outside `src/schema.ts`. `npm test` checks invalid inputs, nested objects, defaults, tool plans, TypeScript inference and MCP calls under both protocol negotiations. Architectural decision: [ADR-0011](../../docs/adr/0011-validation-facade.md).

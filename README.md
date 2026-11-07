@@ -1,192 +1,194 @@
 # Fiscal RAG Lab
 
-Laboratório de pesquisa fiscal brasileira com **RAG, algoritmos próprios de busca e ferramentas MCP somente leitura**. O projeto transforma documentos oficiais e tabelas CFOP/NCM em evidências pesquisáveis, preservando fonte, edição, datas e relações entre trechos.
+A Brazilian tax research laboratory with **RAG, custom search algorithms and read-only MCP tools**. The project turns official documents and CFOP/NCM tables into searchable evidence while preserving sources, editions, dates and relationships between excerpts.
 
-O objetivo é estudar e tornar inspecionável o caminho inteiro: baixar uma fonte, extrair seu conteúdo, construir índices, recuperar evidências e entregá-las a um assistente. A aplicação implementa a recuperação; a LLM do cliente redige a resposta a partir dos resultados. O servidor não contém uma LLM geradora nem um motor completo de decisão tributária.
+The goal is to study and inspect the entire workflow: download a source, extract its content, build indexes, retrieve evidence and deliver it to an assistant. The application implements retrieval; the client LLM writes the answer from the results. The server contains neither a generative LLM nor a complete tax decision engine.
 
-**Estado documentado em 15/11/2026:** servidor MCP, ingestão, busca híbrida, índices exato/IVF/HNSW, contratos encapsulados e avaliações implementados. Há uma [demonstração HTTPS na AWS](https://d2kvl1uo6lcsgz.cloudfront.net), com corpus oficial carregado em 14/11/2026. O endpoint usa hash lexical de 128 dimensões e índice vetorial exato; embeddings aprendidos, IVF/HNSW no endpoint e treinamento LoRA não estão ativos. Revisão fiscal humana e teste completo do plugin em ChatGPT Work permanecem pendentes.
+**Status documented on 2026-11-15:** MCP server, ingestion, hybrid search, exact/IVF/HNSW indexes, encapsulated contracts and evaluations are implemented. An [HTTPS demo runs on AWS](https://d2kvl1uo6lcsgz.cloudfront.net), with an official corpus loaded on 2026-11-14. The endpoint uses 128-dimensional lexical hashing and an exact vector index; learned embeddings, IVF/HNSW at the endpoint and LoRA training are not active. Human tax review and complete plugin testing in ChatGPT Work remain pending.
 
-> É um projeto educacional de recuperação de evidências. Similaridade textual e código encontrado não comprovam enquadramento tributário. O projeto não emite NF-e nem calcula automaticamente todos os tributos de uma operação.
+> This is an educational evidence retrieval project. Text similarity and matching codes do not establish tax applicability. The project does not issue NF-e or automatically calculate all taxes on a transaction.
 
-## Navegação
+## Navigation
 
-- [O que o projeto entrega](#o-que-o-projeto-entrega)
-- [Tecnologias e responsabilidades](#tecnologias-e-responsabilidades)
-- [Como os dados percorrem o sistema](#como-os-dados-percorrem-o-sistema)
-- [Arquitetura C4 em quatro níveis](#arquitetura-c4-em-quatro-níveis)
-- [Decisões arquiteturais — ADRs](#decisões-arquiteturais--adrs)
-- [Ferramentas MCP](#ferramentas-mcp)
-- [Corpus e procedência](#corpus-e-procedência)
-- [Executar localmente](#executar-localmente)
-- [Testes e avaliações](#testes-e-avaliações)
-- [Implantação AWS e plugin](#implantação-aws-e-plugin)
-- [Organização do repositório](#organização-do-repositório)
-- [Limites e próximos passos](#limites-e-próximos-passos)
+- [What the project provides](#what-the-project-provides)
+- [Technologies and responsibilities](#technologies-and-responsibilities)
+- [How data flows through the system](#how-data-flows-through-the-system)
+- [C4 architecture at four levels](#c4-architecture-at-four-levels)
+- [Architectural decisions — ADRs](#architectural-decisions--adrs)
+- [MCP tools](#mcp-tools)
+- [Corpus and provenance](#corpus-and-provenance)
+- [Run locally](#run-locally)
+- [Tests and evaluations](#tests-and-evaluations)
+- [AWS deployment and plugin](#aws-deployment-and-plugin)
+- [Repository structure](#repository-structure)
+- [Limitations and next steps](#limitations-and-next-steps)
 
-Para uma explicação didática de vetores, cosseno, BM25 e RRF, com contas e exemplos executáveis, leia o [README-RAG](README-RAG.md). Este README apresenta o projeto e relaciona as partes às decisões que as sustentam.
+For a beginner-friendly explanation of vectors, cosine similarity, BM25 and RRF, with calculations and runnable examples, read [README-RAG](README-RAG.md). This README introduces the project and connects its parts to the decisions behind them.
 
-## O que o projeto entrega
+## What the project provides
 
-| Capacidade | Implementação e alcance |
+| Capability | Implementation and scope |
 |---|---|
-| Ingestão verificável | Downloads oficiais, snapshots por SHA-256, metadados de coleta e parsers de formatos específicos. |
-| Consulta exata CFOP/NCM | Códigos completos normalizados, versões preservadas e retorno explícito de ausência, ambiguidade ou evidência insuficiente. |
-| Fragmentação documental | Separação de unidades legais, com vínculos de artigos, exceções e partes de um mesmo trecho quando reconhecidos. |
-| Busca lexical | BM25 próprio, com índice invertido de palavras. |
-| Busca vetorial | Cosseno, busca exaustiva, K-Means/IVF e HNSW implementados no projeto. |
-| Busca híbrida | Roteamento de códigos completos, recuperação textual e fusão dos rankings por Reciprocal Rank Fusion — RRF. |
-| Filtragem e atribuição | Jurisdição, intervalos conhecidos de vigência, fontes e evidências relacionadas. Limites desconhecidos continuam explícitos. |
-| Integração com assistentes | Quatro ferramentas MCP de leitura, com entradas e saídas estruturadas. |
-| Avaliação reproduzível | Fixtures, testes numéricos, integração HTTP, datasets fixos e resultados com condições de execução. |
+| Verifiable ingestion | Official downloads, SHA-256 snapshots, collection metadata and format-specific parsers. |
+| Exact CFOP/NCM lookup | Normalized complete codes, preserved editions and explicit missing, ambiguous or insufficient-evidence results. |
+| Document chunking | Legal units with article, exception and same-excerpt links where recognized. |
+| Lexical search | Custom BM25 with a word inverted index. |
+| Vector search | Cosine similarity, exhaustive search, K-Means/IVF and HNSW implemented in the project. |
+| Hybrid search | Complete-code routing, text retrieval and Reciprocal Rank Fusion (RRF). |
+| Filtering and attribution | Jurisdiction, known validity intervals, sources and related evidence. Unknown boundaries remain explicit. |
+| Assistant integration | Four read-only MCP tools with structured inputs and outputs. |
+| Reproducible evaluation | Fixtures, numerical tests, HTTP integration, fixed datasets and results with execution conditions. |
 
-A escolha de implementar os índices, em vez de delegar a busca a um banco vetorial pronto, é parte do objetivo educacional: [ADR-0002](docs/adr/0002-manual-vector-index.md). Bibliotecas continuam sendo usadas para transporte, parsing e validação, com fronteiras explícitas.
+Implementing the indexes instead of delegating search to a turnkey vector database is part of the educational goal: [ADR-0002](docs/adr/0002-manual-vector-index.md). Libraries are still used for transport, parsing and validation, with explicit boundaries.
 
-## Tecnologias e responsabilidades
+## Technologies and responsibilities
 
-Versões declaradas no [package.json](package.json); a resolução completa está fixada no [package-lock.json](package-lock.json). A tabela descreve o uso neste repositório, não uma recomendação de versões mais recentes.
+Versions are declared in [package.json](package.json); complete resolution is pinned in [package-lock.json](package-lock.json). This table describes use in this repository, not a recommendation of the latest versions.
 
-| Tecnologia | Versão / configuração | Onde e por quê |
+| Technology | Version / configuration | Where and why |
 |---|---|---|
-| TypeScript | 5.8.3; modo `strict`; módulos ESM/NodeNext | Código de aplicação, contratos e portas tipadas. [ADR-0001](docs/adr/0001-modular-monolith.md). |
-| Node.js | 22+ para desenvolvimento; Node 22 na Lambda | Runtime HTTP, CLIs, APIs de arquivos/criptografia e testes. |
-| SDK MCP oficial | `server` e `client` 2.4.0; adaptador `node` 2.1.2 | Negociação e transporte Streamable HTTP, sem implementar o protocolo manualmente. [ADR-0008](docs/adr/0008-mcp-runtime.md). |
-| Classes de validação próprias | `Schema<T>`, `ObjectContract`, `Field` | API legível para contratos, tipos inferidos e erros próprios. [ADR-0011](docs/adr/0011-validation-facade.md). |
-| Zod | 4.6.7, encapsulado | Motor interno de validação e JSON Schema. Um adaptador converte nossos contratos para Standard Schema; consumidores não importam Zod. [Guia](packages/validation/README.md). |
-| ExcelJS | 4.4.0 | Leitura da planilha CFOP no worker. O parser fiscal valida o esquema e recusa fórmulas. [ADR-0006](docs/adr/0006-parsing-and-runtime.md). |
-| Cheerio | 1.1.2 | Extração HTML com seletores específicos de fontes oficiais. [ADR-0010](docs/adr/0010-official-html-ingestion.md). |
-| iconv-lite | 0.7.0 | Decodificação de páginas, incluindo Windows-1252. [ADR-0010](docs/adr/0010-official-html-ingestion.md). |
-| JSON, SHA-256 e estruturas em memória | APIs nativas de Node.js; `Map`, `Float32Array` | Snapshots, corpus, procedência e índices locais. Não há banco vetorial gerenciado na implantação atual. [ADR-0004](docs/adr/0004-versioned-legal-corpus.md). |
-| Embedding por hash | `lexical-fnv1a-v1`, 128 dimensões | Controle determinístico de palavras usado pelo endpoint; não é um modelo semântico aprendido. [ADR-0007](docs/adr/0007-embedding-adapters.md). |
-| Ollama | Adaptador opcional; modelo não selecionado para a implantação | Integração HTTP por `EmbeddingProvider`, disponível para experimentos com embeddings aprendidos. [ADR-0007](docs/adr/0007-embedding-adapters.md). |
-| esbuild | 0.28.2; ferramenta de desenvolvimento | Empacota o servidor em `index.mjs` para Lambda. [ADR-0009](docs/adr/0009-aws-demo.md). |
-| Sharp | 0.35.5; ferramenta de desenvolvimento | Renderiza assets e diagramas SVG em PNG. Não participa da pesquisa fiscal. |
-| `node:test` e `node:assert` | Integrados ao Node.js | Testes unitários, contratos MCP e validação da inferência TypeScript. |
-| GitHub Actions | Workflow versionado | Instalação reproduzível, testes, fronteiras de arquitetura, build Lambda e auditoria de dependências. [CI](.github/workflows/ci.yml). |
-| AWS | S3, CloudFront, API Gateway HTTP API, Lambda e CloudWatch Logs | Página estática, HTTPS, execução do MCP e logs operacionais. Infraestrutura em CloudFormation. [ADR-0009](docs/adr/0009-aws-demo.md). |
-| Modelo C4 | JSON versionado, exportação Structurizr DSL, SVG e PNG | Documentação de contexto, contêineres, componentes e um recorte de código. [Fontes e geração](docs/c4/README.md). |
+| TypeScript | 5.8.3; `strict` mode; ESM/NodeNext modules | Application code, contracts and typed ports. [ADR-0001](docs/adr/0001-modular-monolith.md). |
+| Node.js | 22+ for development; Node 22 on Lambda | HTTP runtime, CLIs, file/cryptography APIs and tests. |
+| Official MCP SDK | `server` and `client` 2.4.0; `node` adapter 2.1.2 | Negotiation and Streamable HTTP transport without manually implementing the protocol. [ADR-0008](docs/adr/0008-mcp-runtime.md). |
+| Project-owned validation classes | `Schema<T>`, `ObjectContract`, `Field` | Readable contracts, inferred types and project-owned errors. [ADR-0011](docs/adr/0011-validation-facade.md). |
+| Zod | 4.6.7, encapsulated | Internal validation and JSON Schema engine. An adapter converts our contracts to Standard Schema; consumers do not import Zod. [Guide](packages/validation/README.md). |
+| ExcelJS | 4.4.0 | Reads CFOP spreadsheets in the worker. The fiscal parser validates the schema and rejects formulas. [ADR-0006](docs/adr/0006-parsing-and-runtime.md). |
+| Cheerio | 1.1.2 | HTML extraction with selectors specific to official sources. [ADR-0010](docs/adr/0010-official-html-ingestion.md). |
+| iconv-lite | 0.7.0 | Page decoding, including Windows-1252. [ADR-0010](docs/adr/0010-official-html-ingestion.md). |
+| JSON, SHA-256 and in-memory structures | Native Node.js APIs; `Map`, `Float32Array` | Snapshots, corpus, provenance and local indexes. The current deployment has no managed vector database. [ADR-0004](docs/adr/0004-versioned-legal-corpus.md). |
+| Hash embeddings | `lexical-fnv1a-v1`, 128 dimensions | Deterministic word control used by the endpoint; not a learned semantic model. [ADR-0007](docs/adr/0007-embedding-adapters.md). |
+| Ollama | Optional adapter; no model selected for deployment | HTTP integration through `EmbeddingProvider`, available for learned-embedding experiments. [ADR-0007](docs/adr/0007-embedding-adapters.md). |
+| esbuild | 0.28.2; development tool | Bundles the server into `index.mjs` for Lambda. [ADR-0009](docs/adr/0009-aws-demo.md). |
+| Sharp | 0.35.5; development tool | Renders SVG assets and diagrams to PNG. Does not participate in tax research. |
+| `node:test` and `node:assert` | Built into Node.js | Unit tests, MCP contracts and TypeScript inference validation. |
+| GitHub Actions | Versioned workflow | Reproducible installation, tests, architecture boundaries, Lambda build and dependency audit. [CI](.github/workflows/ci.yml). |
+| AWS | S3, CloudFront, API Gateway HTTP API, Lambda and CloudWatch Logs | Static pages, HTTPS, MCP execution and operational logs. Infrastructure in CloudFormation. [ADR-0009](docs/adr/0009-aws-demo.md). |
+| C4 model | Versioned JSON, Structurizr DSL export, SVG and PNG | Context, container, component and selected code views. [Sources and generation](docs/c4/README.md). |
 
-### Algoritmos implementados no laboratório
+### Algorithms implemented in the lab
 
-| Algoritmo | Papel | Uso atual |
+| Algorithm | Role | Current use |
 |---|---|---|
-| Cosseno + busca exaustiva | Compara a consulta com todos os vetores; referência exata para a métrica. | Índice vetorial do endpoint. |
-| BM25 | Combina frequência, raridade de palavras e comprimento dos trechos. | Busca lexical do endpoint. |
-| RRF | Combina posições dos resultados de buscas distintas, sem somar escalas incompatíveis. | Modo híbrido padrão. |
-| K-Means esférico + IVF | Agrupa vetores e consulta uma parte dos grupos; troca cobertura por menos comparações. | Experimentos e benchmark. |
-| HNSW | Organiza vetores em um grafo de vizinhos com camadas. | Experimentos e benchmark. |
+| Cosine similarity + exhaustive search | Compares the query against every vector; exact reference for the metric. | Endpoint vector index. |
+| BM25 | Combines frequency, word rarity and excerpt length. | Endpoint lexical search. |
+| RRF | Combines result positions across searches without adding incompatible scales. | Default hybrid mode. |
+| Spherical K-Means + IVF | Groups vectors and probes some groups, trading coverage for fewer comparisons. | Experiments and benchmarks. |
+| HNSW | Organizes vectors in a layered neighbor graph. | Experiments and benchmarks. |
 
-Trocar o índice não muda automaticamente a qualidade da representação textual. Um índice aproximado sobre vetores lexicais continua pesquisando vetores lexicais. Os detalhes estão no [guia de RAG](README-RAG.md) e nos [resultados dos índices](docs/benchmarks/README.md).
+Changing the index does not automatically improve the text representation. An approximate index over lexical vectors still searches lexical vectors. Details are in the [RAG guide](README-RAG.md) and [index results](docs/benchmarks/README.md).
 
-## Como os dados percorrem o sistema
+## How data flows through the system
 
-1. **Manutenção do acervo:** o worker baixa edições oficiais autorizadas, guarda bytes e metadados, confere hashes e aplica o parser adequado. O conteúdo vira registros CFOP/NCM e fragmentos com procedência.
-2. **Construção do corpus:** os registros e trechos são reunidos em `corpus.json`. Arquivos baixados sem parser ficam arquivados, sem se tornarem evidência pesquisável.
-3. **Inicialização do servidor:** `loadServices` lê o corpus, cria repositórios em memória, calcula os vetores dos fragmentos e monta os índices BM25 e vetorial.
-4. **Chamada MCP:** o cliente envia uma ferramenta e seus argumentos. O adaptador valida a entrada e chama os serviços no mesmo processo Node.js.
-5. **Recuperação:** códigos completos seguem consulta exata. Perguntas textuais usam BM25, cosseno ou ambos; filtros conhecidos são aplicados antes do corte final dos resultados.
-6. **Resposta documental:** o servidor retorna trechos, IDs, URLs, versões, datas e avisos. O assistente usa esse material para redigir a resposta e apontar lacunas.
+1. **Source maintenance:** the worker downloads authorized official editions, stores bytes and metadata, verifies hashes and applies the appropriate parser. Content becomes CFOP/NCM records and chunks with provenance.
+2. **Corpus construction:** records and excerpts are assembled in `corpus.json`. Downloads without parsers remain archived rather than becoming searchable evidence.
+3. **Server initialization:** `loadServices` reads the corpus, creates in-memory repositories, computes chunk vectors and builds BM25 and vector indexes.
+4. **MCP call:** the client sends a tool and its arguments. The adapter validates input and calls services in the same Node.js process.
+5. **Retrieval:** complete codes use exact lookup. Text questions use BM25, cosine similarity or both; known filters apply before the final result cutoff.
+6. **Document response:** the server returns excerpts, IDs, URLs, editions, dates and warnings. The assistant uses this material to write the answer and identify gaps.
 
-A ingestão é separada da consulta. O endpoint não acessa páginas oficiais para completar uma pergunta em tempo real. A política de respostas está em [RAG exclusivo](docs/rag-only.md), e o tratamento da evidência está no [ADR-0004](docs/adr/0004-versioned-legal-corpus.md).
+Ingestion is separate from querying. The endpoint does not fetch official pages to complete a question in real time. The answer policy is described in [RAG-only evidence](docs/rag-only.md), and evidence handling in [ADR-0004](docs/adr/0004-versioned-legal-corpus.md).
 
-Na Lambda, os serviços são reaproveitados enquanto a mesma instância permanece ativa. Instâncias novas reconstroem seus índices. O corpus acompanha o pacote da função; alterar um arquivo local não atualiza a implantação automaticamente.
+Lambda reuses services while the same instance stays active. New instances rebuild their indexes. The corpus is bundled with the function; editing a local file does not automatically update deployment.
 
-## Arquitetura C4 em quatro níveis
+## C4 architecture at four levels
 
-O projeto é um **monólito modular com portas e adaptadores**: MCP/HTTP e provedores são fronteiras externas; domínio, corpus e recuperação trabalham com interfaces próprias. O worker de ingestão é uma CLI separada. A justificativa está no [ADR-0001](docs/adr/0001-modular-monolith.md), complementada pelo [ADR-0003](docs/adr/0003-mcp-boundary.md).
+The project is a **modular monolith with ports and adapters**: MCP/HTTP and providers are external boundaries; domain, corpus and retrieval use project-owned interfaces. The ingestion worker is a separate CLI. Rationale: [ADR-0001](docs/adr/0001-modular-monolith.md), complemented by [ADR-0003](docs/adr/0003-mcp-boundary.md).
 
-Os PNGs abaixo são versionados e podem ser abertos em tamanho completo. O [modelo compartilhado](docs/c4/model.json) gera imagens e a [exportação Structurizr DSL](docs/c4/workspace.dsl), evitando manter descrições independentes para cada formato. A posição visual das caixas está no modelo; o código de renderização está em [render-c4.ts](scripts/render-c4.ts).
+The following PNGs are versioned and can be opened at full size. The [shared model](docs/c4/model.json) generates images and the [Structurizr DSL export](docs/c4/workspace.dsl), avoiding independent descriptions for each format. Box positions are stored in the model; rendering code is in [render-c4.ts](scripts/render-c4.ts).
 
-### Nível 1 — Contexto
+### Level 1 — Context
 
-Mostra quem usa o laboratório e os sistemas externos envolvidos. O assistente conduz a conversa; o Fiscal RAG Lab recupera evidências. O provedor Ollama aparece como integração opcional, fora do caminho da Lambda atual.
+Shows who uses the lab and the external systems involved. The assistant conducts the conversation; Fiscal RAG Lab retrieves evidence. Ollama appears as an optional integration outside the current Lambda path.
 
-[![C4 nível 1: contexto do Fiscal RAG Lab](docs/c4/images/01-context.png)](docs/c4/images/01-context.png)
+[![C4 level 1: Fiscal RAG Lab context](docs/c4/images/01-context.png)](docs/c4/images/01-context.png)
 
-### Nível 2 — Contêineres
+### Level 2 — Containers
 
-Mostra unidades de execução e armazenamento. **Contêiner no C4 não significa Docker.** Servidor MCP e lógica de recuperação executam no mesmo processo; worker, acervo de arquivos e página estática têm responsabilidades distintas. CloudFront/API Gateway encaminham requisições ao servidor na implantação AWS.
+Shows execution and storage units. **A C4 container does not mean Docker.** The MCP server and retrieval logic run in the same process; the worker, file corpus and static page have separate responsibilities. CloudFront/API Gateway forward requests to the server in the AWS deployment.
 
-[![C4 nível 2: servidor, ingestão, corpus e página estática](docs/c4/images/02-containers.png)](docs/c4/images/02-containers.png)
+[![C4 level 2: server, ingestion, corpus and static page](docs/c4/images/02-containers.png)](docs/c4/images/02-containers.png)
 
-### Nível 3 — Componentes
+### Level 3 — Components
 
-Abre o servidor em adaptador MCP, contratos, repositórios e recuperação. `HybridRetriever` combina BM25, provedor de vetores e índice exato, preservando a origem das evidências. Essas caixas representam módulos no mesmo processo, não microsserviços.
+Breaks the server into the MCP adapter, contracts, repositories and retrieval. `HybridRetriever` combines BM25, a vector provider and the exact index while preserving evidence sources. These boxes represent modules in one process, not microservices.
 
-[![C4 nível 3: componentes internos do servidor MCP e recuperação](docs/c4/images/03-components.png)](docs/c4/images/03-components.png)
+[![C4 level 3: MCP server and retrieval components](docs/c4/images/03-components.png)](docs/c4/images/03-components.png)
 
-### Nível 4 — Código
+### Level 4 — Code
 
-Recorte das classes dos índices vetoriais. `HybridRetriever` depende da porta `VectorIndex<T>`; `BruteForceIndex`, `IvfIndex` e `HnswIndex` implementam o mesmo contrato. O recorte torna visível a decisão do [ADR-0002](docs/adr/0002-manual-vector-index.md), sem tentar reproduzir todas as classes do repositório.
+A selected view of vector-index classes. `HybridRetriever` depends on the `VectorIndex<T>` port; `BruteForceIndex`, `IvfIndex` and `HnswIndex` implement the same contract. This view exposes the decision in [ADR-0002](docs/adr/0002-manual-vector-index.md) without trying to reproduce every class in the repository.
 
-[![C4 nível 4: interface VectorIndex e implementações exata, IVF e HNSW](docs/c4/images/04-code.png)](docs/c4/images/04-code.png)
+[![C4 level 4: VectorIndex and exact, IVF and HNSW implementations](docs/c4/images/04-code.png)](docs/c4/images/04-code.png)
 
-Para regenerar todos os formatos com as dependências já instaladas:
+To regenerate all formats with dependencies already installed:
 
 ```sh
 npm run docs:c4
 ```
 
-O comando funciona localmente, sem enviar o modelo a serviços de diagramas. A exportação DSL cobre os níveis 1–3; o nível 4 é o recorte de classes produzido pelo mesmo modelo em SVG/PNG. Instruções de edição e limites em [docs/c4/README.md](docs/c4/README.md).
+This runs locally without sending the model to diagram services. The DSL export covers levels 1–3; level 4 is the class view produced from the same model in SVG/PNG. Editing instructions and limitations are in [docs/c4/README.md](docs/c4/README.md).
 
-## Decisões arquiteturais — ADRs
+## Architectural decisions — ADRs
 
-Um ADR registra o contexto, a escolha e suas consequências. Os links permitem conferir o fundamento de cada decisão; não equivalem a certificar a correção fiscal do sistema. Alguns textos preservam o estado inicial da decisão: evolução do corpus e refinamentos são descritos nos guias atuais.
+An ADR records context, a decision and its consequences. The links make the reasoning inspectable; they do not certify the system's tax correctness. Some records preserve the initial decision state: corpus evolution and refinements are described in the current guides.
 
-| Decisão | Justificativa registrada |
+| Decision | Recorded rationale |
 |---|---|
-| [0001 — Monólito modular e portas/adaptadores](docs/adr/0001-modular-monolith.md) | Reduzir complexidade operacional e manter busca/domínio independentes de transporte e fornecedor. |
-| [0002 — Índices vetoriais próprios](docs/adr/0002-manual-vector-index.md) | Estudar algoritmos e medir aproximações contra uma referência exata. |
-| [0003 — MCP como adaptador somente leitura](docs/adr/0003-mcp-boundary.md) | Compartilhar o backend entre clientes sem acoplar o domínio a um chatbot. |
-| [0004 — Evidência legal versionada](docs/adr/0004-versioned-legal-corpus.md) | Preservar procedência, versões, estrutura e limites temporais. |
-| [0005 — Fine-tuning após avaliação de recuperação](docs/adr/0005-fine-tuning-strategy.md) | Separar ganhos de busca, instruções e treinamento; evitar tratar memorização como atualização normativa. |
-| [0006 — Bibliotecas de parsing nos adaptadores](docs/adr/0006-parsing-and-runtime.md) | Usar parser XLSX mantido sem delegar a lógica fiscal e os algoritmos de busca. |
-| [0007 — Embeddings por uma porta própria](docs/adr/0007-embedding-adapters.md) | Trocar provedores sem alterar o recuperador e distinguir controle lexical de modelo aprendido. |
-| [0008 — SDK MCP oficial](docs/adr/0008-mcp-runtime.md) | Delegar negociação e transporte ao SDK, com integração testável. |
-| [0009 — Demonstração AWS](docs/adr/0009-aws-demo.md) | Usar S3/CloudFront para arquivos e API Gateway/Lambda para processamento. |
-| [0010 — Extração de HTML oficial](docs/adr/0010-official-html-ingestion.md) | Seletores e encoding específicos, preservação de snapshots e exclusão explícita de conteúdo corrompido. |
-| [0011 — Encapsulamento da validação](docs/adr/0011-validation-facade.md) | Classes próprias para contratos, Zod privado e integração por Standard Schema. |
+| [0001 — Modular monolith and ports/adapters](docs/adr/0001-modular-monolith.md) | Reduce operational complexity and keep search/domain independent of transport and vendors. |
+| [0002 — Custom vector indexes](docs/adr/0002-manual-vector-index.md) | Study algorithms and measure approximations against an exact reference. |
+| [0003 — MCP as a read-only adapter](docs/adr/0003-mcp-boundary.md) | Share the backend across clients without coupling the domain to a chatbot. |
+| [0004 — Versioned legal evidence](docs/adr/0004-versioned-legal-corpus.md) | Preserve provenance, editions, structure and temporal limits. |
+| [0005 — Fine-tuning after retrieval evaluation](docs/adr/0005-fine-tuning-strategy.md) | Separate gains from search, instructions and training; avoid treating memorization as legal updates. |
+| [0006 — Parsing libraries in adapters](docs/adr/0006-parsing-and-runtime.md) | Use a maintained XLSX parser without delegating fiscal logic or search algorithms. |
+| [0007 — Embeddings through a project-owned port](docs/adr/0007-embedding-adapters.md) | Swap providers without changing retrieval and distinguish lexical controls from learned models. |
+| [0008 — Official MCP SDK](docs/adr/0008-mcp-runtime.md) | Delegate negotiation and transport to the SDK with testable integration. |
+| [0009 — AWS demo](docs/adr/0009-aws-demo.md) | Use S3/CloudFront for files and API Gateway/Lambda for processing. |
+| [0010 — Official HTML extraction](docs/adr/0010-official-html-ingestion.md) | Specific selectors/encoding, snapshot preservation and explicit exclusion of corrupted content. |
+| [0011 — Encapsulated validation](docs/adr/0011-validation-facade.md) | Project-owned contract classes, private Zod and Standard Schema integration. |
 
-## Ferramentas MCP
+## MCP tools
 
-| Ferramenta | Entrada principal | O que retorna |
+| Tool | Main input | Returns |
 |---|---|---|
-| `get_cfop` | Código completo; data opcional. | Registros exatos, versões, procedência, situação temporal e contexto faltante. |
-| `get_ncm` | NCM completo; data opcional. | Registro e notas disponíveis; não classifica automaticamente um produto. |
-| `search_regulations` | Texto, data, jurisdição, `topK` e modo de busca. | Evidências ranqueadas e relacionadas; códigos completos podem seguir a rota exata. |
-| `explain_rule` | ID de evidência; data opcional. | Texto e relações existentes, sem geração de parecer pela ferramenta. |
+| `get_cfop` | Complete code; optional date. | Exact records, editions, provenance, temporal status and missing context. |
+| `get_ncm` | Complete NCM; optional date. | Available record and notes; does not automatically classify a product. |
+| `search_regulations` | Text, date, jurisdiction, `topK` and search mode. | Ranked and related evidence; complete codes may follow the exact route. |
+| `explain_rule` | Evidence ID; optional date. | Existing text and relationships, without tool-generated tax advice. |
 
-Todas são de leitura. Os contratos rejeitam campos extras, limitam formatos e validam a saída. Cada resposta contém `structuredContent` e sua representação textual JSON. Veja os [contratos documentados](docs/mcp-contracts.md), as [declarações executáveis](apps/mcp-server/src/contracts.ts) e a [fachada de validação](packages/validation/README.md).
+All tools are read-only. Contracts reject extra fields, restrict formats and validate output. Each response includes `structuredContent` and its JSON text representation. See the [documented contracts](docs/mcp-contracts.md), [executable declarations](apps/mcp-server/src/contracts.ts) and [validation facade](packages/validation/README.md).
 
-O modo padrão de busca textual é híbrido. `jurisdiction: 'MG'` permite MG e fontes BR; SP funciona da mesma forma. Datas incompatíveis com intervalos conhecidos são excluídas; limites desconhecidos permanecem indicados como `unknown`. O ranking não resolve automaticamente regime tributário, finalidade da compra ou aplicação de exceções.
+The default text search mode is hybrid. `jurisdiction: 'MG'` allows MG and BR sources; SP works the same way. Dates incompatible with known intervals are excluded; unknown boundaries remain marked `unknown`. Ranking does not automatically resolve tax regimes, purchase purpose or exception applicability.
 
-## Corpus e procedência
+## Corpus and provenance
 
-A carga oficial registrada em **14/11/2026** priorizou fontes nacionais, depois São Paulo e Minas Gerais. Não há cobertura estadual de outras UFs neste recorte.
+The official load recorded on **2026-11-14** prioritized national sources, then São Paulo and Minas Gerais. Other states are outside this selection.
 
-| Indicador do relatório de carga | Quantidade |
+| Load report metric | Count |
 |---|---:|
-| Entradas de fontes baixadas | 71, correspondentes a 70 URLs distintas |
-| Entradas de fontes indexadas | 66 |
-| Registros NCM completos | 10.516 |
-| Registros CFOP | 619 |
-| Evidências nacionais | 13.604 |
-| Evidências de SP | 8.504 |
-| Evidências de MG | 11.388 |
-| Evidências totais | 33.496 |
+| Downloaded source entries | 71, representing 70 distinct URLs |
+| Indexed source entries | 66 |
+| Complete NCM records | 10,516 |
+| CFOP records | 619 |
+| National evidence chunks | 13,604 |
+| SP evidence chunks | 8,504 |
+| MG evidence chunks | 11,388 |
+| Total evidence chunks | 33,496 |
 
-Evidências são fragmentos e representações textuais de códigos, não necessariamente documentos independentes. As contagens e URLs estão no [relatório por fonte](docs/data/official-corpus.json); conteúdo, arquivos somente arquivados e exclusões estão no [guia de ingestão oficial](docs/official-ingestion.md).
+Evidence items are chunks and textual code representations, not necessarily independent documents. Counts and URLs are in the [per-source report](docs/data/official-corpus.json); content, archive-only files and exclusions are described in the [official ingestion guide](docs/official-ingestion.md).
 
-Cada evidência conserva identificadores, texto, órgão, jurisdição, URL oficial, edição, instante de coleta, checksum e datas conhecidas. Datas desconhecidas são `null`; baixar uma consolidação hoje não prova a vigência de cada dispositivo em uma data solicitada.
+Each evidence item preserves identifiers, text, authority, jurisdiction, official URL, edition, collection time, checksum and known dates. Unknown dates are `null`; downloading a consolidation today does not establish each provision's validity on a requested date.
 
-Os bytes baixados e o corpus ficam em `.data/`, fora do Git. O repositório contém código, catálogo e relatórios necessários para reproduzir a carga. Documentos completos só podem ser redistribuídos após revisão dos termos aplicáveis. Essa separação segue o [ADR-0004](docs/adr/0004-versioned-legal-corpus.md).
+Downloaded bytes and the corpus live in `.data/`, outside Git. The repository contains the code, catalog and reports needed to reproduce ingestion. Complete documents may only be redistributed after applicable terms are reviewed. This separation follows [ADR-0004](docs/adr/0004-versioned-legal-corpus.md).
 
-## Executar localmente
+Repository documentation, comments, prompts and interface messages are in English. Original Portuguese evidence, official names/schema keys and language-specific retrieval fixtures are preserved so translations do not replace source material or invalidate evaluations.
 
-Requisitos: **Node.js 22+ e npm**. Não é necessário instalar banco vetorial ou configurar uma LLM para executar a demonstração sintética.
+## Run locally
 
-### Instalar e verificar
+Requirements: **Node.js 22+ and npm**. No vector database installation or LLM configuration is needed to run the synthetic demo.
 
-Na raiz do repositório:
+### Install and verify
+
+From the repository root:
 
 ```sh
 npm ci
@@ -194,59 +196,59 @@ npm test
 npm run check:boundaries
 ```
 
-### Iniciar com dados sintéticos
+### Start with synthetic data
 
 ```sh
 npm start -- --demo
 ```
 
-O servidor atende em `http://127.0.0.1:3000/mcp`. Os dados de demonstração são fixtures sem valor fiscal. Em outro terminal, uma demonstração autônoma de chamadas pode ser executada com:
+The server listens at `http://127.0.0.1:3000/mcp`. Demo data consists of fixtures with no fiscal value. In another terminal, run an independent tool-call demonstration:
 
 ```sh
 npm run demo:mcp
 ```
 
-Esse comando abre seu próprio servidor temporário, chama as ferramentas com o cliente oficial, grava `.data/demo-transcript.json` e encerra. Ele não depende de uma conta de assistente nem constitui teste dentro do ChatGPT Work.
+This command starts its own temporary server, calls tools with the official client, writes `.data/demo-transcript.json` and exits. It does not require an assistant account and does not constitute testing inside ChatGPT Work.
 
-### Preparar e usar o corpus oficial
+### Prepare and use the official corpus
 
-Ingestão é uma operação explícita de manutenção que acessa as fontes oficiais configuradas:
+Ingestion is an explicit maintenance operation that accesses configured official sources:
 
 ```sh
 npm run ingest:official
 npm start
 ```
 
-Sem `--demo`, o caminho padrão local é `.data/corpus.json`; se o arquivo não existir, é preciso construir o corpus. Para reprocessar snapshots já existentes, use `npm run ingest:official -- --reuse`. Isso não representa uma nova consulta às fontes. Para reconstrução por manifesto, formatos e requisitos, consulte [ingestão oficial](docs/official-ingestion.md) e o [worker](apps/ingestion-worker/README.md).
+Without `--demo`, the default local path is `.data/corpus.json`; build the corpus if the file does not exist. To reprocess existing snapshots, use `npm run ingest:official -- --reuse`. This is not a new source consultation. For manifest-based reconstruction, formats and requirements, see [official ingestion](docs/official-ingestion.md) and the [worker](apps/ingestion-worker/README.md).
 
-### Configuração local
+### Local configuration
 
-| Variável | Padrão / função |
+| Variable | Default / purpose |
 |---|---|
-| `MCP_CORPUS` | Caminho do corpus; normalmente `.data/corpus.json`. |
+| `MCP_CORPUS` | Corpus path; usually `.data/corpus.json`. |
 | `MCP_HOST` / `MCP_PORT` | `127.0.0.1` / `3000`. |
-| `EMBEDDING_PROVIDER` | `hash`; `ollama` exige um runtime e modelo disponíveis. |
-| `EMBEDDING_MODEL` | `lexical-fnv1a-v1` no controle hash. |
-| `EMBEDDING_DIMENSIONS` | `128` no controle hash; deve corresponder ao modelo escolhido. |
-| `OLLAMA_URL` | `http://127.0.0.1:11434` para o adaptador local opcional. |
+| `EMBEDDING_PROVIDER` | `hash`; `ollama` requires an available runtime and model. |
+| `EMBEDDING_MODEL` | `lexical-fnv1a-v1` for the hash control. |
+| `EMBEDDING_DIMENSIONS` | `128` for the hash control; must match the selected model. |
+| `OLLAMA_URL` | `http://127.0.0.1:11434` for the optional local adapter. |
 
-Essas opções de embeddings são lidas pelo ponto de entrada local. A Lambda usa a composição padrão e não passa a utilizar Ollama apenas por receber essas variáveis. Modelos e dimensões não podem ser misturados entre documentos e consultas. Detalhes no [servidor](apps/mcp-server/README.md).
+These embedding options are read by the local entry point. Lambda uses the default composition and does not start using Ollama merely because these variables are set. Do not mix models or dimensions between documents and queries. Details are in the [server guide](apps/mcp-server/README.md).
 
-## Testes e avaliações
+## Tests and evaluations
 
-O projeto distingue três tipos de verificação:
+The project distinguishes three kinds of verification:
 
-| Verificação | O que demonstra | O que não demonstra |
+| Verification | Demonstrates | Does not demonstrate |
 |---|---|---|
-| Testes automatizados | Cálculos, invariantes, parsing, limites, tipos e contratos de transporte. | Correção tributária de toda resposta possível. |
-| Benchmark vetorial | Recall e custo dos índices comparados à busca exata em dados fixos. | Desempenho garantido em outro corpus ou escala. |
-| Avaliação documental | Recuperação de evidências e critérios definidos em casos fixos. | Qualidade geral de geração por uma LLM ou aprovação fiscal humana. |
+| Automated tests | Calculations, invariants, parsing, limits, types and transport contracts. | Tax correctness of every possible answer. |
+| Vector benchmark | Index recall and cost against exact search on fixed data. | Guaranteed performance on another corpus or scale. |
+| Document evaluation | Evidence retrieval and defined criteria on fixed cases. | General LLM generation quality or human tax approval. |
 
-A suíte local passou com **50 testes** na refatoração de validação, incluindo integração MCP nas negociações anterior/moderna e teste do adaptador Lambda. A [CI](.github/workflows/ci.yml) roda a cada push e pull request, em qualquer branch, e pode ser iniciada manualmente pela aba Actions. Ela usa Node.js 22 e executa instalação pelo lockfile, testes, verificação de fronteiras, empacotamento com fixture explícita e auditoria das dependências de runtime.
+The local suite passed **50 tests** during the validation refactor, including MCP integration under earlier/modern negotiations and the Lambda adapter. [CI](.github/workflows/ci.yml) runs on every push and pull request on any branch, and can be started manually from Actions. It uses Node.js 22 and runs lockfile installation, tests, boundary checks, explicit fixture packaging and a runtime dependency audit.
 
-O workflow tem permissão somente de leitura, Actions fixadas por commit e timeout de 15 minutos. Uma nova execução para a mesma branch ou pull request cancela a anterior. Os testes usam fixtures públicas e não precisam de credenciais AWS nem do corpus local de produção.
+The workflow has read-only permissions, Actions pinned by commit and a 15-minute timeout. A new run for the same branch or pull request cancels the previous one. Tests use public fixtures and need neither AWS credentials nor the local production corpus.
 
-Comandos de reprodução:
+Reproduction commands:
 
 ```sh
 npm run benchmark:vectors -- .data/vector-benchmark.json
@@ -254,64 +256,64 @@ npm run eval:retrieval -- .data/retrieval-results.json
 npm run eval:initial
 ```
 
-O último comando consulta o MCP remoto para verificar o [cenário documental inicial](docs/initial-scenario.md). Ele não é uma certificação fiscal nem um teste da resposta final de um assistente.
+The last command queries the remote MCP to verify the [initial document scenario](docs/initial-scenario.md). It is neither tax certification nor a test of an assistant's final answer.
 
-Os [resultados vetoriais](docs/benchmarks/README.md) publicam parâmetros, dados e limitações: no ensaio de 1.000 vetores, HNSW foi mais lento que a busca exata; IVF ganhou tempo com perda de recall. A [avaliação de recuperação](docs/benchmarks/retrieval.md) usa 40 casos e um corpus editorial pequeno, separado dos 33.496 fragmentos oficiais; não deve ser apresentada como avaliação de toda a base atual.
+The [vector results](docs/benchmarks/README.md) publish parameters, data and limitations: in the 1,000-vector trial, HNSW was slower than exact search; IVF saved time at the cost of recall. The [retrieval evaluation](docs/benchmarks/retrieval.md) uses 40 cases and a small editorial corpus, separate from the 33,496 official chunks; it must not be presented as an evaluation of the entire current dataset.
 
-LoRA tem datasets e manifesto de experimento preparados, mas treinamento e comparação entre baseline, RAG e RAG com fine-tuning continuam em aberto, conforme [ADR-0005](docs/adr/0005-fine-tuning-strategy.md).
+LoRA datasets and an experiment manifest are prepared, but training and comparison of baseline, RAG and fine-tuned RAG remain open under [ADR-0005](docs/adr/0005-fine-tuning-strategy.md).
 
-## Implantação AWS e plugin
+## AWS deployment and plugin
 
-O [endpoint MCP](https://d2kvl1uo6lcsgz.cloudfront.net/mcp) é servido por:
+The [MCP endpoint](https://d2kvl1uo6lcsgz.cloudfront.net/mcp) is served through:
 
 ```text
-Cliente MCP → CloudFront → API Gateway HTTP API → Lambda Node.js
-                   └── página e política estáticas → S3 privado
+MCP client → CloudFront → API Gateway HTTP API → Node.js Lambda
+                  └── static page and policy → private S3
 ```
 
-O S3 não executa a busca. A Lambda recebe `index.mjs` e `corpus.json`, carrega os dados e mantém os índices em memória. A configuração documentada usa 1.024 MiB e timeout de 28 segundos, com limites no gateway e logs operacionais sanitizados. Infraestrutura em [template CloudFormation](deploy/aws/template.json); justificativa no [ADR-0009](docs/adr/0009-aws-demo.md) e procedimentos no [guia AWS](deploy/aws/README.md).
+S3 does not execute search. Lambda receives `index.mjs` and `corpus.json`, loads data and maintains in-memory indexes. The documented configuration uses 1,024 MiB and a 28-second timeout, with gateway limits and sanitized operational logs. Infrastructure: [CloudFormation template](deploy/aws/template.json); rationale: [ADR-0009](docs/adr/0009-aws-demo.md); procedures: [AWS guide](deploy/aws/README.md).
 
-`npm run build:lambda` gera o pacote local com corpus populado; não faz deploy. Na CI, `--demo` é explícito e usa fixture. Código, documentos locais e serviço publicado podem estar em revisões diferentes até uma implantação deliberada. O [relatório de smoke da carga oficial](docs/deployment/aws-official-smoke.json) registra a verificação remota feita na publicação daquele corpus.
+`npm run build:lambda` generates the local package with the populated corpus; it does not deploy. CI explicitly uses `--demo` with fixtures. Code, local documents and the published service may be at different revisions until a deliberate deployment. The [official-load smoke report](docs/deployment/aws-official-smoke.json) records remote verification at that corpus's publication.
 
-O plugin de conta permanece **privado e gratuito**, sem submissão pública. Essa privacidade de distribuição do plugin não equivale a autenticação do endpoint HTTPS: o endpoint de demonstração atende documentação pública e não deve receber um corpus sigiloso. O segredo de origem da implantação restringe o caminho até a Lambda; ele não identifica usuários finais.
+The account plugin remains **private and free**, without public submission. Private plugin distribution does not authenticate the HTTPS endpoint: the demo endpoint serves public documentation and must not receive a confidential corpus. The deployment origin secret restricts the path to Lambda; it does not identify end users.
 
-O pacote portátil está em [plugins/fiscal-rag](plugins/fiscal-rag/README.md). O teste completo no Work, vídeo e submissão estão pendentes nos [materiais de revisão](docs/plugin-review.md). Instruções de evidência exclusiva pelo RAG orientam o assistente, mas não apagam seu conhecimento prévio nem comprovam por si só que cada frase esteja sustentada: [limites da política](docs/rag-only.md).
+The portable package is under [plugins/fiscal-rag](plugins/fiscal-rag/README.md). Full Work testing, video and submission remain pending in the [review materials](docs/plugin-review.md). RAG-only evidence instructions guide the assistant but do not erase its prior knowledge or independently prove that every sentence is supported: [policy limitations](docs/rag-only.md).
 
-## Organização do repositório
+## Repository structure
 
-| Caminho | Responsabilidade |
+| Path | Responsibility |
 |---|---|
-| [apps/mcp-server](apps/mcp-server/README.md) | Ferramentas, contratos, HTTP/Lambda e composição dos serviços. |
-| [apps/ingestion-worker](apps/ingestion-worker/README.md) | Download, snapshots e parsers oficiais. |
-| [packages/vector-core](packages/vector-core/src/vector-index.ts) | Porta dos índices, cosseno, busca exata, K-Means, IVF e HNSW. |
-| [packages/retrieval](packages/retrieval/README.md) | Fragmentação, BM25, roteamento, filtros e RRF. |
-| [packages/fiscal-domain](packages/fiscal-domain/README.md) | Consulta exata e versões de códigos. |
-| [packages/corpus](packages/corpus/src/evidence.ts) | Evidências, procedência e relações documentais. |
-| [packages/application](packages/application/src/corpus-file.ts) | Contrato do arquivo de corpus. |
-| [packages/adapters](packages/adapters/src/hash-embedding.ts) | Provedores de vetores por hash e Ollama. |
-| [packages/validation](packages/validation/README.md) | Classes de schemas e encapsulamento da validação. |
-| [packages/evaluation](packages/evaluation/src/dataset.ts) | Datasets, métricas e supervisão de comportamento. |
-| [config/official-sources.json](config/official-sources.json) | Catálogo oficial para ingestão. |
-| [scripts](scripts) | Operação, avaliações, empacotamento e geração de documentação. |
-| [test](test) | Testes e fixtures; exemplos sintéticos identificados. |
-| [eval](eval) e [experiments](experiments) | Casos fixos e preparação de experimentos. |
-| [deploy/aws](deploy/aws/README.md) | Infraestrutura e operação da demonstração. |
-| [docs/adr](docs/adr/README.md) e [docs/c4](docs/c4/README.md) | Decisões e vistas arquiteturais. |
-| [tasks.md](tasks.md) e [TODO.md](TODO.md) | Entregas, commits coerentes, pendências e limitações. |
+| [apps/mcp-server](apps/mcp-server/README.md) | Tools, contracts, HTTP/Lambda and service composition. |
+| [apps/ingestion-worker](apps/ingestion-worker/README.md) | Downloads, snapshots and official parsers. |
+| [packages/vector-core](packages/vector-core/src/vector-index.ts) | Index port, cosine similarity, exact search, K-Means, IVF and HNSW. |
+| [packages/retrieval](packages/retrieval/README.md) | Chunking, BM25, routing, filters and RRF. |
+| [packages/fiscal-domain](packages/fiscal-domain/README.md) | Exact lookup and code editions. |
+| [packages/corpus](packages/corpus/src/evidence.ts) | Evidence, provenance and document relationships. |
+| [packages/application](packages/application/src/corpus-file.ts) | Corpus file contract. |
+| [packages/adapters](packages/adapters/src/hash-embedding.ts) | Hash and Ollama vector providers. |
+| [packages/validation](packages/validation/README.md) | Schema classes and validation encapsulation. |
+| [packages/evaluation](packages/evaluation/src/dataset.ts) | Datasets, metrics and behavior supervision. |
+| [config/official-sources.json](config/official-sources.json) | Official ingestion catalog. |
+| [scripts](scripts) | Operations, evaluations, packaging and documentation generation. |
+| [test](test) | Tests and fixtures; synthetic examples are identified. |
+| [eval](eval) and [experiments](experiments) | Fixed cases and experiment preparation. |
+| [deploy/aws](deploy/aws/README.md) | Demo infrastructure and operations. |
+| [docs/adr](docs/adr/README.md) and [docs/c4](docs/c4/README.md) | Decisions and architectural views. |
+| [tasks.md](tasks.md) and [TODO.md](TODO.md) | Deliverables, coherent commits, pending work and limitations. |
 
-## Limites e próximos passos
+## Limitations and next steps
 
-- Melhorar o ranking do caso inicial: consultas amplas podem priorizar documentos com vocabulário semelhante e operação diferente.
-- Separar redações históricas e ampliar a validade por dispositivo; a data de download não resolve a vigência jurídica.
-- Implementar parsers dos arquivos auxiliares já baixados e ampliar atos avulsos federais, de SP e MG conforme necessidade.
-- Avaliar embeddings aprendidos com modelo, versão e condições registrados antes de alterar o padrão publicado.
-- Medir memória e custo em processos isolados e rever candidatos/filtros para corpora maiores.
-- Concluir revisão fiscal humana e avaliação do comportamento do assistente com as evidências.
+- Improve ranking for the initial scenario: broad queries may prioritize documents with similar vocabulary but a different transaction.
+- Separate historical wording and expand provision-level validity; download time does not establish legal validity.
+- Implement parsers for downloaded auxiliary files and add individual federal, SP and MG acts as needed.
+- Evaluate learned embeddings with recorded model, version and conditions before changing the published default.
+- Measure memory and cost in isolated processes and review candidates/filters for larger corpora.
+- Complete human tax review and evaluation of assistant behavior with the evidence.
 
-Não há atualização automática das fontes nem treinamento a partir das conversas. As pendências detalhadas estão em [TODO.md](TODO.md); escopos de implementação em [tasks.md](tasks.md).
+Sources are not updated automatically, and conversations are not used for training. Detailed pending work is in [TODO.md](TODO.md); implementation scopes are in [tasks.md](tasks.md).
 
-## Contribuição e licença
+## Contributing and license
 
-As [instruções de contribuição](AGENTS.md) exigem uma tarefa coerente por commit, fronteiras entre domínio e adaptadores, testes para algoritmos numéricos e contratos MCP, e preservação da procedência. Credenciais, contatos pessoais, documentos sem revisão de redistribuição e dados operacionais ignorados não devem entrar no Git.
+The [contributor instructions](AGENTS.md) require one coherent task per commit, domain/adapter boundaries, numerical algorithm and MCP contract tests, and preserved provenance. Credentials, personal contact details, documents without redistribution review and ignored operational data must not enter Git.
 
-Código sob licença **MIT**, conforme [LICENSE](LICENSE). Documentos e materiais de terceiros continuam sujeitos aos seus próprios termos.
+Code is licensed under **MIT**; see [LICENSE](LICENSE). Third-party documents and materials remain subject to their own terms.

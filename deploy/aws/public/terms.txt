@@ -1,13 +1,13 @@
-Fiscal RAG Lab — condições de uso experimental — 14/11/2026
+Fiscal RAG Lab — experimental terms of use — 2026-11-14
 
-Demonstração educativa de recuperação documental, sem garantia de disponibilidade ou adequação a decisões fiscais. Não substitui consulta à legislação aplicável e revisão profissional. Similaridade de texto ou presença de um código não determina sua aplicabilidade a uma operação.
+Educational document retrieval demo, without guarantees of availability or suitability for tax decisions. It does not replace consultation of applicable legislation and professional review. Text similarity or the presence of a code does not determine applicability to a transaction.
 
-Não use o serviço para emitir documentos fiscais, calcular obrigações, processar dados confidenciais ou obter uma classificação definitiva de produto. Não envie dados pessoais, credenciais ou XML de notas. A aplicação oferece somente consultas de leitura e pode aplicar limites de tráfego.
+Do not use the service to issue tax documents, calculate liabilities, process confidential data or obtain definitive product classifications. Do not submit personal data, credentials or invoice XML. The application provides read-only queries and may enforce traffic limits.
 
-O corpus contém tabelas NCM/CFOP, atos CONFAZ e recortes oficiais de ICMS de São Paulo e Minas Gerais. Não contém todo o histórico fiscal, todas as normas ou todos os manuais técnicos. Há trechos excluídos por corrupção na fonte; planilhas auxiliares arquivadas sem parser não são evidências recuperáveis. Não há atualização automática. Vigência desconhecida permanece desconhecida. Confira as fontes oficiais referenciadas e seu contexto antes de usar qualquer informação.
+The corpus contains NCM/CFOP tables, CONFAZ acts and official ICMS excerpts from São Paulo and Minas Gerais. It does not include the complete fiscal history, every rule or every technical manual. Some sections are excluded because of source corruption; auxiliary spreadsheets archived without parsers are not retrievable evidence. There are no automatic updates. Unknown validity remains unknown. Check cited official sources and their context before using any information.
 
-Código do projeto sob MIT; materiais de terceiros conservam suas condições próprias. A política de privacidade descreve o processamento técnico. Estas condições descrevem o uso experimental, sem declarar correção fiscal ou conformidade jurídica integral.
+Project code is licensed under MIT; third-party materials retain their own terms. The privacy policy describes technical processing. These terms describe experimental use without asserting tax correctness or comprehensive legal compliance.
 
-Responsável: {{OPERATOR_NAME}}
-Contato: {{OPERATOR_EMAIL}}
-Site: {{OPERATOR_SITE}}
+Operator: {{OPERATOR_NAME}}
+Contact: {{OPERATOR_EMAIL}}
+Website: {{OPERATOR_SITE}}

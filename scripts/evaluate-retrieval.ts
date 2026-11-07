@@ -36,7 +36,7 @@ for (const variant of variants) {
   const buildMs = performance.now() - start;
   global.gc?.();
   const after = process.memoryUsage();
-  await retriever.search({ query: 'consulta de aquecimento', mode: variant.mode });
+  await retriever.search({ query: 'warmup query', mode: variant.mode });
   const rows: { id: string; category: string; ids: string[]; elapsedMs: number; recallAt5: number | null;
     recallAt10: number | null; reciprocalRankAt10: number | null; guardPassed: boolean | null; sources: string[] }[] = [];
   for (const item of dataset.cases) {

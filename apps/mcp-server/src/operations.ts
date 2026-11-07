@@ -19,13 +19,13 @@ export class FixedWindowLimiter {
   }
 }
 
-export const privacyPolicy = `Política de privacidade — protótipo Fiscal RAG Lab (14/11/2026)
-Este serviço oferece pesquisa documental educativa, não parecer tributário.
-Não envie CPF, CNPJ, XML de notas, dados pessoais ou segredos nas consultas.
-Consultas e resultados são processados em memória e não são armazenados pela aplicação.
-Logs registram somente identificador aleatório de requisição, rota categorizada, status e duração; não incluem corpo, consulta, IP, cabeçalhos ou credenciais.
-Endereços de conexão são usados somente em memória para quotas e descartados na limpeza das janelas, acionada por requisições posteriores, sem persistência.
-O provedor padrão de embeddings é lexical e local. Um operador que configure embeddings remotos deverá revisar e divulgar o tratamento adicional antes de publicar.
-Infraestrutura, proxy e plataforma cliente podem aplicar políticas próprias. O operador deverá informar identidade, contato e retenção da infraestrutura antes de abrir a demonstração pública.
-O corpus oficial exige procedência e revisão; os dados da demonstração local são sintéticos e sem valor fiscal.
+export const privacyPolicy = `Privacy policy — Fiscal RAG Lab prototype (2026-11-14)
+This service provides educational document research, not tax advice.
+Do not include CPF/CNPJ identifiers, invoice XML, personal data or secrets in queries.
+Queries and results are processed in memory and are not stored by the application.
+Logs contain only a random request identifier, categorized route, status and duration; they exclude bodies, queries, IP addresses, headers and credentials.
+Connection addresses are used only in memory for quotas and discarded when subsequent requests trigger window cleanup, without persistence.
+The default embedding provider is local and lexical. Operators configuring remote embeddings must review and disclose the additional processing before publication.
+Infrastructure, proxies and client platforms may apply their own policies. Operators must disclose their identity, contact details and infrastructure retention before opening a public demo.
+The official corpus requires provenance and review; local demo data is synthetic and has no fiscal value.
 `;

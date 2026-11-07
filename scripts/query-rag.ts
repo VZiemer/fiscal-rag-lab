@@ -5,7 +5,7 @@ import { queryPlanSchema, type RagToolCall, lookupSchema, searchOutput, explainO
 
 // This client is restricted to the project's RAG. Its use for fiscal answers requires user authorization under AGENTS.md.
 const [planFile, output = '.data/rag-query-results.json'] = process.argv.slice(2);
-if (!planFile) throw new Error('Uso: node dist/scripts/query-rag.js plano.json [resultado.json]');
+if (!planFile) throw new Error('Usage: node dist/scripts/query-rag.js plan.json [result.json]');
 const plan = queryPlanSchema.parse(JSON.parse(await readFile(planFile, 'utf8')));
 const endpoint = 'https://d2kvl1uo6lcsgz.cloudfront.net/mcp';
 const client = new Client({ name: 'fiscal-rag-authorized-query', version: '1' }, { versionNegotiation: { mode: 'auto' } });

@@ -50,7 +50,7 @@ export class InMemoryFiscalRepository implements FiscalRuleRepository {
         : records.length > 1 ? 'ambiguous' : 'found',
       records,
       missingContext: [...(!date ? ['date'] : []), 'originUF', 'destinationUF', 'regime', 'operation'],
-      warning: 'Consulta documental; o código encontrado não determina sua aplicabilidade à operação. Vigência desconhecida exige conferência da fonte.'
+      warning: 'Document lookup; a matching code does not determine applicability to the transaction. Unknown validity requires checking the source.'
     };
   }
 }

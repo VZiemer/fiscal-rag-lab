@@ -1,18 +1,18 @@
-# Conexão MCP no Codex
+# MCP connection in Codex
 
-Registrado no host com o comando oficial:
+Registered on the host with the official command:
 
 ```powershell
 codex mcp add fiscal_rag_lab --url https://d2kvl1uo6lcsgz.cloudfront.net/mcp
 codex mcp get fiscal_rag_lab --json
 ```
 
-A CLI confirmou `enabled: true` e transporte `streamable_http`. O registro está no arquivo de configuração do usuário, fora do Git; não contém token e não altera a audiência `USER` / `PRIVATE` do plugin. Os servidores existentes foram preservados. Configuração nativa segue a [documentação oficial de MCP](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
+The CLI confirmed `enabled: true` and `streamable_http`. Registration lives in the user configuration outside Git, contains no token and does not change the plugin's `USER` / `PRIVATE` audience. Existing servers were preserved. Native setup follows the [official MCP documentation](https://learn.chatgpt.com/docs/extend/mcp?surface=cli).
 
-O screenshot enviado mostrava somente `blender` e `node_repl`, além do agregador `codex_apps`; não havia um servidor fiscal independente listado. A skill instalada, por si só, não comprovava presença das ferramentas no catálogo desta sessão.
+The supplied screenshot showed only `blender`, `node_repl` and the `codex_apps` aggregator, without a separate fiscal server. An installed skill alone did not prove tools were available in that session's catalog.
 
-Após atualizar a lista de MCPs ou reabrir o Codex, conferir o servidor `fiscal_rag_lab`. As ferramentas esperadas são `search_regulations`, `get_cfop`, `get_ncm` e `explain_rule`. Iniciar outra conversa no mesmo projeto se o catálogo da conversa atual permanecer sem essas ferramentas. Não é necessário criar outro plugin ou mudar sua privacidade.
+After refreshing MCPs or reopening Codex, check `fiscal_rag_lab`. Expected tools: `search_regulations`, `get_cfop`, `get_ncm` and `explain_rule`. Start another conversation in the project if the current catalog still lacks them. Another plugin or privacy change is unnecessary.
 
-Validação realizada: configuração lida pela própria CLI e contratos remotos já testados pelo cliente MCP oficial. A execução por ferramentas dentro desta conversa e no ChatGPT Work ainda depende de atualização do catálogo e não foi declarada concluída. A configuração direta do Codex não substitui uma conexão de app no ChatGPT Work hospedado.
+Verification performed: configuration read through the CLI and remote contracts tested with the official client. Native conversation/ChatGPT Work execution still depended on catalog refresh and was not declared complete. Direct Codex configuration does not replace a hosted ChatGPT Work app connection.
 
-O projeto agora contém `.codex/config.toml` com `web_search = "disabled"` e instruções fiscais RAG-only em `AGENTS.md`. A skill privada 0.1.1 foi salva com a mesma política; é necessário recarregar a configuração/versão no host para aplicá-las em sessões iniciadas antes da alteração. A configuração não bloqueia sozinha browser, conectores ou requests por código. Ver `docs/rag-only.md`.
+The project includes `.codex/config.toml` with `web_search = "disabled"` and RAG-only instructions in `AGENTS.md`. Private skill 0.1.1 was saved with the same policy; older sessions require configuration/version reload. This setting alone does not block browsers, connectors or code requests. See `docs/rag-only.md`.

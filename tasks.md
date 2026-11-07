@@ -10,6 +10,7 @@
 - [x] Document the implemented runtime, published demo and explicit remaining dependencies. (`docs: document implemented lab`)
 - [x] Explain the complete MCP/RAG call flow, current hash vectors, cosine/BM25/RRF search and experimental indexes in a reproducible beginner guide. (`docs: explain MCP and RAG step by step`)
 - [x] Expand the main README with technologies and ADR links, and publish reproducible C4 PNG views aligned with the implementation. (`docs: expand project overview and C4 diagrams`)
+- [x] Translate documentation, comments, runtime messages, plugin prompts and C4 views into English while preserving original fiscal evidence and language-specific evaluation data. (`docs: translate repository text into English`)
 
 ## Milestone 1 — Authoritative data ingestion
 - [x] Inventory official NF-e/CFOP/NCM sources and redistribution constraints. (`docs(sources): catalog official sources`)

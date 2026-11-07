@@ -1,27 +1,23 @@
-# Pendências verificáveis
+# Verifiable pending work
 
-## Dependem de acesso ou decisão externa
+## External access or decisions required
 
-- [x] Implantar na AWS com S3/CloudFront, HTTP API e Lambda. HTTPS e ferramentas verificados por cliente MCP oficial remoto; credenciais e contato pessoal permanecem fora do Git.
-- [x] Baixar e carregar edições oficiais CFOP/NCM e legislação nacional, paulista e mineira. Relatório por fonte em `docs/data/official-corpus.json`; bytes locais fora do Git. Revisão tributária humana e cobertura histórica permanecem pendentes.
-- [ ] Instalar e testar o Fiscal RAG Lab em ChatGPT Work. Plugin Creator está disponível e o plugin privado já foi criado; skill e endpoint foram confirmados nos arquivos salvos. Controle de navegador/interface falhou ao iniciar (`setup refresh had errors`); instalação e teste no produto aguardam acesso funcional.
-- [x] Registrar o servidor MCP no host Codex como `fiscal_rag_lab`; CLI confirmou habilitação e URL. Aguardar atualização do catálogo para verificar chamadas como ferramentas desta conversa, sem tratar isso como teste já concluído no Work.
-- [ ] Gravar demonstração em ChatGPT Work e submeter pelo portal com conta autorizada e materiais reais. Contato público fornecido, política publicada, Brasil escolhido como disponibilidade futura e gratuidade sem pagamentos confirmada pelo usuário. Atestações legais devem ser preenchidas pelo desenvolvedor autorizado. O plugin continua privado e não foi submetido.
-- [ ] LoRA e comparação de respostas permanecem em aberto por decisão do usuário. Este host não dispõe de Python, Docker ou nvidia-smi no PATH; não há treinamento executado.
+- [x] Deploy on AWS with S3/CloudFront, HTTP API and Lambda. HTTPS/tools verified by an official remote MCP client; credentials and personal contact remain outside Git.
+- [x] Download/load official CFOP/NCM editions and national/SP/MG legislation. Per-source report: `docs/data/official-corpus.json`; local bytes outside Git. Human tax review and historical coverage remain pending.
+- [ ] Install/test Fiscal RAG Lab in ChatGPT Work. Plugin Creator is available and the private plugin exists; skill/endpoint were confirmed in saved files. Browser/UI control failed at startup (`setup refresh had errors`); in-product testing awaits functional access.
+- [x] Register `fiscal_rag_lab` on the Codex host; CLI confirmed enablement/URL. Refresh the catalog to verify native conversation calls; do not describe that as completed Work testing.
+- [ ] Record a ChatGPT Work demo and submit through the portal with an authorized account and real materials. Public contact/policy, Brazil availability and free/no-payment behavior are confirmed. Legal attestations require the authorized developer. The plugin remains private and unsubmitted.
+- [ ] LoRA and answer comparison remain pending at the user's direction. This host has no configured Python, Docker or nvidia-smi in PATH; no training was executed.
 
-## Melhorias contornáveis
+## Addressable improvements
 
-- [ ] Melhorar recuperação do caso inicial de ferragens SP→MG: consultas amplas de revenda ranquearam devolução/transferência acima do candidato pertinente; não escolher CFOP apenas pelo primeiro resultado. Recuperar fundamento explícito do grupo interestadual, protocolos/regras aplicáveis à ST para o produto/operação e vigência por dispositivo. O contrato documental em `eval/scenarios/initial-hardware-sale.json` não certifica aplicação fiscal.
-- [ ] Separar e filtrar redações históricas do CONFAZ por vigência do dispositivo: a consulta inicial retornou passagens com datas históricas no texto, embora a proveniência da consolidação tenha limites desconhecidos. Não tratá-las como regras atuais.
-
-- [ ] Rever na fonte a seção paulista omitida por caracteres corrompidos; não completar texto por inferência. Não declarar cobertura integral dos livros/anexos extraídos. Detalhes em `docs/official-ingestion.md`.
-- [ ] Implementar parsers próprios de esquema para as planilhas auxiliares NCM/uTrib e cClassTrib IBS/CBS já baixadas. Extrair e revisar tabelas dos PDFs MOC 7 e cruzar com notas técnicas posteriores antes de indexar. Arquivamento não significa evidência disponível ao RAG.
-- [ ] Ampliar a cobertura de atos avulsos de SP/MG e das demais normas federais necessárias por caso de uso; manter outras UFs fora deste escopo. Criar atualização programada somente após definir política de revisão de diferenças.
-
-- [ ] Avaliar no host a política RAG-only: citar apenas evidências retornadas e recusar fallback para web/memória em perguntas sem suporte. Skill privada 0.1.1 salva; configuração de projeto desativa busca web. Não confundir isso com isolamento de todas as ferramentas ou validação semântica de cada afirmação.
-
-- [ ] Revisar cota de concorrência Lambda antes de reservar capacidade. A conta rejeitou reserva de 2 por exigir mínimo de 10 não reservadas; o deploy usa throttling HTTP API e concorrência compartilhada, sem alterar recursos existentes.
-
-- [ ] Medir memória isolada por processo, variância e tamanho serializado de IVF; substituir filas ordenadas de HNSW por heaps se perfis justificarem.
-- [ ] Criar partições temporais/jurisdicionais para filtrar antes da busca sem examinar todos os candidatos.
-- [ ] Revisar licenças por edição antes de redistribuir documentos oficiais e obter revisão humana do benchmark fiscal.
+- [ ] Improve initial SP→MG hardware retrieval: broad resale queries ranked returns/transfers above the relevant candidate; never pick CFOP solely from the top result. Retrieve explicit interstate-group support, applicable ST protocols/rules and provision-level validity. The contract in `eval/scenarios/initial-hardware-sale.json` does not certify tax applicability.
+- [ ] Separate/filter historical CONFAZ wording by provision validity. Initial results included historical dates in text while consolidation provenance had unknown boundaries; do not treat them as current rules.
+- [ ] Review the SP section omitted for corrupted characters through a separately authorized maintenance workflow. Never infer missing text or claim complete book/annex coverage. See `docs/official-ingestion.md`.
+- [ ] Implement schema-specific parsers for downloaded NCM/uTrib and cClassTrib IBS/CBS spreadsheets. Extract/review MOC 7 PDF tables against later technical notes before indexing. Archiving is not RAG availability.
+- [ ] Expand individual SP/MG acts and federal rules by use case, keeping other states outside scope. Schedule updates only after defining a difference-review policy.
+- [ ] Evaluate RAG-only behavior in the host: cite returned evidence only and refuse web/memory fallback for unsupported questions. Private skill 0.1.1 is saved and project web search disabled; this is neither complete tool isolation nor semantic claim validation.
+- [ ] Review Lambda concurrency quotas before reserving capacity. Reservation of 2 was rejected because at least 10 unreserved executions are required; deployment uses HTTP API throttling/shared concurrency without changing existing resources.
+- [ ] Measure process-isolated memory, variance and IVF serialized size; replace HNSW sorted queues with heaps if profiles justify it.
+- [ ] Partition indexes temporally/by jurisdiction to filter without scanning every candidate.
+- [ ] Review edition-specific redistribution licenses and obtain human fiscal benchmark review.

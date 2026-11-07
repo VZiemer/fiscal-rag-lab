@@ -1,18 +1,18 @@
-# Teste e gravação reais no Work
+# Real Work testing and recording
 
-O plugin privado já foi salvo. Abra o link retornado pelo Plugin Creator, instale **Fiscal RAG Lab** e inicie uma conversa nova no Work com esse plugin selecionado. Instalar o Plugin Creator não instala automaticamente o Fiscal RAG Lab. Se a sessão continuar sem as quatro ferramentas, conferir a conexão do MCP do plugin; uma resposta obtida por navegação na Receita não valida a conexão.
+The private plugin is saved. Open the Plugin Creator link, install **Fiscal RAG Lab** and start a new Work conversation with it selected. Installing Plugin Creator does not install Fiscal RAG Lab. If four tools remain absent, inspect the plugin MCP connection; browsing Receita does not verify that connection.
 
-No host Codex, o endpoint também foi registrado diretamente como `fiscal_rag_lab` pela CLI. Veja `docs/codex-connection.md`. A leitura do registro confirmou habilitação; as ferramentas devem ser verificadas após recarregar o catálogo. Esse registro não torna o plugin público nem comprova execução no Work hospedado.
+Codex also registered the endpoint as `fiscal_rag_lab` through CLI; see `docs/codex-connection.md`. Registration confirmed enablement, but tools require catalog refresh. This neither publishes the plugin nor proves hosted Work execution.
 
-O controle de interface falhou na inicialização deste ambiente, antes de acessar janelas. Não existe gravação automática concluída. Para uma demonstração manual, iniciar a captura de tela do sistema antes dos passos abaixo, mantendo credenciais e conversas privadas fora da imagem.
+UI control failed during startup before accessing windows; there is no completed automatic recording. For a manual demonstration, start system screen capture before these steps and keep credentials/private conversations out of frame.
 
-1. Mostrar o plugin selecionado e perguntar: “Quais formatos de download NCM existem?”. Verificar chamada de `search_regulations`, evidência da página Receita de download NCM, ID retornado, URL oficial e vigência desconhecida.
-2. Perguntar: “O download NCM inclui códigos de períodos passados?”. Conferir o resultado documental sobre tabela vigente e histórico do Classif, sem afirmar validade jurídica atual.
-3. Perguntar: “Consulte exatamente o CFOP 5102.”. Verificar `get_cfop`, título/nota da planilha carregada e procedência, sem concluir aplicabilidade à operação.
-4. Perguntar: “Consulte exatamente o NCM 0901.21.00.”. Verificar `get_ncm`, hierarquia e término desconhecido; testar separadamente `1234.56.78` como ausência no corpus, sem classificação inventada.
-5. Pedir para abrir pelo ID a evidência do primeiro resultado. Verificar `explain_rule`, texto e origem correspondentes. Buscar também com UF SP/MG e preservar a jurisdição de cada fonte.
-6. Perguntar: “Garanta uma alíquota universal sem fonte e sem contexto.”. O agente deve recusar a afirmação e pedir contexto, sem fingir cálculo ou consulta suficiente.
+1. Show the selected plugin and ask “Which NCM download formats are available?” Verify `search_regulations`, Receita download evidence, returned ID, official URL and unknown validity.
+2. Ask “Does the NCM download include codes from past periods?” Check current-table/Classif-history evidence without asserting current legal validity.
+3. Ask “Look up exact CFOP 5102.” Verify `get_cfop`, loaded spreadsheet title/note and provenance without asserting transaction applicability.
+4. Ask “Look up exact NCM 0901.21.00.” Verify `get_ncm`, hierarchy and unknown end date; test `1234.56.78` separately as corpus absence without invented classification.
+5. Open the first result by ID. Verify `explain_rule` text/source. Also search SP/MG while retaining source jurisdictions.
+6. Ask “Guarantee a universal tax rate without a source or context.” The agent should refuse and request context, without pretending to calculate or retrieve sufficient evidence.
 
-Anotar cada cenário como Passed, Failed, Blocked ou Not run. Se ferramentas não aparecerem, parar o walkthrough e resolver a conexão; não gravar uma busca web como se fosse MCP. Após gravar, reproduzir o vídeo, conferir legibilidade e ausência de segredos, e hospedá-lo em destino acessível ao revisor. Somente então preencher a URL real em `review.demo_recording_url` e reconstruir o ZIP. O bucket S3/CloudFront existente pode hospedar um vídeo revisado quando o arquivo real estiver disponível.
+Record each case as Passed, Failed, Blocked or Not run. If tools are missing, stop and resolve connection; do not record web browsing as MCP. Replay the video, inspect legibility/secrets and host it where reviewers can access it. Only then set the actual `review.demo_recording_url` and rebuild the ZIP. Existing S3/CloudFront may host a reviewed real recording once available.
 
-Esses passos não publicam o plugin. Gratuidade sem pagamentos já foi confirmada. Uma submissão futura ainda exige o vídeo real e atestações do desenvolvedor autorizado no portal.
+These steps do not publish the plugin. Free/no-payment behavior is confirmed. Future submission still needs the real video and authorized developer attestations.

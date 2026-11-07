@@ -20,7 +20,7 @@ test('HTTP enforces quotas/body/host and logs metadata without queries or identi
   const base = `http://127.0.0.1:${runtime.server.address().port}`;
   try {
     assert.equal((await fetch(`${base}/health`)).status, 200);
-    assert.match(await (await fetch(`${base}/privacy`)).text(), /não são armazenados/);
+    assert.match(await (await fetch(`${base}/privacy`)).text(), /are not stored by the application/);
     const headers = { 'content-type': 'application/json', accept: 'application/json, text/event-stream' };
     assert.equal((await fetch(`${base}/mcp`, { method: 'POST', headers, body: 'x'.repeat(65537) })).status, 413);
     await fetch(`${base}/mcp`, { method: 'POST', headers, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'search_regulations', arguments: { query: 'PRIVATE_QUERY_123' } } }) });

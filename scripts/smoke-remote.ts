@@ -6,7 +6,7 @@ import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/cli
 import { lookupSchema, searchOutput, explainOutput } from '../apps/mcp-server/src/contracts.js';
 
 const endpoint = process.argv[2];
-if (!endpoint) throw new Error('Uso: npm run smoke:remote -- https://dominio/mcp [relatorio.json]');
+if (!endpoint) throw new Error('Usage: npm run smoke:remote -- https://your-domain/mcp [report.json]');
 const url = new URL(endpoint);
 if (url.protocol !== 'https:' || url.username || url.password) throw new Error('HTTPS endpoint without credentials required');
 const observations: unknown[] = [];

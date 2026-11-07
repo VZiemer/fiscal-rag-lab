@@ -1,20 +1,20 @@
-# Preparação de implantação HTTPS
+# HTTPS deployment preparation
 
-Implementado e testado localmente: `/mcp`, `/health`, `/privacy`, quota 60 requisições/minuto por conexão de origem, quota global 600/minuto, máximo 16 simultâneas, corpo 64 KiB, validação Host/Origin, logs sem conteúdo de consulta. Quotas contam chamadas HTTP, inclusive negociação e listagem de ferramentas.
+Implemented and tested locally: `/mcp`, `/health`, `/privacy`, 60 requests/minute per source connection, 600/minute globally, 16 concurrent requests, 64 KiB bodies, Host/Origin validation and logs without query content. Quotas count HTTP calls, including negotiation and tool listing.
 
-Implantação realizada em 14/11/2026 na AWS: [MCP HTTPS](https://d2kvl1uo6lcsgz.cloudfront.net/mcp), [prontidão](https://d2kvl1uo6lcsgz.cloudfront.net/health) e [privacidade](https://d2kvl1uo6lcsgz.cloudfront.net/privacy). S3 privado + CloudFront + HTTP API + Lambda Node 22. Cliente MCP oficial remoto verificou as quatro ferramentas em modo anterior e moderno. Implementação e instruções em `deploy/aws/`. Contato autorizado do operador é inserido somente nos artefatos locais/publicados, não no Git.
+Deployed to AWS on 2026-11-14: [HTTPS MCP](https://d2kvl1uo6lcsgz.cloudfront.net/mcp), [readiness](https://d2kvl1uo6lcsgz.cloudfront.net/health) and [privacy](https://d2kvl1uo6lcsgz.cloudfront.net/privacy). Private S3 + CloudFront + HTTP API + Node 22 Lambda. An official remote MCP client verified all four tools under earlier and modern negotiations. Implementation/instructions: `deploy/aws/`. Authorized operator contact appears only in local/published artifacts, not Git.
 
-O pacote Docker abaixo é alternativa não utilizada: Docker não está instalado neste host e a imagem não foi construída. A demonstração AWS usa tabelas oficiais NCM/CFOP e documentação nacional, paulista e mineira selecionada, sem embeddings aprendidos. Contagens, hashes e limites em [carga oficial](official-ingestion.md). Vigências não comprovadas permanecem desconhecidas; não é um corpus fiscal completo.
+The Docker package below is an unused alternative: Docker was not installed on this host and the image was not built. AWS uses official NCM/CFOP tables and selected national/SP/MG documents without learned embeddings. Counts, hashes and limits: [official load](official-ingestion.md). Unverified validity stays unknown; coverage is incomplete.
 
-Para um host Linux com Docker Compose e DNS já apontado:
+For Linux with Docker Compose and configured DNS:
 
-1. Revisar e montar um corpus público em `.data/public-corpus/corpus.json`. Não publicar fixtures sintéticas como normas reais.
-2. Configurar `FISCAL_DOMAIN` no ambiente do operador. Executar `docker compose -f deploy/compose.yaml up --build -d`. O Caddy solicita TLS; a API não expõe porta direta.
-3. Conferir `/health`, `/privacy` e os contratos com cliente MCP remoto. Revisar políticas de logs da infraestrutura e informar contato do operador na política antes de abrir ao público.
-4. Fixar digests de imagens após validação de arquitetura e plataforma, registrar revisão Git, hash do corpus e parâmetros. Não registrar certificados, tokens nem dados fiscais privados em Git.
+1. Review and assemble a public corpus at `.data/public-corpus/corpus.json`. Do not publish synthetic fixtures as real rules.
+2. Set `FISCAL_DOMAIN` in the operator environment. Run `docker compose -f deploy/compose.yaml up --build -d`. Caddy requests TLS; the API exposes no direct port.
+3. Check `/health`, `/privacy` and contracts with a remote MCP client. Review infrastructure logging and disclose operator contact before public access.
+4. Pin image digests after platform/architecture validation; record Git revision, corpus hash and parameters. Never commit certificates, tokens or private fiscal data.
 
-O limite por origem usa o endereço de socket, ignorando `X-Forwarded-For`. Atrás do proxy todos compartilham esse limite; a quota global evita multiplicação. Para segmentação real por cliente, implementar autenticação ou um proxy confiável com política explícita. Esta demo lê um corpus local e não requer autenticação; nunca montar dados privados nesse modo.
+Source limits use socket addresses, ignoring `X-Forwarded-For`. A proxy shares that limit; global quotas prevent multiplication. Real per-client segmentation requires authentication or an explicitly trusted proxy policy. Never mount private data in this unauthenticated demo.
 
-Logs da aplicação contêm só ID aleatório, rota categorizada, status e duração. O Compose limita rotação por tamanho, não por prazo. Caddy não habilita access log; infraestrutura pode manter logs próprios e precisa de revisão. `/privacy` descreve o protótipo, sem inventar identidade ou contato do operador.
+Application logs include only random ID, categorized route, status and duration. Compose rotates by size, not retention period. Caddy does not enable access logs; infrastructure may keep its own records and requires review. `/privacy` describes the prototype without inventing operator identity/contact.
 
-Rollback: voltar à imagem anterior e ao corpus imutável anterior. Prontidão só é exposta após carregar e indexar o corpus; falha no carregamento impede o servidor de iniciar. O runtime de embeddings Ollama não está incluído no Compose; o controle lexical offline é o padrão.
+Rollback to the previous image and immutable corpus. Readiness is exposed only after loading/indexing; loading failures prevent startup. Compose does not include Ollama; offline lexical control is the default.

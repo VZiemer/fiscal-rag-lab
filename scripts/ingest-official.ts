@@ -65,7 +65,7 @@ for (let index = 0; index < queue.length; index++) {
     requiredFailed ||= item.required === true;
     const reason = error instanceof Error ? `${error.message}${error.cause instanceof Error ? `: ${error.cause.message}` : ''}` : String(error);
     results.push({ sourceId: item.sourceId, url: item.sourceUrl, jurisdiction: item.jurisdiction, checksum,
-      status: 'failed', reason, todo: 'Revisar acesso/schema oficial; não substituir por mirror nem inventar evidência.' });
+      status: 'failed', reason, todo: 'Review official access/schema; do not substitute a mirror or invent evidence.' });
     console.log(JSON.stringify({ source: item.sourceId, status: 'failed', reason }));
   }
   // Save progress after every source so interrupted downloads remain auditable and reusable.

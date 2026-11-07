@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fiscal RAG Lab — demonstração</title>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fiscal RAG Lab — demo</title>
 <style>body{font:18px/1.65 system-ui;max-width:760px;margin:8vh auto;padding:0 24px;color:#182c38;background:#f4f7f8}h1{line-height:1.15}a{color:#005c79}code{background:#e1e9ed;padding:3px 6px;border-radius:4px}aside{border-left:4px solid #bc6a13;padding-left:18px}li{margin:9px 0}</style>
-<main><p>LABORATÓRIO EDUCACIONAL · DEMONSTRAÇÃO PÚBLICA</p><h1>Fiscal RAG Lab</h1>
-<p>Recuperação documental com procedência, busca lexical, índices vetoriais próprios e ferramentas MCP somente leitura.</p>
-<aside>Não fornece parecer tributário, cálculo de impostos ou emissão de NF-e. A base reúne tabelas oficiais NCM/CFOP, atos CONFAZ e um recorte dos regulamentos de ICMS de São Paulo e Minas Gerais. Cobertura parcial, sem histórico completo ou garantia de atualização automática. Vigências não comprovadas permanecem desconhecidas.</aside>
-<h2>Conexão</h2><p>Endpoint HTTPS: <code id="endpoint">/mcp</code>. <a href="/health">Estado do serviço</a> · <a href="/privacy">Privacidade</a></p>
-<ul><li><code>search_regulations</code>: recuperar evidências e respectivas fontes, com filtro de UF e data.</li><li><code>get_cfop</code> e <code>get_ncm</code>: consultar os códigos nas tabelas carregadas, preservando notas, hierarquia e procedência.</li><li><code>explain_rule</code>: consultar evidência pelo identificador.</li></ul>
-<p>O controle vetorial usa hashing lexical local; não há modelo de linguagem ou treinamento de LoRA nesta implantação.</p>
-<p>Exemplos: “Consulte o CFOP 5102”, “Consulte o NCM 0901.21.00” ou “Busque substituição tributária em Minas Gerais”. Confira sempre a referência oficial retornada, a edição e as limitações. <a href="/health">Contagens e hash da edição implantada</a>.</p>
-<p>Responsável: {{OPERATOR_NAME}}. Contato: {{OPERATOR_EMAIL}} · {{OPERATOR_SITE}}. Não envie dados pessoais, notas ou credenciais. Acesso experimental sem garantia de disponibilidade.</p></main>
+<main><p>EDUCATIONAL LAB · PUBLIC DEMO</p><h1>Fiscal RAG Lab</h1>
+<p>Document retrieval with provenance, lexical search, custom vector indexes and read-only MCP tools.</p>
+<aside>Does not provide tax advice, tax calculations or NF-e issuance. The corpus combines official NCM/CFOP tables, CONFAZ acts and selected ICMS regulations from São Paulo and Minas Gerais. Coverage is partial, without a complete history or automatic update guarantee. Unverified validity remains unknown.</aside>
+<h2>Connection</h2><p>HTTPS endpoint: <code id="endpoint">/mcp</code>. <a href="/health">Service status</a> · <a href="/privacy">Privacy</a></p>
+<ul><li><code>search_regulations</code>: retrieve evidence and sources, with state and date filters.</li><li><code>get_cfop</code> and <code>get_ncm</code>: look up codes in loaded tables, preserving notes, hierarchy and provenance.</li><li><code>explain_rule</code>: retrieve evidence by identifier.</li></ul>
+<p>The vector control uses local lexical hashing; this deployment does not run a language model or LoRA training.</p>
+<p>Examples: “Look up CFOP 5102”, “Look up NCM 0901.21.00” or “Search for tax substitution in Minas Gerais”. Always check the returned official reference, edition and limitations. <a href="/health">Counts and hash of the deployed edition</a>.</p>
+<p>Operator: {{OPERATOR_NAME}}. Contact: {{OPERATOR_EMAIL}} · {{OPERATOR_SITE}}. Do not submit personal data, invoices or credentials. Experimental access without an availability guarantee.</p></main>
 <script>document.getElementById('endpoint').textContent=location.origin+'/mcp'</script></html>

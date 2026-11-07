@@ -58,7 +58,7 @@ export async function writeCorpusAtomically(path: string, corpus: CorpusFile): P
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const [manifestFile, output = '.data/corpus.json'] = process.argv.slice(2);
-  if (!manifestFile) throw new Error('Uso: npm run corpus:build -- manifest.json [saida.json]');
+  if (!manifestFile) throw new Error('Usage: npm run corpus:build -- manifest.json [output.json]');
   const manifest: CorpusBuildManifest = JSON.parse(await readFile(manifestFile, 'utf8'));
   const corpus = await buildCorpus(manifest, dirname(resolve(manifestFile)));
   await writeCorpusAtomically(output, corpus);

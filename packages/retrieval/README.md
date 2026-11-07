@@ -1,7 +1,7 @@
-# Recuperação documental
+# Document retrieval
 
-Implementado: chunker de texto legal com relações, BM25 invertido próprio, porta de embeddings, roteamento de identificadores completos e fusão RRF. Índices exato, IVF/K-Means e HNSW ficam em `packages/vector-core`. Nenhum deles delega busca a biblioteca vetorial pronta.
+Implemented: legal text chunking with relationships, a custom BM25 inverted index, an embedding port, complete-identifier routing and RRF fusion. Exact, IVF/K-Means and HNSW indexes live in `packages/vector-core`. None delegates search to a turnkey vector library.
 
-`HybridRetriever.create` recebe corpus, repositório de códigos, provedor de embeddings e índice vetorial por portas. Saídas distinguem a rota e incluem pontuação de ranking, procedência, vigência e relações legais. O filtro temporal elimina intervalos incompatíveis e mantém como desconhecidos os limites não estabelecidos. A busca obtém candidatos antes de filtrar; particionamento para corpora grandes está no TODO.
+`HybridRetriever.create` receives the corpus, code repository, embedding provider and vector index through ports. Outputs distinguish the route and include ranking scores, provenance, validity and legal relationships. Temporal filtering excludes incompatible intervals and retains unknown boundaries as unknown. Search obtains candidates before filtering; partitioning for larger corpora remains in the TODO list.
 
-O controle offline de embeddings é lexical, sem semântica aprendida. Os [benchmarks](../../docs/benchmarks/retrieval.md) publicam dados, condições e falhas; recall não mede correção fiscal. Exceções são ligações heurísticas no texto, não interpretação jurídica automática.
+The offline embedding control is lexical, without learned semantics. The [benchmarks](../../docs/benchmarks/retrieval.md) publish data, conditions and failures; recall does not measure tax correctness. Exception links are text heuristics, not automatic legal interpretation.

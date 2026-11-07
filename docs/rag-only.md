@@ -1,19 +1,19 @@
-# Respostas fiscais somente com evidências do RAG
+# Fiscal answers using RAG evidence only
 
-Política solicitada pelo usuário: consultar somente o Fiscal RAG Lab para fatos fiscais. A skill e o `AGENTS.md` exigem consulta às quatro ferramentas, citações de evidências/edições e abstenção quando o corpus não sustenta a resposta. Não há fallback para web, navegadores, outros conectores ou requests por código. Conhecimento memorizado não pode preencher lacunas fiscais. URLs retornadas servem como atribuição; não são buscadas automaticamente.
+User-requested policy: consult Fiscal RAG Lab exclusively for fiscal facts. The skill and `AGENTS.md` require the four tools, evidence/edition citations and abstention when the corpus cannot support an answer. No fallback to web search, browsers, other connectors or code requests. Model memory must not fill fiscal gaps. Returned URLs provide attribution and are not fetched automatically.
 
-Exceção de transporte autorizada expressamente pelo usuário nesta conversa: consultar as mesmas quatro ferramentas do RAG pelo cliente MCP do projeto quando não expostas no catálogo nativo. `scripts/query-rag.ts` restringe chamadas a essas ferramentas e ao endpoint existente. Essa autorização não permite busca externa, fetch de fontes ou substituição de evidências por memória. Foi usada para o [primeiro cenário de aceitação](initial-scenario.md); não representa disponibilidade de ferramentas nativas nesta sessão nem altera a política de outros usuários.
+The user explicitly authorized a transport exception: call the same four tools through the project MCP client when absent from the native catalog. `scripts/query-rag.ts` restricts calls to those tools and the existing endpoint. This permits no external search, source fetching or memory substitution. It was used for the [first acceptance scenario](initial-scenario.md); it does not establish native tool availability or change other users' policies.
 
-Exemplos esperados:
+Expected examples:
 
-- Código sem registro: “Evidência insuficiente no RAG; a tabela completa não está carregada”, sem inventar descrição e sem declarar inexistência legal.
-- Ferramenta indisponível: “Não foi possível consultar o RAG”, sem substituição por busca externa.
-- Evidência encontrada: resumir somente o conteúdo sustentado, citar ID/URL e manter vigência desconhecida ou limitações editoriais.
+- Missing code: “Insufficient evidence in the RAG; the complete table is not loaded,” without inventing descriptions or claiming legal nonexistence.
+- Unavailable tool: “The RAG could not be consulted,” without external fallback.
+- Retrieved evidence: summarize only supported content, cite ID/URL and preserve unknown validity/editorial limitations.
 
-No projeto Codex, `.codex/config.toml` usa `web_search = "disabled"`. É uma opção de configuração de projeto confiável; passa a valer quando o host recarrega a configuração. [Documentação oficial](https://learn.chatgpt.com/docs/web-search). Não altera os demais projetos ou a visibilidade do plugin.
+`.codex/config.toml` sets `web_search = "disabled"` for this trusted project after configuration reload. [Official documentation](https://learn.chatgpt.com/docs/web-search). Other projects and plugin visibility are unchanged.
 
-Esse controle remove a ferramenta de busca web do Codex, mas não bloqueia sozinho navegadores, conectores ou a rede de comandos. A skill orienta o uso do cliente; o servidor MCP não controla todas as ferramentas expostas pelo ChatGPT/Codex. O modelo continua tendo conhecimento pré-treinado, portanto instrução de grounding não equivale a apagar conhecimento ou provar que cada frase é sustentada.
+This removes Codex web search but does not independently block browsers, connectors or command networking. The skill guides the client; MCP does not control every ChatGPT/Codex tool. The model retains pretrained knowledge, so grounding instructions neither erase knowledge nor prove support for each sentence.
 
-Para isolamento técnico completo de ferramentas em um cliente próprio, expor somente o MCP fiscal na chamada ao modelo e impor uma allowlist com chamada obrigatória, sem disponibilizar web/browser/shell. A [API oficial](https://developers.openai.com/api/docs/guides/function-calling) oferece `tool_choice` e `allowed_tools`. Ainda é necessário validar as referências e avaliar se cada afirmação é sustentada; um ID de citação válido não prova implicação semântica. Respostas extrativas podem restringir a saída a trechos efetivamente recuperados. Esse cliente próprio não está implementado nesta tarefa.
+A custom client could expose only fiscal MCP with mandatory allowlisted calls and no web/browser/shell. The [official API](https://developers.openai.com/api/docs/guides/function-calling) provides `tool_choice` and `allowed_tools`. Citation and claim support validation remain necessary: a valid ID does not prove semantic entailment. Extractive answers can restrict output to retrieved excerpts. That client is not implemented here.
 
-Ingestão de fontes oficiais permanece separada: downloads autorizados atualizam snapshots/corpus; consultas não fazem atualização automática. O corpus atual contém tabelas oficiais NCM/CFOP e documentação nacional, paulista e mineira selecionada; [cobertura](official-ingestion.md). A política restritiva deve levar à abstenção nas perguntas não cobertas, mesmo com essa ampliação.
+Source ingestion remains separate: authorized downloads update snapshots/corpus; queries do not update automatically. Current tables and selected national/SP/MG documents have [partial coverage](official-ingestion.md). Uncovered questions still require abstention.

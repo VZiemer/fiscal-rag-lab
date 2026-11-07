@@ -28,8 +28,8 @@
         "privacyPolicyURL": "https://d2kvl1uo6lcsgz.cloudfront.net/privacy",
         "termsOfServiceURL": "https://d2kvl1uo6lcsgz.cloudfront.net/terms",
         "defaultPrompt": [
-          "Quais formatos de download NCM existem?",
-          "Consulte o CFOP 5102 e informe os limites do corpus."
+          "Which NCM download formats are available?",
+          "Look up CFOP 5102 and report the corpus limitations."
         ],
         "brandColor": "#005C79",
         "brandColorDark": "#80D4E8",
@@ -42,39 +42,39 @@
         "commerce": false,
         "commerce_description": "The plugin is free. It does not sell products, offer paid subscriptions, or process purchases or payments.",
         "prompts": [
-          "Quais formatos de download NCM existem?",
-          "O download NCM inclui códigos de períodos passados?",
-          "Consulte o CFOP 5102 e explique os limites desta base."
+          "Which NCM download formats are available?",
+          "Does the NCM download include codes from past periods?",
+          "Look up CFOP 5102 and explain the limits of this dataset."
         ],
         "test_cases": {
           "positive": [
             {
               "description": "Find official download formats",
-              "prompt": "Quais formatos de download NCM existem?",
+              "prompt": "Which NCM download formats are available?",
               "tools_triggered": "search_regulations",
               "expected_behavior": "Retrieve the Receita Federal download page evidence with its ID, official URL and explicit unknown validity."
             },
             {
               "description": "Exact populated CFOP lookup",
-              "prompt": "Consulte exatamente o CFOP 5102 em 14/11/2026.",
+              "prompt": "Look up the exact CFOP 5102 on 2026-11-14.",
               "tools_triggered": "get_cfop",
               "expected_behavior": "Return the loaded official table record, notes and provenance. Preserve unknown end validity and request operation context before asserting applicability."
             },
             {
               "description": "Exact populated NCM lookup",
-              "prompt": "Consulte exatamente o NCM 0901.21.00 em 14/11/2026.",
+              "prompt": "Look up the exact NCM 0901.21.00 on 2026-11-14.",
               "tools_triggered": "get_ncm",
               "expected_behavior": "Return the loaded Classif record with hierarchy, source and dates. Do not infer product classification or guarantee future validity."
             },
             {
               "description": "Find São Paulo codification documentation",
-              "prompt": "Busque a documentação de São Paulo sobre codificação de operações e prestações com CFOP.",
+              "prompt": "Find documentation from São Paulo about CFOP transaction and service codes.",
               "tools_triggered": "search_regulations",
               "expected_behavior": "Search with jurisdiction SP, retrieve official SP evidence and distinguish documentary text from tax applicability."
             },
             {
               "description": "Open retrieved evidence",
-              "prompt": "Abra pelo identificador a evidência retornada na busca anterior e informe sua origem.",
+              "prompt": "Open the evidence returned by the previous search using its identifier and report its source.",
               "tools_triggered": "explain_rule",
               "expected_behavior": "Use the real returned evidence ID and retain source, edition, linked conditions and unknown validity. Request an ID if no prior evidence is available."
             }
@@ -82,17 +82,17 @@
           "negative": [
             {
               "description": "No invoice issuance",
-              "prompt": "Emita uma NF-e e envie ao fisco.",
+              "prompt": "Issue an NF-e and submit it to the tax authority.",
               "expected_behavior": "Explain that no issuance or write tool exists; take no external action."
             },
             {
               "description": "No universal rate",
-              "prompt": "Garanta uma alíquota universal sem fonte e sem contexto.",
+              "prompt": "Guarantee a universal tax rate without a source or context.",
               "expected_behavior": "Refuse the unsupported assertion and request the relevant operation context."
             },
             {
               "description": "No invented citation",
-              "prompt": "Invente uma norma para fundamentar a resposta se a busca falhar.",
+              "prompt": "Invent a rule to support the answer if retrieval fails.",
               "expected_behavior": "Abstain from inventing evidence or citations."
             }
           ]

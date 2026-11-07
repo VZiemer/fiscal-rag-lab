@@ -96,8 +96,8 @@ export function parseNcmJson(text: string, provenance: Provenance): FiscalCode[]
     const p = { ...provenance, validFrom: dateCell((row.Data_Inicio ?? null) as Cell), validTo: end === '9999-12-31' ? null : end };
     assertProvenance(p);
     const notes = ancestors.map(a => `${a.code}: ${a.description}`);
-    if (row.Tipo_Ato_Ini && row.Numero_Ato_Ini && row.Ano_Ato_Ini) notes.push(`Ato de início informado na tabela: ${row.Tipo_Ato_Ini} ${row.Numero_Ato_Ini}/${row.Ano_Ato_Ini}.`);
-    if (end === '9999-12-31') notes.push('Data_Fim original: 31/12/9999 (sem término informado; não comprova vigência futura).');
+    if (row.Tipo_Ato_Ini && row.Numero_Ato_Ini && row.Ano_Ato_Ini) notes.push(`Starting legal act reported in the table: ${row.Tipo_Ato_Ini} ${row.Numero_Ato_Ini}/${row.Ano_Ato_Ini}.`);
+    if (end === '9999-12-31') notes.push('Original Data_Fim: 31/12/9999 (no end date provided; does not establish future validity).');
     records.push({ kind: 'ncm', code, description: row.Descricao, notes: notes.join('\n') || null, provenance: p });
   }
   if (!records.length) throw new Error('Empty NCM table');

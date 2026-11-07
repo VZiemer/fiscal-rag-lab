@@ -38,7 +38,7 @@ try {
   assert.equal(scenario.requiresSTReview, true); assert.equal(scenario.requiresTemporalQualification, true);
   const report = { testedAt: new Date().toISOString(), endpoint, scenario: scenario.id, status: 'passed-documentary-contract', checks,
     answerStatus: 'conditional', legalApplicability: 'not-certified', humanFiscalReview: 'not-run',
-    limitations: ['Ausência de ST declarada pelo usuário não foi confirmada.', 'Vigência desconhecida não comprova aplicabilidade na data.', 'Não avalia a resposta ou escolha de ferramentas de uma LLM.'] };
+    limitations: ['The user-reported absence of tax substitution (ST) has not been confirmed.', 'Unknown validity does not establish applicability on the specified date.', 'Does not evaluate an LLM response or tool selection.'] };
   const output = process.argv[2] ?? '.data/initial-scenario-contract.json';
   await mkdir(dirname(output), { recursive: true }); await writeFile(output, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify({ scenario: scenario.id, status: report.status, output }));

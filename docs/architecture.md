@@ -6,7 +6,7 @@ Create an educational, open-source proof of concept in which custom retrieval al
 
 ## C4 model
 
-The shared C4 source is [`c4/model.json`](c4/model.json). Run `npm run docs:c4` to generate PNG/SVG views and the [`Structurizr DSL export`](c4/workspace.dsl). The views cover **System Context**, **Containers**, **Components**, and a focused **Code** view of vector-index classes. The DSL export covers levels 1–3. See [generation and interpretation](c4/README.md) and the embedded images in the [main README](../README.md#arquitetura-c4-em-quatro-níveis).
+The shared C4 source is [`c4/model.json`](c4/model.json). Run `npm run docs:c4` to generate PNG/SVG views and the [`Structurizr DSL export`](c4/workspace.dsl). The views cover **System Context**, **Containers**, **Components**, and a focused **Code** view of vector-index classes. The DSL export covers levels 1–3. See [generation and interpretation](c4/README.md) and the embedded images in the [main README](../README.md#c4-architecture-at-four-levels).
 
 MCP and retrieval run in one Node.js process (locally or in Lambda); they are modules, not separate network services. Ingestion writes text and metadata to the corpus. Embeddings and both search indexes are built when the server loads that corpus. The deployed composition uses lexical hashing and exact cosine search; IVF/HNSW and learned embeddings remain separate experiments. The updated diagrams correct the initial proposed process split to reflect this implementation.
 

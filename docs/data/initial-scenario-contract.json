@@ -41,8 +41,8 @@
   "legalApplicability": "not-certified",
   "humanFiscalReview": "not-run",
   "limitations": [
-    "Ausência de ST declarada pelo usuário não foi confirmada.",
-    "Vigência desconhecida não comprova aplicabilidade na data.",
-    "Não avalia a resposta ou escolha de ferramentas de uma LLM."
+    "The user-reported absence of tax substitution (ST) has not been confirmed.",
+    "Unknown validity does not establish applicability on the specified date.",
+    "Does not evaluate an LLM response or tool selection."
   ]
 }

@@ -1,6 +1,6 @@
 # Evaluation plan
 
-Implementado: [dataset fixo de 40 casos](../eval/README.md), [comparação de recuperação](benchmarks/retrieval.md) e [benchmark vetorial](benchmarks/README.md). São avaliações de recuperação e contratos, com limites publicados; a comparação de respostas baseline/RAG/RAG+LoRA permanece dependente de um modelo e ambiente de treinamento reais.
+Implemented: [fixed 40-case dataset](../eval/README.md), [retrieval comparison](benchmarks/retrieval.md) and [vector benchmark](benchmarks/README.md). These evaluate retrieval and contracts with published limitations; baseline/RAG/RAG+LoRA answer comparison still requires an actual model and training environment.
 
 ## Dataset
 

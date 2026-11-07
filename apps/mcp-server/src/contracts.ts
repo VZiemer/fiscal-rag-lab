@@ -3,7 +3,7 @@ import { assertDate } from '../../../packages/corpus/src/evidence.js';
 
 const date = Field.text({
   check: value => { try { assertDate(value); return true; } catch { return false; } },
-  message: 'Data ISO inválida'
+  message: 'Invalid ISO date'
 });
 const nullableDate = date.nullable();
 export const provenanceSchema = new ObjectContract({

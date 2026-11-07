@@ -101,7 +101,7 @@ ${text(58, view.height - 30, view.note, 20, '#536b80')}
 // One model produces the PNG views and the Structurizr description; layout never changes runtime behavior.
 function dsl(): string {
   const quote = (value: string) => JSON.stringify(value);
-  const lines = [`workspace ${quote(model.name)} "Arquitetura do código implementado; detalhes em docs/c4/README.md" {`, '    !impliedRelationships false', '    model {'];
+  const lines = [`workspace ${quote(model.name)} "Architecture of the implemented code; details in docs/c4/README.md" {`, '    !impliedRelationships false', '    model {'];
   const emit = (e: Element, depth: number): void => {
     const indent = '    '.repeat(depth);
     const children = model.elements.filter(child => child.parent === e.id);
