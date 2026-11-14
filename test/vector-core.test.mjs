@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cosineSimilarity } from '../dist/vector-core/src/similarity.js';
-import { BruteForceIndex } from '../dist/vector-core/src/brute-force-index.js';
+import { cosineSimilarity } from '../dist/packages/vector-core/src/similarity.js';
+import { BruteForceIndex } from '../dist/packages/vector-core/src/brute-force-index.js';
 
 test('cosine similarity is 1 for collinear vectors', () => {
   assert.ok(Math.abs(cosineSimilarity(new Float32Array([1, 2]), new Float32Array([2, 4])) - 1) < 1e-6);
