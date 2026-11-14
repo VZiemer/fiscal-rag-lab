@@ -1,0 +1,8 @@
+{
+  "reviewedAt": "2026-11-14",
+  "sources": [
+    { "id": "confaz-cfop", "url": "https://www.confaz.fazenda.gov.br/legislacao/ajustes/sinief/cvsn_70", "authority": "CONFAZ", "jurisdiction": "BR", "format": "html", "redistribution": "review-required" },
+    { "id": "nfe-diversos", "url": "https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=%2FNJarYc9nus%3D", "authority": "Portal Nacional NF-e", "jurisdiction": "BR", "format": "html-index", "redistribution": "review-required" },
+    { "id": "classif-ncm", "url": "https://portalunico.siscomex.gov.br/classif/api/publico/nomenclatura/download/json", "authority": "Receita Federal", "jurisdiction": "BR", "format": "json", "redistribution": "review-required" }
+  ]
+}
