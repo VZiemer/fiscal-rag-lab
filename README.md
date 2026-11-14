@@ -4,6 +4,8 @@
 
 **Status:** ingestão de snapshots, lookup CFOP/NCM, fragmentação legal, BM25, índices exato/IVF/HNSW e MCP HTTP com testes. [Demonstração HTTPS na AWS](https://d2kvl1uo6lcsgz.cloudfront.net) com 10.516 NCMs, 619 CFOPs e documentação oficial nacional, paulista e mineira: [cobertura e reprodução](docs/official-ingestion.md). Teste no Work, revisão fiscal humana e treinamento permanecem pendentes. Não é um sistema de cálculo tributário ou emissão de NF-e.
 
+Para entender o funcionamento desde o início, leia [Como funciona o RAG, passo a passo](README-RAG.md): chamada MCP, preparação dos documentos, vetores, cosseno, BM25 e busca híbrida, com exemplos executáveis e distinção entre o endpoint atual e os experimentos do laboratório.
+
 ## Goals
 
 - Study how RAG works below the framework layer: ingest, chunk, embed, index, retrieve, rerank, and cite.
