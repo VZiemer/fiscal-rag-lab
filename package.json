@@ -10,6 +10,7 @@
     "benchmark:vectors": "npm run build && node --expose-gc dist/scripts/benchmark-vectors.js",
     "start": "npm run build && node dist/apps/mcp-server/src/main.js",
     "plugin:prepare": "npm run build && node dist/scripts/prepare-plugin.js",
+    "demo:mcp": "npm run build && node dist/scripts/demo-mcp.js",
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
