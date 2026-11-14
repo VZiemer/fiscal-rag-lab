@@ -1,5 +1,7 @@
 # Evaluation plan
 
+Implementado: [dataset fixo de 40 casos](../eval/README.md), [comparação de recuperação](benchmarks/retrieval.md) e [benchmark vetorial](benchmarks/README.md). São avaliações de recuperação e contratos, com limites publicados; a comparação de respostas baseline/RAG/RAG+LoRA permanece dependente de um modelo e ambiente de treinamento reais.
+
 ## Dataset
 
 Build a curated, version-tagged set of queries (start with 30–50), with human-reviewed source references. Include exact CFOP/NCM queries, ambiguous state/regime questions, outdated norms, confusing abbreviations, and questions where the correct response is 'insufficient evidence'. No real private invoice data.

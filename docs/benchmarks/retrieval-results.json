@@ -1,0 +1,4498 @@
+{
+  "generatedAt": "2026-11-14T13:25:59.328Z",
+  "revision": "a2b6004d27d99a3d68af69aaac8b897abb280c1b",
+  "codeSha256": "1f1ef77834cebbe99cb64e82aad2b11eb90f7bfbee080b24842ae6c724c469ea",
+  "datasetSha256": "c90d3d21db634081dafa2fa372643f352eba88891725255fd761c8f82f335da1",
+  "conditions": {
+    "model": "lexical-fnv1a-v1",
+    "dimensions": 128,
+    "learnedEmbeddings": false,
+    "documents": 10,
+    "queries": 40,
+    "rankedCases": 32,
+    "node": "v22.17.0",
+    "platform": "win32",
+    "cpu": "AMD Ryzen 5 5600G with Radeon Graphics         ",
+    "totalMemoryBytes": 25013874688,
+    "gcExposed": true,
+    "warmupQueries": 1,
+    "repeats": 1,
+    "caveats": [
+      "Small editorial corpus, human fiscal review pending",
+      "No LLM or fiscal correctness measured",
+      "Sequential memory deltas are noisy, not isolated memory usage",
+      "Retriever exhausts candidates before legal filtering; HNSW expands ef to corpus size here. Use vector benchmark for ANN trade-offs.",
+      "BM25 construction also initializes the vector index through the shared retriever; build time includes unused embeddings.",
+      "Default FNV lexical hashing is not a semantic embedding model"
+    ]
+  },
+  "results": [
+    {
+      "name": "bm25",
+      "parameters": {
+        "k1": 1.2,
+        "b": 0.75
+      },
+      "buildMs": 2.8730999999999938,
+      "heapDeltaBytes": 88240,
+      "rssDeltaBytes": 258048,
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "mrrAt10": 1,
+      "guardPassRate": 1,
+      "guardCases": 10,
+      "categories": [
+        {
+          "category": "retrieval",
+          "count": 30,
+          "meanMs": 0.38319666666666546,
+          "p50Ms": 0.11220000000000141,
+          "p95Ms": 0.25969999999999516
+        },
+        {
+          "category": "exact",
+          "count": 4,
+          "meanMs": 0.08037499999999298,
+          "p50Ms": 0.04039999999999111,
+          "p95Ms": 0.2021999999999906
+        },
+        {
+          "category": "context",
+          "count": 2,
+          "meanMs": 0.09424999999999528,
+          "p50Ms": 0.05659999999998888,
+          "p95Ms": 0.13190000000000168
+        },
+        {
+          "category": "abstention",
+          "count": 2,
+          "meanMs": 0.009749999999996817,
+          "p50Ms": 0.00549999999999784,
+          "p95Ms": 0.013999999999995794
+        },
+        {
+          "category": "temporal",
+          "count": 2,
+          "meanMs": 0.16049999999999898,
+          "p50Ms": 0.1547999999999945,
+          "p95Ms": 0.16620000000000346
+        }
+      ],
+      "rows": [
+        {
+          "id": "q01",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "ncm-json",
+            "ncm-current",
+            "ncm-xlsx",
+            "ncm-history",
+            "classif-history",
+            "classif-admin",
+            "classif-tax",
+            "classif-platform",
+            "classif-access"
+          ],
+          "elapsedMs": 0.25969999999999516,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q02",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-platform",
+            "ncm-json",
+            "ncm-history",
+            "ncm-xlsx",
+            "ncm-current",
+            "classif-history",
+            "classif-tax",
+            "classif-admin",
+            "classif-access"
+          ],
+          "elapsedMs": 0.16499999999999204,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q03",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-history",
+            "ncm-json",
+            "ncm-xlsx",
+            "ncm-current",
+            "classif-access",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.13019999999998788,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q04",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "classif-admin",
+            "ncm-json",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-history",
+            "classif-tax",
+            "classif-platform",
+            "classif-access"
+          ],
+          "elapsedMs": 0.13589999999999236,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q05",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-formats",
+            "classif-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.07609999999999673,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q06",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "classif-admin",
+            "classif-platform",
+            "ncm-xlsx",
+            "ncm-formats",
+            "classif-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.11399999999999011,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q07",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "classif-platform",
+            "classif-admin",
+            "ncm-json",
+            "ncm-xlsx",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.10620000000000118,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q08",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history"
+          ],
+          "elapsedMs": 0.10969999999998947,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q09",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1004999999999967,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q10",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "classif-history",
+            "ncm-history",
+            "ncm-xlsx",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.0969000000000051,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q11",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.045100000000005025,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q12",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-current",
+            "ncm-history"
+          ],
+          "elapsedMs": 8.26060000000001,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q13",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-access",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.059600000000003206,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q14",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-access",
+            "ncm-json",
+            "classif-history",
+            "classif-platform",
+            "classif-tax",
+            "classif-admin",
+            "ncm-formats",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.11530000000000484,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q15",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-formats",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.08639999999999759,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q16",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "ncm-json",
+            "ncm-current",
+            "classif-history",
+            "ncm-history",
+            "ncm-formats",
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "classif-access"
+          ],
+          "elapsedMs": 0.12059999999999604,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q17",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "ncm-formats",
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.11719999999999686,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q18",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx",
+            "ncm-history",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1063000000000045,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q19",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-platform",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-access",
+            "classif-admin",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.12190000000001078,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q20",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "classif-platform",
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.10460000000000491,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q21",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.05379999999999541,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q22",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "ncm-current",
+            "classif-history",
+            "classif-admin",
+            "ncm-formats",
+            "classif-platform",
+            "classif-tax",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.1144999999999925,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q23",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "classif-admin",
+            "classif-history",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.07939999999999259,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q24",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-history",
+            "ncm-xlsx",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.12239999999999895,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q25",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "classif-platform",
+            "ncm-xlsx",
+            "ncm-formats",
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.14180000000000348,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q26",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-history",
+            "classif-platform",
+            "classif-admin",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.09619999999999607,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q27",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "classif-access",
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.11220000000000141,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q28",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.05729999999999791,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q29",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "ncm-history",
+            "classif-tax",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1449000000000069,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q30",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "classif-history",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.14159999999999684,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q31",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.2021999999999906,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q32",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.04039999999999111,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q33",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.04939999999999145,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q34",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.02949999999999875,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q35",
+          "category": "context",
+          "ids": [
+            "ncm-current",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-formats",
+            "classif-history",
+            "classif-tax",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.13190000000000168,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q36",
+          "category": "context",
+          "ids": [
+            "classif-tax",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.05659999999998888,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q37",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.013999999999995794,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q38",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.00549999999999784,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q39",
+          "category": "temporal",
+          "ids": [
+            "classif-history",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.16620000000000346,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q40",
+          "category": "temporal",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-current",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.1547999999999945,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vector-exact",
+      "parameters": {},
+      "buildMs": 0.6106999999999942,
+      "heapDeltaBytes": -24,
+      "rssDeltaBytes": 61440,
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "mrrAt10": 0.9218749999999999,
+      "guardPassRate": 1,
+      "guardCases": 10,
+      "categories": [
+        {
+          "category": "retrieval",
+          "count": 30,
+          "meanMs": 0.19118333333333293,
+          "p50Ms": 0.1518999999999977,
+          "p95Ms": 0.4334999999999951
+        },
+        {
+          "category": "exact",
+          "count": 4,
+          "meanMs": 0.04630000000000223,
+          "p50Ms": 0.03640000000000043,
+          "p95Ms": 0.07770000000000721
+        },
+        {
+          "category": "context",
+          "count": 2,
+          "meanMs": 0.11554999999999893,
+          "p50Ms": 0.095799999999997,
+          "p95Ms": 0.13530000000000086
+        },
+        {
+          "category": "abstention",
+          "count": 2,
+          "meanMs": 0.07104999999999961,
+          "p50Ms": 0.06799999999999784,
+          "p95Ms": 0.07410000000000139
+        },
+        {
+          "category": "temporal",
+          "count": 2,
+          "meanMs": 0.15879999999999939,
+          "p50Ms": 0.15639999999999077,
+          "p95Ms": 0.161200000000008
+        }
+      ],
+      "rows": [
+        {
+          "id": "q01",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-current",
+            "classif-platform",
+            "ncm-json",
+            "ncm-history",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-history"
+          ],
+          "elapsedMs": 0.3299999999999983,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q02",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.24269999999999925,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q03",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "ncm-current",
+            "classif-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.3353000000000037,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q04",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "ncm-formats",
+            "classif-admin",
+            "classif-history",
+            "ncm-xlsx",
+            "classif-tax",
+            "classif-access",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.4334999999999951,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q05",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-json",
+            "ncm-history",
+            "classif-history",
+            "ncm-formats",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.43779999999999575,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q06",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.24139999999999873,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q07",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-platform",
+            "ncm-formats",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.22460000000000946,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q08",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-json",
+            "ncm-current",
+            "classif-history",
+            "classif-tax",
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.2670999999999992,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q09",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "classif-tax",
+            "ncm-json",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.1518999999999977,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q10",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-tax",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.1425000000000125,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q11",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-current",
+            "ncm-formats",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.10370000000000346,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q12",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "ncm-current",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-platform",
+            "classif-history",
+            "ncm-history",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.11769999999999925,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q13",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-formats",
+            "classif-access",
+            "ncm-current",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.13450000000000273,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q14",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.14329999999999643,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q15",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-history",
+            "ncm-current",
+            "classif-admin",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.15809999999999036,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q16",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-current",
+            "ncm-formats",
+            "ncm-json",
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.15840000000000032,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q17",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.15869999999999607,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q18",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "ncm-history",
+            "classif-access",
+            "classif-history",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.14800000000001035,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q19",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "ncm-formats",
+            "ncm-json",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.1401000000000039,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q20",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-formats",
+            "classif-tax",
+            "classif-admin",
+            "ncm-current",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.13719999999999288,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q21",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-json",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.10720000000000596,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q22",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "ncm-formats",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.13470000000000937,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q23",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-current",
+            "classif-admin",
+            "classif-history",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.12709999999999866,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q24",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "ncm-json",
+            "classif-tax",
+            "ncm-current",
+            "classif-history",
+            "ncm-history",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.12199999999999989,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q25",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "ncm-json",
+            "classif-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.2913999999999959,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q26",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-platform",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.17099999999999227,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q27",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-current",
+            "classif-access",
+            "ncm-history",
+            "ncm-json",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.16109999999999047,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q28",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.11619999999999209,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q29",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "classif-access",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.15290000000000248,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q30",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-xlsx",
+            "classif-history",
+            "classif-tax",
+            "ncm-current",
+            "classif-access",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1453999999999951,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q31",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.07770000000000721,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q32",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.03810000000000002,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q33",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.03640000000000043,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q34",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.03300000000000125,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q35",
+          "category": "context",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "classif-access",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.13530000000000086,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q36",
+          "category": "context",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.095799999999997,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q37",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.07410000000000139,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q38",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.06799999999999784,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q39",
+          "category": "temporal",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-formats",
+            "ncm-current",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.161200000000008,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q40",
+          "category": "temporal",
+          "ids": [
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-access",
+            "classif-admin",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.15639999999999077,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "hybrid-rrf",
+      "parameters": {
+        "rrfConstant": 60
+      },
+      "buildMs": 0.4724999999999966,
+      "heapDeltaBytes": -12920,
+      "rssDeltaBytes": 303104,
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "mrrAt10": 0.96875,
+      "guardPassRate": 1,
+      "guardCases": 10,
+      "categories": [
+        {
+          "category": "retrieval",
+          "count": 30,
+          "meanMs": 0.19588333333333452,
+          "p50Ms": 0.18829999999999814,
+          "p95Ms": 0.33669999999999334
+        },
+        {
+          "category": "exact",
+          "count": 4,
+          "meanMs": 0.04172499999999957,
+          "p50Ms": 0.031999999999996476,
+          "p95Ms": 0.07410000000000139
+        },
+        {
+          "category": "context",
+          "count": 2,
+          "meanMs": 0.1571000000000069,
+          "p50Ms": 0.11530000000000484,
+          "p95Ms": 0.19890000000000896
+        },
+        {
+          "category": "abstention",
+          "count": 2,
+          "meanMs": 0.0788999999999973,
+          "p50Ms": 0.0764999999999958,
+          "p95Ms": 0.08129999999999882
+        },
+        {
+          "category": "temporal",
+          "count": 2,
+          "meanMs": 0.1953499999999977,
+          "p50Ms": 0.19140000000000157,
+          "p95Ms": 0.19929999999999382
+        }
+      ],
+      "rows": [
+        {
+          "id": "q01",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "ncm-current",
+            "classif-admin",
+            "ncm-json",
+            "classif-tax",
+            "ncm-history",
+            "ncm-xlsx",
+            "classif-platform",
+            "classif-history",
+            "classif-access"
+          ],
+          "elapsedMs": 0.2220000000000084,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q02",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-platform",
+            "classif-admin",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax",
+            "classif-history",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-access"
+          ],
+          "elapsedMs": 0.19930000000000803,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q03",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-history",
+            "classif-platform",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-access",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.19060000000000343,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q04",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-admin",
+            "ncm-formats",
+            "classif-history",
+            "ncm-xlsx",
+            "classif-tax",
+            "classif-access",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.25950000000000273,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q05",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "ncm-formats",
+            "classif-history",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.1852000000000089,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q06",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "classif-admin",
+            "classif-history",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-platform",
+            "ncm-json",
+            "classif-access",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.22460000000000946,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q07",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "classif-platform",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.2126999999999981,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q08",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-json",
+            "classif-tax",
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.1710999999999956,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q09",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json",
+            "classif-tax",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.19230000000000302,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q10",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.18910000000001048,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q11",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-current",
+            "ncm-formats",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.12139999999999418,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q12",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "classif-access",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-platform",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.1565999999999974,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q13",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.16379999999999484,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q14",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-history",
+            "classif-access",
+            "classif-platform",
+            "ncm-history",
+            "ncm-json",
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.18439999999999657,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q15",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-history",
+            "ncm-current",
+            "ncm-formats",
+            "classif-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.14700000000000557,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q16",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-history",
+            "ncm-current",
+            "ncm-json",
+            "ncm-history",
+            "ncm-formats",
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.18829999999999814,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q17",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-history"
+          ],
+          "elapsedMs": 0.1893000000000029,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q18",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx",
+            "ncm-history",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json",
+            "classif-history"
+          ],
+          "elapsedMs": 0.2172000000000054,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q19",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "ncm-formats",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.33669999999999334,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q20",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "ncm-xlsx",
+            "ncm-current",
+            "classif-access",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.21859999999999502,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q21",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "classif-history",
+            "ncm-current",
+            "ncm-xlsx",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.3492999999999995,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q22",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "classif-admin",
+            "ncm-history",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.1863000000000028,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q23",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.18030000000000257,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q24",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "classif-admin",
+            "ncm-json",
+            "classif-platform",
+            "ncm-formats",
+            "classif-tax",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.20589999999999975,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q25",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "classif-platform",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "classif-history",
+            "ncm-json",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.1910000000000025,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q26",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-platform",
+            "classif-history",
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-history",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.1501999999999981,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q27",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-access",
+            "ncm-history",
+            "ncm-json",
+            "ncm-current",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.16970000000000596,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q28",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.12980000000000302,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q29",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-history",
+            "ncm-xlsx",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.17429999999998813,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q30",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "ncm-formats",
+            "classif-tax",
+            "classif-history",
+            "ncm-xlsx",
+            "classif-access",
+            "ncm-history",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1700000000000017,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q31",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.07410000000000139,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q32",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.03979999999999961,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q33",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.031999999999996476,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q34",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.021000000000000796,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q35",
+          "category": "context",
+          "ids": [
+            "classif-admin",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-current",
+            "classif-history",
+            "classif-access",
+            "ncm-history",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.19890000000000896,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q36",
+          "category": "context",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.11530000000000484,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q37",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.0764999999999958,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q38",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.08129999999999882,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q39",
+          "category": "temporal",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-formats",
+            "ncm-current",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.19140000000000157,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q40",
+          "category": "temporal",
+          "ids": [
+            "ncm-formats",
+            "ncm-json",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-access",
+            "classif-admin",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.19929999999999382,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vector-ivf",
+      "parameters": {
+        "nlist": 4,
+        "nprobe": 2,
+        "seed": 42
+      },
+      "buildMs": 1.7794999999999987,
+      "heapDeltaBytes": 13760,
+      "rssDeltaBytes": 385024,
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "mrrAt10": 0.9322916666666666,
+      "guardPassRate": 1,
+      "guardCases": 10,
+      "categories": [
+        {
+          "category": "retrieval",
+          "count": 30,
+          "meanMs": 0.09984666666666774,
+          "p50Ms": 0.08339999999999748,
+          "p95Ms": 0.20429999999998927
+        },
+        {
+          "category": "exact",
+          "count": 4,
+          "meanMs": 0.02634999999999721,
+          "p50Ms": 0.006599999999991724,
+          "p95Ms": 0.061499999999995225
+        },
+        {
+          "category": "context",
+          "count": 2,
+          "meanMs": 0.10794999999999533,
+          "p50Ms": 0.09629999999999939,
+          "p95Ms": 0.11959999999999127
+        },
+        {
+          "category": "abstention",
+          "count": 2,
+          "meanMs": 0.07205000000000439,
+          "p50Ms": 0.07120000000000459,
+          "p95Ms": 0.07290000000000418
+        },
+        {
+          "category": "temporal",
+          "count": 2,
+          "meanMs": 0.20165000000000788,
+          "p50Ms": 0.13170000000000925,
+          "p95Ms": 0.2716000000000065
+        }
+      ],
+      "rows": [
+        {
+          "id": "q01",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-history",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.14610000000000412,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q02",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.20429999999998927,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q03",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.11299999999999955,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q04",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.08080000000001064,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q05",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.06839999999999691,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q06",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.07510000000000616,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q07",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.06900000000000261,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q08",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-json",
+            "ncm-current",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.06579999999999586,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q09",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "classif-tax",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.07160000000000366,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q10",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "ncm-xlsx",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.07620000000000005,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q11",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-current",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.05670000000000641,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q12",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.10990000000001032,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q13",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-formats",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "classif-history"
+          ],
+          "elapsedMs": 0.10849999999999227,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q14",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-history",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.09090000000000487,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q15",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-history",
+            "ncm-current",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.08449999999999136,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q16",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-current",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.08260000000001355,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q17",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.08900000000001285,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q18",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-tax",
+            "ncm-history",
+            "classif-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.07490000000001373,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q19",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.07450000000000045,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q20",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "classif-tax",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.11189999999999145,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q21",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "classif-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.06829999999999359,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q22",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "ncm-formats",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.07399999999999807,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q23",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "ncm-formats",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.07699999999999818,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q24",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.08339999999999748,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q25",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.25019999999999243,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q26",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-platform",
+            "classif-history",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.10900000000000887,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q27",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "ncm-current",
+            "classif-access",
+            "ncm-history",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.1273999999999944,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q28",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.11030000000000939,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q29",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "classif-access",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.1379000000000019,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q30",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-xlsx",
+            "classif-history",
+            "classif-access"
+          ],
+          "elapsedMs": 0.10419999999999163,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q31",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.061499999999995225,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q32",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.006599999999991724,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q33",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.03360000000000696,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q34",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.0036999999999949296,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q35",
+          "category": "context",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-access"
+          ],
+          "elapsedMs": 0.11959999999999127,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q36",
+          "category": "context",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.09629999999999939,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q37",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.07290000000000418,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q38",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.07120000000000459,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q39",
+          "category": "temporal",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.13170000000000925,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q40",
+          "category": "temporal",
+          "ids": [
+            "ncm-formats",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-access",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.2716000000000065,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "vector-hnsw",
+      "parameters": {
+        "m": 4,
+        "efConstruction": 20,
+        "efSearch": 10,
+        "seed": 42
+      },
+      "buildMs": 1.6140000000000043,
+      "heapDeltaBytes": 30936,
+      "rssDeltaBytes": 94208,
+      "recallAt5": 1,
+      "recallAt10": 1,
+      "mrrAt10": 0.9218749999999999,
+      "guardPassRate": 1,
+      "guardCases": 10,
+      "categories": [
+        {
+          "category": "retrieval",
+          "count": 30,
+          "meanMs": 0.19283000000000355,
+          "p50Ms": 0.168200000000013,
+          "p95Ms": 0.3212000000000046
+        },
+        {
+          "category": "exact",
+          "count": 4,
+          "meanMs": 0.00829999999999842,
+          "p50Ms": 0.0028000000000076852,
+          "p95Ms": 0.02199999999999136
+        },
+        {
+          "category": "context",
+          "count": 2,
+          "meanMs": 0.16490000000000293,
+          "p50Ms": 0.13290000000000646,
+          "p95Ms": 0.1968999999999994
+        },
+        {
+          "category": "abstention",
+          "count": 2,
+          "meanMs": 0.12299999999999045,
+          "p50Ms": 0.11889999999999645,
+          "p95Ms": 0.12709999999998445
+        },
+        {
+          "category": "temporal",
+          "count": 2,
+          "meanMs": 0.2043999999999926,
+          "p50Ms": 0.16259999999999764,
+          "p95Ms": 0.24619999999998754
+        }
+      ],
+      "rows": [
+        {
+          "id": "q01",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-current",
+            "classif-platform",
+            "ncm-json",
+            "ncm-history",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-history"
+          ],
+          "elapsedMs": 0.1594000000000051,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q02",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.3212000000000046,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q03",
+          "category": "retrieval",
+          "ids": [
+            "ncm-formats",
+            "ncm-current",
+            "classif-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.19810000000001082,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q04",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-history",
+            "ncm-json",
+            "ncm-formats",
+            "classif-admin",
+            "classif-history",
+            "ncm-xlsx",
+            "classif-tax",
+            "classif-access",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.15280000000001337,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q05",
+          "category": "retrieval",
+          "ids": [
+            "ncm-current",
+            "ncm-json",
+            "ncm-history",
+            "classif-history",
+            "ncm-formats",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "classif-tax",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.16079999999999472,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q06",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.15890000000001692,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q07",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-platform",
+            "ncm-formats",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.1342999999999961,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q08",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-json",
+            "ncm-current",
+            "classif-history",
+            "classif-tax",
+            "ncm-xlsx",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.13460000000000605,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q09",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-current",
+            "classif-history",
+            "ncm-formats",
+            "classif-tax",
+            "ncm-json",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.13850000000002183,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q10",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "classif-access",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "classif-tax",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.168200000000013,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q11",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-current",
+            "ncm-formats",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.1185000000000116,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q12",
+          "category": "retrieval",
+          "ids": [
+            "ncm-json",
+            "ncm-formats",
+            "ncm-current",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-platform",
+            "classif-history",
+            "ncm-history",
+            "classif-admin"
+          ],
+          "elapsedMs": 0.13139999999998508,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q13",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-formats",
+            "classif-access",
+            "ncm-current",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-json",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.1897999999999911,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q14",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-platform",
+            "classif-access",
+            "classif-admin",
+            "classif-tax",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.16169999999999618,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q15",
+          "category": "retrieval",
+          "ids": [
+            "ncm-xlsx",
+            "ncm-history",
+            "ncm-current",
+            "classif-admin",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.13569999999998572,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q16",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-current",
+            "ncm-formats",
+            "ncm-json",
+            "classif-tax",
+            "classif-admin",
+            "classif-access",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.1827000000000112,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.5,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q17",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-formats",
+            "ncm-json",
+            "ncm-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.17379999999999995,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q18",
+          "category": "retrieval",
+          "ids": [
+            "classif-platform",
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "ncm-history",
+            "classif-access",
+            "classif-history",
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.18070000000000164,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q19",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "ncm-formats",
+            "ncm-json",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "classif-admin",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.17019999999999413,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q20",
+          "category": "retrieval",
+          "ids": [
+            "classif-history",
+            "classif-platform",
+            "ncm-history",
+            "ncm-formats",
+            "classif-tax",
+            "classif-admin",
+            "ncm-current",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.4519999999999982,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q21",
+          "category": "retrieval",
+          "ids": [
+            "ncm-history",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-json",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.17430000000001655,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q22",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-json",
+            "ncm-formats",
+            "classif-history",
+            "ncm-current",
+            "ncm-history",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.293200000000013,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q23",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-json",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-current",
+            "classif-admin",
+            "classif-history",
+            "ncm-history",
+            "classif-tax"
+          ],
+          "elapsedMs": 0.18489999999999895,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q24",
+          "category": "retrieval",
+          "ids": [
+            "classif-access",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "ncm-json",
+            "classif-tax",
+            "ncm-current",
+            "classif-history",
+            "ncm-history",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.26310000000000855,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q25",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "classif-platform",
+            "classif-access",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "ncm-json",
+            "classif-history",
+            "ncm-current"
+          ],
+          "elapsedMs": 0.29110000000000014,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q26",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "classif-platform",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-admin",
+            "ncm-formats"
+          ],
+          "elapsedMs": 0.22889999999998167,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q27",
+          "category": "retrieval",
+          "ids": [
+            "classif-tax",
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-current",
+            "classif-access",
+            "ncm-history",
+            "ncm-json",
+            "ncm-xlsx"
+          ],
+          "elapsedMs": 0.2370000000000232,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q28",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-tax",
+            "classif-access",
+            "ncm-history"
+          ],
+          "elapsedMs": 0.15930000000000177,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q29",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-xlsx",
+            "ncm-formats",
+            "ncm-history",
+            "classif-access",
+            "ncm-current",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1641999999999939,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q30",
+          "category": "retrieval",
+          "ids": [
+            "classif-admin",
+            "ncm-formats",
+            "classif-platform",
+            "ncm-xlsx",
+            "classif-history",
+            "classif-tax",
+            "ncm-current",
+            "classif-access",
+            "ncm-history",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.16560000000001196,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": null,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q31",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.02199999999999136,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q32",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.006100000000003547,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q33",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.0028000000000076852,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q34",
+          "category": "exact",
+          "ids": [],
+          "elapsedMs": 0.002299999999991087,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q35",
+          "category": "context",
+          "ids": [
+            "ncm-formats",
+            "classif-admin",
+            "classif-platform",
+            "classif-history",
+            "ncm-history",
+            "ncm-current",
+            "classif-access",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.1968999999999994,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        },
+        {
+          "id": "q36",
+          "category": "context",
+          "ids": [
+            "classif-tax",
+            "classif-admin",
+            "ncm-xlsx",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.13290000000000646,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q37",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.11889999999999645,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q38",
+          "category": "abstention",
+          "ids": [],
+          "elapsedMs": 0.12709999999998445,
+          "recallAt5": null,
+          "recallAt10": null,
+          "reciprocalRankAt10": null,
+          "guardPassed": true,
+          "sources": []
+        },
+        {
+          "id": "q39",
+          "category": "temporal",
+          "ids": [
+            "classif-history",
+            "ncm-history",
+            "ncm-formats",
+            "ncm-current",
+            "classif-access",
+            "classif-admin",
+            "classif-platform",
+            "classif-tax",
+            "ncm-json"
+          ],
+          "elapsedMs": 0.24619999999998754,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 1,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul"
+          ]
+        },
+        {
+          "id": "q40",
+          "category": "temporal",
+          "ids": [
+            "ncm-formats",
+            "ncm-current",
+            "ncm-json",
+            "ncm-xlsx",
+            "classif-history",
+            "ncm-history",
+            "classif-access",
+            "classif-admin",
+            "classif-platform"
+          ],
+          "elapsedMs": 0.16259999999999764,
+          "recallAt5": 1,
+          "recallAt10": 1,
+          "reciprocalRankAt10": 0.3333333333333333,
+          "guardPassed": true,
+          "sources": [
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+            "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+          ]
+        }
+      ]
+    }
+  ]
+}

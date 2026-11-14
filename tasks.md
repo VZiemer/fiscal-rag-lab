@@ -31,6 +31,6 @@
 
 ## Milestone 4 — Research and fine-tuning
 - [x] Prepare a held-out citation/source-evidence dataset. (`test(evals): add fiscal benchmark`)
-- [ ] Compare retrieval variants and publish reproducible results. (`perf: compare search algorithms`)
+- [x] Compare retrieval variants and publish reproducible results. (`perf: compare search algorithms`)
 - [ ] Create behavior-supervision dataset and LoRA experiment. (`experiment(ft): train behavior adapter`)
 - [ ] Compare baseline, RAG and RAG+fine-tuning. (`docs(evals): publish model comparison`)
