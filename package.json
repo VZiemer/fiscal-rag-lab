@@ -8,13 +8,17 @@
     "build": "tsc -p tsconfig.json",
     "ingest": "npm run build && node dist/apps/ingestion-worker/src/main.js",
     "benchmark:vectors": "npm run build && node --expose-gc dist/scripts/benchmark-vectors.js",
+    "start": "npm run build && node dist/apps/mcp-server/src/main.js",
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
+    "@modelcontextprotocol/client": "2.4.0",
     "@types/node": "22.20.5",
     "typescript": "5.8.3"
   },
   "dependencies": {
+    "@modelcontextprotocol/node": "2.1.2",
+    "@modelcontextprotocol/server": "2.4.0",
     "exceljs": "4.4.0",
     "zod": "4.6.7"
   },
