@@ -11,6 +11,7 @@
 - [x] Parse structured CFOP source and implement strict code lookup. (`feat(fiscal): implement CFOP lookup`)
 - [x] Add legal-aware text chunking with article/exception relationships. (`feat(ingest): add legal chunker`)
 - [x] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
+- [x] Connect verified snapshots, parsers and chunking to a runtime-loadable corpus CLI. (`feat(ingest): assemble verified corpus`)
 
 ## Milestone 2 — Hand-built retrieval
 - [x] Add exact vector index snapshot serialization. (`feat(vector): persist index`)

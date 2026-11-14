@@ -15,8 +15,8 @@ workspace "Fiscal RAG Lab" "Architecture of an educational fiscal RAG engine" {
                 rules = component "Fiscal lookup service" "Exact code lookup and missing-information checks" "TypeScript"
             }
             ingest = container "Ingestion worker" "Download, parse, chunk, embed and index source documents" "Node.js / TypeScript CLI"
-            store = container "Corpus metadata store" "Document versions, legal hierarchy, code tables and provenance" "SQLite"
-            indexFiles = container "Index snapshot files" "Serialized vector and BM25 indexes" "Binary files"
+            store = container "Corpus metadata store" "Document versions, legal hierarchy, code tables and provenance" "Versioned JSON + content-addressed snapshots"
+            indexFiles = container "Index snapshot files" "Exact vector snapshots; BM25/IVF/HNSW rebuilt in memory" "Versioned JSON + in-memory indexes"
         }
 
         user -> chat "Asks natural language questions"

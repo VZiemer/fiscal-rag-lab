@@ -13,7 +13,8 @@
     "demo:mcp": "npm run build && node dist/scripts/demo-mcp.js",
     "eval:retrieval": "npm run build && node --expose-gc dist/scripts/evaluate-retrieval.js",
     "training:prepare": "npm run build && node dist/scripts/prepare-training.js",
-    "test": "npm run build && node --test test/*.test.mjs"
+    "test": "npm run build && node --test test/*.test.mjs",
+    "corpus:build": "npm run build && node dist/apps/ingestion-worker/src/build-corpus.js"
   },
   "devDependencies": {
     "@modelcontextprotocol/client": "2.4.0",
