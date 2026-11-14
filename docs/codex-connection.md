@@ -14,3 +14,5 @@ O screenshot enviado mostrava somente `blender` e `node_repl`, além do agregado
 Após atualizar a lista de MCPs ou reabrir o Codex, conferir o servidor `fiscal_rag_lab`. As ferramentas esperadas são `search_regulations`, `get_cfop`, `get_ncm` e `explain_rule`. Iniciar outra conversa no mesmo projeto se o catálogo da conversa atual permanecer sem essas ferramentas. Não é necessário criar outro plugin ou mudar sua privacidade.
 
 Validação realizada: configuração lida pela própria CLI e contratos remotos já testados pelo cliente MCP oficial. A execução por ferramentas dentro desta conversa e no ChatGPT Work ainda depende de atualização do catálogo e não foi declarada concluída. A configuração direta do Codex não substitui uma conexão de app no ChatGPT Work hospedado.
+
+O projeto agora contém `.codex/config.toml` com `web_search = "disabled"` e instruções fiscais RAG-only em `AGENTS.md`. A skill privada 0.1.1 foi salva com a mesma política; é necessário recarregar a configuração/versão no host para aplicá-las em sessões iniciadas antes da alteração. A configuração não bloqueia sozinha browser, conectores ou requests por código. Ver `docs/rag-only.md`.

@@ -1,0 +1,3 @@
+# Fiscal research in this trusted project uses RAG evidence only.
+# This removes web search; other tools remain governed by host policy and AGENTS.md.
+web_search = "disabled"

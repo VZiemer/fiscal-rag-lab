@@ -33,6 +33,7 @@
 - [x] Render submission PNGs, validate the final archive and rehearse positive tool contracts. (`build(plugin): validate submission package`)
 - [x] Record confirmed free/no-commerce behavior while preserving private account visibility. (`docs(plugin): record free usage declaration`)
 - [x] Register the deployed MCP endpoint in the Codex host and verify native configuration. (`ops(mcp): register Codex host connection`)
+- [x] Require RAG-only fiscal evidence in the project/private plugin and disable project web search. (`feat(plugin): require RAG-only fiscal evidence`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
 - [x] Prepare review materials and record an executable local MCP transcript. (`docs(plugin): prepare review materials`)
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)

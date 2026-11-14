@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "fiscal-rag-lab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Educational fiscal-document research with sources and explicit validity. The public demo has a limited editorial corpus, not complete CFOP/NCM tables.",
   "license": "MIT",
   "homepage": "https://d2kvl1uo6lcsgz.cloudfront.net",

@@ -54,6 +54,8 @@ O pacote aponta para o [MCP implantado](https://d2kvl1uo6lcsgz.cloudfront.net/mc
 
 Bloqueios e melhorias em [TODO.md](TODO.md); tarefas concluídas e seus escopos de commit em [tasks.md](tasks.md). Credenciais CSV e dados pessoais de contato ficam fora do Git. A política publicada recebe o contato somente durante a geração dos artefatos.
 
+Consultas fiscais seguem [modo RAG exclusivo](docs/rag-only.md): evidência apenas das ferramentas fiscais, sem fallback externo e com abstenção quando o corpus é insuficiente. A busca web do Codex está desativada neste projeto; limites do controle por instruções estão documentados.
+
 Guias oficiais: [empacotamento](https://developers.openai.com/plugins/build/plugins) e [submissão](https://developers.openai.com/plugins/deploy/submission).
 
 ## License
