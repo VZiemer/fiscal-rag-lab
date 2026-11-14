@@ -13,4 +13,4 @@ O controle de interface falhou na inicialização deste ambiente, antes de acess
 
 Anotar cada cenário como Passed, Failed, Blocked ou Not run. Se ferramentas não aparecerem, parar o walkthrough e resolver a conexão; não gravar uma busca web como se fosse MCP. Após gravar, reproduzir o vídeo, conferir legibilidade e ausência de segredos, e hospedá-lo em destino acessível ao revisor. Somente então preencher a URL real em `review.demo_recording_url` e reconstruir o ZIP. O bucket S3/CloudFront existente pode hospedar um vídeo revisado quando o arquivo real estiver disponível.
 
-Esses passos não publicam o plugin. Uma submissão futura ainda exige confirmação de comércio e atestações do desenvolvedor autorizado no portal.
+Esses passos não publicam o plugin. Gratuidade sem pagamentos já foi confirmada. Uma submissão futura ainda exige o vídeo real e atestações do desenvolvedor autorizado no portal.

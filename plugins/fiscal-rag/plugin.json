@@ -24,6 +24,8 @@
         "logo": "./assets/icon.svg", "logoDark": "./assets/icon-dark.svg"
       },
       "review": {
+        "commerce": false,
+        "commerce_description": "The plugin is free. It does not sell products, offer paid subscriptions, or process purchases or payments.",
         "prompts": ["Quais formatos de download NCM existem?", "O download NCM inclui códigos de períodos passados?", "Consulte o CFOP 5102 e explique os limites desta base."],
         "test_cases": {
           "positive": [

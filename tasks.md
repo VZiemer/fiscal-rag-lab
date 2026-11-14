@@ -31,6 +31,7 @@
 - [x] Wire the deployed HTTPS backend and prepare listing assets/review cases. (`feat(plugin): wire public MCP endpoint`)
 - [x] Save the private account plugin and verify its stored skill/MCP components. (`feat(plugin): save private account plugin`)
 - [x] Render submission PNGs, validate the final archive and rehearse positive tool contracts. (`build(plugin): validate submission package`)
+- [x] Record confirmed free/no-commerce behavior while preserving private account visibility. (`docs(plugin): record free usage declaration`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
 - [x] Prepare review materials and record an executable local MCP transcript. (`docs(plugin): prepare review materials`)
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
