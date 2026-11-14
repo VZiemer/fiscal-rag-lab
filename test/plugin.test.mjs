@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import sharp from 'sharp';
 import { validatePublicEndpoint, preparePlugin } from '../dist/scripts/prepare-plugin.js';
 test('plugin public packaging refuses local/insecure/credential endpoints and copies only intended files', async () => {
   for (const url of ['http://remote.test/mcp', 'https://localhost/mcp', 'https://example.com/mcp', 'https://user:secret@remote.test/mcp', 'https://remote.test/mcp?token=secret']) assert.throws(() => validatePublicEndpoint(url));
@@ -19,5 +20,9 @@ test('plugin public packaging refuses local/insecure/credential endpoints and co
     assert.equal(manifest.extensions['com.openai'].review.test_cases.positive.length, 5);
     assert.equal(manifest.extensions['com.openai'].review.test_cases.negative.length, 3);
     assert.equal(manifest.extensions['com.openai'].interface.privacyPolicyURL, 'https://fiscal.unit-test.test/privacy');
+    for (const path of [manifest.extensions['com.openai'].interface.logo, manifest.extensions['com.openai'].interface.logoDark]) {
+      const image = await sharp(join(directory, path)).metadata();
+      assert.equal(image.format, 'png'); assert.equal(image.width, 512); assert.equal(image.height, 512);
+    }
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

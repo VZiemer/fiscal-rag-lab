@@ -18,12 +18,14 @@
     "check:boundaries": "npm run build && node dist/scripts/check-boundaries.js",
     "smoke:remote": "npm run build && node dist/scripts/smoke-remote.js",
     "public:prepare": "npm run build && node dist/scripts/prepare-public-assets.js",
+    "review:rehearse": "npm run build && node dist/scripts/rehearse-review.js",
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/client": "2.4.0",
     "@types/node": "22.20.5",
     "esbuild": "0.28.2",
+    "sharp": "0.35.5",
     "typescript": "5.8.3"
   },
   "dependencies": {

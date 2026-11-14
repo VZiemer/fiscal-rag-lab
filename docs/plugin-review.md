@@ -11,3 +11,15 @@ Roteiro de vídeo após implantação e instalação: mostrar a conexão; declar
 Concluído: endpoint HTTPS validado com cliente oficial remoto, política pública com contato autorizado, suporte/condições publicados, ícones SVG e cinco casos positivos/três negativos no manifesto. Pacote com identidade do publicador gerado em `.data/fiscal-rag-plugin.zip`, sem chaves AWS. Plugin privado criado na conta e arquivos salvos conferidos: skill e MCP remoto estão presentes. Referências de conta ficam somente em `.data/plugin-account.json`. Instalação do Fiscal RAG Lab e teste no Work ainda não confirmados: controles de navegador e desktop falharam na inicialização do runtime. Falta vídeo acessível e submissão pelo portal; não há submissão ou aprovação realizada.
 
 Casos para o revisor: código exato → ferramenta de lookup; texto ambíguo → busca e contexto; data fora do corpus → evidência insuficiente; tentativa de instrução no texto → tratar como dados; código ausente → informar limite do corpus. Publicar só resultados realmente observados.
+
+## Verificação após criação privada
+
+- **Passed:** skill e MCP presentes na versão salva; endpoint e transporte preservados.
+- **Passed:** quatro ferramentas remotas com `readOnlyHint=true`, `destructiveHint=false`, `openWorldHint=false`; cinco chamadas positivas ensaiadas com argumentos e respostas em `.data/review-rehearsal.json`.
+- **Passed:** conteúdo das quatro páginas públicas identifica o projeto e o contato; PNGs light/dark de 512 px inspecionados e incluídos na cópia pública.
+- **Not run:** seleção de ferramenta e respostas do agente no Work, incluindo os três cenários negativos. Ensaio do cliente oficial não é evidência desses comportamentos.
+- **Blocked:** instalação/captura de walkthrough pelo runtime de interface — falha `setup refresh had errors` antes de acessar janelas. O controle disponível não ofereceu uma gravação concluída; não existe URL de vídeo a declarar.
+- **Confirmed:** Brasil (`BR`) como disponibilidade para uma eventual publicação; plugin atual continua `USER` / `PRIVATE`.
+- **Pending:** confirmação de ausência de comércio; verificação de identidade/domínio e atestações pelo desenvolvedor no portal. O campo de comércio foi omitido da cópia de preparação enquanto aguarda confirmação.
+
+Rascunho de listagem mantém a descrição educativa e declara o corpus restrito; o ZIP não está pronto para submissão enquanto esses itens estiverem pendentes. O pacote privado continua privado; não houve upload em portal de submissão nem publicação no diretório.

@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { renderContact, type PublicContact } from './prepare-public-assets.js';
+import sharp from 'sharp';
 
 export function validatePublicEndpoint(endpoint: string): URL {
   const url = new URL(endpoint);
@@ -30,11 +31,19 @@ export async function preparePlugin(endpoint: string, output = '.data/plugin-pub
   manifest.homepage = url.origin;
   await mkdir(join(output, 'skills/fiscal-research'), { recursive: true });
   await mkdir(join(output, 'assets'), { recursive: true });
+  const listing = manifest.extensions['com.openai'].interface;
+  // Render the existing vector identity for submission; domain/runtime code never imports this build tool.
+  listing.logo = listing.composerIcon = './assets/icon.png';
+  listing.logoDark = listing.composerIconDark = './assets/icon-dark.png';
   // Copy an explicit allowlist so future local credentials or downloaded data cannot enter the package.
   await writeFile(join(output, 'plugin.json'), JSON.stringify(manifest, null, 2) + '\n');
   await writeFile(join(output, 'mcp.json'), JSON.stringify(mcp, null, 2) + '\n');
   await writeFile(join(output, 'skills/fiscal-research/SKILL.md'), skill);
-  for (const asset of ['icon.svg', 'icon-dark.svg']) await writeFile(join(output, 'assets', asset), await readFile(join(source, 'assets', asset)));
+  for (const name of ['icon', 'icon-dark']) {
+    const asset = await readFile(join(source, 'assets', `${name}.svg`));
+    await writeFile(join(output, 'assets', `${name}.svg`), asset);
+    await sharp(asset).resize(512, 512).png().toFile(join(output, 'assets', `${name}.png`));
+  }
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   if (!process.argv[2]) throw new Error('Uso: npm run plugin:prepare -- https://seu-dominio/mcp [diretorio]');
