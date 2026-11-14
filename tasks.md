@@ -40,6 +40,7 @@
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
 
 ## Milestone 4 — Research and fine-tuning
+- [x] Record and validate the initial SP→MG hardware-resale scenario through MCP contracts, with a conditional CFOP expectation and explicit ST/validity limits; keep fiscal approval separate. (`test(evals): add initial hardware-sale scenario`)
 - [x] Prepare a held-out citation/source-evidence dataset. (`test(evals): add fiscal benchmark`)
 - [x] Compare retrieval variants and publish reproducible results. (`perf: compare search algorithms`)
 - [x] Prepare isolated behavior datasets, conversational export and LoRA experiment manifest. (`experiment(ft): prepare behavior adapter`)

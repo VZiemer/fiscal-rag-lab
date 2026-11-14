@@ -11,6 +11,9 @@
 
 ## Melhorias contornáveis
 
+- [ ] Melhorar recuperação do caso inicial de ferragens SP→MG: consultas amplas de revenda ranquearam devolução/transferência acima do candidato pertinente; não escolher CFOP apenas pelo primeiro resultado. Recuperar fundamento explícito do grupo interestadual, protocolos/regras aplicáveis à ST para o produto/operação e vigência por dispositivo. O contrato documental em `eval/scenarios/initial-hardware-sale.json` não certifica aplicação fiscal.
+- [ ] Separar e filtrar redações históricas do CONFAZ por vigência do dispositivo: a consulta inicial retornou passagens com datas históricas no texto, embora a proveniência da consolidação tenha limites desconhecidos. Não tratá-las como regras atuais.
+
 - [ ] Rever na fonte a seção paulista omitida por caracteres corrompidos; não completar texto por inferência. Não declarar cobertura integral dos livros/anexos extraídos. Detalhes em `docs/official-ingestion.md`.
 - [ ] Implementar parsers próprios de esquema para as planilhas auxiliares NCM/uTrib e cClassTrib IBS/CBS já baixadas. Extrair e revisar tabelas dos PDFs MOC 7 e cruzar com notas técnicas posteriores antes de indexar. Arquivamento não significa evidência disponível ao RAG.
 - [ ] Ampliar a cobertura de atos avulsos de SP/MG e das demais normas federais necessárias por caso de uso; manter outras UFs fora deste escopo. Criar atualização programada somente após definir política de revisão de diferenças.

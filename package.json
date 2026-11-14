@@ -13,6 +13,7 @@
     "plugin:prepare": "npm run build && node dist/scripts/prepare-plugin.js",
     "demo:mcp": "npm run build && node dist/scripts/demo-mcp.js",
     "eval:retrieval": "npm run build && node --expose-gc dist/scripts/evaluate-retrieval.js",
+    "eval:initial": "npm run build && node dist/scripts/validate-initial-scenario.js",
     "training:prepare": "npm run build && node dist/scripts/prepare-training.js",
     "build:lambda": "npm run build && node dist/scripts/build-lambda.js",
     "corpus:build": "npm run build && node dist/apps/ingestion-worker/src/build-corpus.js",
