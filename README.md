@@ -33,6 +33,7 @@ npm test
 - `packages/fiscal-domain/`: lookup determinístico de códigos e versões.
 - `packages/corpus/`: evidências, procedência e relações legais.
 - `packages/adapters/`: embeddings locais e controle lexical offline.
+- `packages/validation/`: contratos em classes próprias, com Zod encapsulado e integração MCP por adaptador.
 - `apps/ingestion-worker/`: snapshots imutáveis e parsers CFOP/NCM.
 - `apps/mcp-server/`: adaptador Streamable HTTP MCP e composição do runtime.
 - `plugins/fiscal-rag/`: pacote portátil conectado ao endpoint HTTPS, skill, ícones e casos para revisão.
