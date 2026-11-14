@@ -3,7 +3,7 @@ name: fiscal-research
 description: Research Brazilian NF-e, CFOP and NCM rules using authoritative evidence and available fiscal retrieval tools.
 ---
 
-# Fiscal research workflow (draft)
+# Fiscal research workflow
 
 Use this workflow only for factual research into Brazilian NF-e, CFOP, NCM and associated rules. This is an educational prototype, not a substitute for professional tax review.
 
@@ -15,3 +15,12 @@ Use this workflow only for factual research into Brazilian NF-e, CFOP, NCM and a
 6. Cite the exact source, and distinguish sourced facts from inferences. Never fabricate a source, article or rate.
 7. If a rule is ambiguous or input is missing, state what is missing instead of returning definitive fiscal advice.
 8. Do not issue NF-e, store taxpayer documents, write records or execute payments.
+
+## Tool contracts
+
+- `get_cfop`: use `code` (four digits, optionally X.XXX) and `date` (YYYY-MM-DD). Never approximate an identifier.
+- `get_ncm`: use `code` (eight digits, optionally XXXX.XX.XX) and `date`. A description alone cannot establish a classification.
+- `search_regulations`: use `query`, optionally `date`, `jurisdiction`, `topK` and `mode`. Preserve missing-context warnings and temporal status.
+- `explain_rule`: retrieve an evidence `id`, optionally at a `date`; include linked exceptions and parent provisions when interpreting it.
+
+`not-found` means this corpus lacks a matching record, not that the code does not exist. `ambiguous` requires version review. `unknown` validity must remain explicit. Scores rank documents; they are not fiscal confidence. If evidence is marked SYNTHETIC/DEMONSTRAÇÃO, state that it has no fiscal value and do not cite it as an official norm. Never fabricate a functioning official link from a synthetic fixture.
