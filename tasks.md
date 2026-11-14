@@ -25,7 +25,7 @@
 - [x] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
 - [x] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
 - [x] Prepare deployment package, rate limits, privacy and sanitized request logs locally. (`ops: prepare MCP demo deployment`)
-- [ ] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
+- [x] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
 - [x] Prepare portable plugin MCP configuration and public-package generator locally. (`feat(plugin): prepare MCP package`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
 - [x] Prepare review materials and record an executable local MCP transcript. (`docs(plugin): prepare review materials`)

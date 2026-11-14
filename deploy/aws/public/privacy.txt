@@ -1,0 +1,16 @@
+Fiscal RAG Lab — política da demonstração pública — 14/11/2026
+
+Finalidade: pesquisa documental educativa sobre fontes fiscais. Não fornece parecer fiscal nem processa emissão de documentos.
+Operador: {{OPERATOR_NAME}}
+Contato: {{OPERATOR_EMAIL}}
+Site: {{OPERATOR_SITE}}
+
+Não envie CPF, CNPJ, XML de NF-e, dados pessoais ou segredos. A aplicação não persiste consultas ou respostas. Embeddings usam controle lexical local, sem envio a LLM ou provedor externo.
+
+Logs da aplicação registram apenas ID aleatório, rota categorizada, status e duração; não incluem texto da consulta, IP, corpo, cabeçalhos ou credenciais. CloudWatch mantém esses logs por 7 dias. Endereços de conexão podem ser usados em memória para quotas e são descartados na limpeza das janelas, sem gravação pela aplicação.
+
+CloudFront e API Gateway processam requisições e endereços de rede para entrega e proteção. Access logs não estão habilitados por esta implantação; serviços AWS podem produzir métricas e registros operacionais segundo suas políticas. A plataforma cliente aplica suas próprias políticas de privacidade.
+
+O corpus público é composto por dez paráfrases editoriais de páginas da Receita sobre NCM/Classif, com origem e checksum. Não contém dados privados de contribuintes nem tabela oficial completa de códigos. Datas de vigência desconhecidas permanecem desconhecidas.
+
+Serviço experimental sem autenticação de usuário e com limites de requisições. Não é adequado a dados confidenciais. Esta política descreve a implantação técnica e não afirma conformidade jurídica integral.

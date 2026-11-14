@@ -1,0 +1,65 @@
+{
+  "testedAt": "2026-11-14T13:44:38.289Z",
+  "endpoint": "https://d2kvl1uo6lcsgz.cloudfront.net/mcp",
+  "observations": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/privacy",
+      "status": 200
+    },
+    {
+      "path": "/health",
+      "status": 200
+    },
+    {
+      "mode": "legacy",
+      "era": "legacy",
+      "tools": [
+        "search_regulations",
+        "get_cfop",
+        "get_ncm",
+        "explain_rule"
+      ],
+      "searchIds": [
+        "ncm-formats",
+        "ncm-current",
+        "classif-admin"
+      ],
+      "sourceUrls": [
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+      ],
+      "status": "passed",
+      "emptyCodeTables": true,
+      "temporalStatus": "unknown"
+    },
+    {
+      "mode": "auto",
+      "era": "modern",
+      "tools": [
+        "search_regulations",
+        "get_cfop",
+        "get_ncm",
+        "explain_rule"
+      ],
+      "searchIds": [
+        "ncm-formats",
+        "ncm-current",
+        "classif-admin"
+      ],
+      "sourceUrls": [
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/download-ncm-nomenclatura-comum-do-mercosul",
+        "https://www.gov.br/receitafederal/pt-br/assuntos/aduana-e-comercio-exterior/classificacao-fiscal-de-mercadorias/classif"
+      ],
+      "status": "passed",
+      "emptyCodeTables": true,
+      "temporalStatus": "unknown"
+    }
+  ],
+  "warning": "Official MCP client over HTTPS. This is not an in-product ChatGPT Work test."
+}
