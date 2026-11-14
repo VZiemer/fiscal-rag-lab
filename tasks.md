@@ -1,0 +1,33 @@
+# Task plan (suggested commit scopes)
+
+## Milestone 0 — Architecture and baseline
+- [x] Establish public-ready repository scaffold, C4 model, proposed ADRs and contributor rules. (`docs: initialize architecture and governance`)
+- [x] Implement brute-force cosine vector index with automated tests. (`feat(vector): add exact-search reference implementation`)
+- [ ] Review and accept/revise ADR-0001 to ADR-0005. (`docs(adr): accept initial decisions`)
+
+## Milestone 1 — Authoritative data ingestion
+- [ ] Inventory official NF-e/CFOP/NCM sources and redistribution constraints. (`docs(sources): catalog official sources`)
+- [ ] Build source download + checksum + metadata persistence. (`feat(ingest): add source snapshots`)
+- [ ] Parse structured CFOP source and implement strict code lookup. (`feat(fiscal): implement CFOP lookup`)
+- [ ] Add legal-aware text chunking with article/exception relationships. (`feat(ingest): add legal chunker`)
+- [ ] Add embedding-provider port and one implementation. (`feat(embedding): add provider adapter`)
+
+## Milestone 2 — Hand-built retrieval
+- [ ] Add exact vector index snapshot serialization. (`feat(vector): persist index`)
+- [ ] Implement BM25 lexical inverted index. (`feat(retrieval): add BM25`)
+- [ ] Implement K-Means and IVF. (`feat(vector): add IVF`)
+- [ ] Implement HNSW and benchmark. (`feat(vector): add HNSW`)
+- [ ] Implement exact/lexical/vector query routing + RRF. (`feat(retrieval): add hybrid search`)
+
+## Milestone 3 — MCP and public demo
+- [ ] Define structured read-only MCP tool contracts. (`docs(mcp): specify tool contracts`)
+- [ ] Implement Streamable HTTP MCP adapter and integration tests. (`feat(mcp): add retrieval tools`)
+- [ ] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
+- [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
+- [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
+
+## Milestone 4 — Research and fine-tuning
+- [ ] Prepare a held-out citation/source-evidence dataset. (`test(evals): add fiscal benchmark`)
+- [ ] Compare retrieval variants and publish reproducible results. (`perf: compare search algorithms`)
+- [ ] Create behavior-supervision dataset and LoRA experiment. (`experiment(ft): train behavior adapter`)
+- [ ] Compare baseline, RAG and RAG+fine-tuning. (`docs(evals): publish model comparison`)

@@ -1,0 +1,14 @@
+{
+  "name": "fiscal-rag-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Educational RAG and custom vector index laboratory",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
