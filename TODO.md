@@ -4,8 +4,8 @@
 
 - [x] Implantar na AWS com S3/CloudFront, HTTP API e Lambda. HTTPS e ferramentas verificados por cliente MCP oficial remoto; credenciais e contato pessoal permanecem fora do Git.
 - [ ] Disponibilizar edições oficiais CFOP/NCM/legislação para revisão de parsing e vigência. Fontes em `docs/sources.md`; não usar mirrors. Downloads diretos apresentaram timeout/redirecionamentos durante a revisão.
-- [ ] Instalar e testar o plugin em ChatGPT Work com endpoint HTTPS real; registrar resultados sem dados privados.
-- [ ] Gravar demonstração em ChatGPT Work e submeter pelo portal com conta autorizada e materiais reais. Contato público já fornecido e política publicada. Plugin Creator ainda não instalado nesta sessão.
+- [ ] Instalar e testar o Fiscal RAG Lab em ChatGPT Work. Plugin Creator está disponível e o plugin privado já foi criado; skill e endpoint foram confirmados nos arquivos salvos. Controle de navegador/interface falhou ao iniciar (`setup refresh had errors`); instalação e teste no produto aguardam acesso funcional.
+- [ ] Gravar demonstração em ChatGPT Work e submeter pelo portal com conta autorizada e materiais reais. Contato público já fornecido e política publicada. Países e declaração de comércio aguardam confirmação; atestações legais devem ser preenchidas pelo desenvolvedor autorizado.
 - [ ] LoRA e comparação de respostas permanecem em aberto por decisão do usuário. Este host não dispõe de Python, Docker ou nvidia-smi no PATH; não há treinamento executado.
 
 ## Melhorias contornáveis

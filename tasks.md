@@ -29,6 +29,7 @@
 - [x] Deploy HTTPS demo endpoint with rate limits, request logs and privacy policy. (`ops: deploy MCP demo`)
 - [x] Prepare portable plugin MCP configuration and public-package generator locally. (`feat(plugin): prepare MCP package`)
 - [x] Wire the deployed HTTPS backend and prepare listing assets/review cases. (`feat(plugin): wire public MCP endpoint`)
+- [x] Save the private account plugin and verify its stored skill/MCP components. (`feat(plugin): save private account plugin`)
 - [ ] Add MCP dependency to plugin package and test in ChatGPT Work. (`feat(plugin): connect MCP backend`)
 - [x] Prepare review materials and record an executable local MCP transcript. (`docs(plugin): prepare review materials`)
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
