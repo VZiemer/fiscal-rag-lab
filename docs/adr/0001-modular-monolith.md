@@ -1,6 +1,6 @@
 # ADR-0001: Modular monolith with ports and adapters
 
-- Status: **Proposed**
+- Status: **Accepted**
 - Date: 2026-11-14
 
 ## Context

@@ -1,6 +1,6 @@
 # ADR-0004: Treat legal texts as versioned, attributable evidence
 
-- Status: **Proposed**
+- Status: **Accepted**
 - Date: 2026-11-14
 
 ## Context

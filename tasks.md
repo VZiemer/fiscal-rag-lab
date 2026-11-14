@@ -3,7 +3,7 @@
 ## Milestone 0 — Architecture and baseline
 - [x] Establish public-ready repository scaffold, C4 model, proposed ADRs and contributor rules. (`docs: initialize architecture and governance`)
 - [x] Implement brute-force cosine vector index with automated tests. (`feat(vector): add exact-search reference implementation`)
-- [ ] Review and accept/revise ADR-0001 to ADR-0005. (`docs(adr): accept initial decisions`)
+- [x] Review and accept/revise ADR-0001 to ADR-0005. (`docs(adr): accept initial decisions`)
 
 ## Milestone 1 — Authoritative data ingestion
 - [ ] Inventory official NF-e/CFOP/NCM sources and redistribution constraints. (`docs(sources): catalog official sources`)

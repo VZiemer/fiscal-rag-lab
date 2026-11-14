@@ -1,6 +1,6 @@
 # ADR-0005: Defer fine-tuning until we have a retrieval benchmark
 
-- Status: **Proposed**
+- Status: **Accepted**
 - Date: 2026-11-14
 
 ## Context

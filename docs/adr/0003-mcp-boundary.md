@@ -1,6 +1,6 @@
 # ADR-0003: Expose application capabilities via read-only MCP tools
 
-- Status: **Proposed**
+- Status: **Accepted**
 - Date: 2026-11-14
 
 ## Context

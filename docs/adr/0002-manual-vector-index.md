@@ -1,6 +1,6 @@
 # ADR-0002: Implement vector-search algorithms in-house
 
-- Status: **Proposed**
+- Status: **Accepted**
 - Date: 2026-11-14
 
 ## Context
