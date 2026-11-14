@@ -10,6 +10,11 @@ test('Lambda HTTP v2 adapter protects origin and serves modern/legacy MCP with s
   const event = { rawPath: '/mcp', headers: {}, requestContext: { http: { method: 'POST', sourceIp: 'unit-test-ip' } } };
   try {
     assert.equal((await handler(event)).statusCode, 403);
+    const health = await handler({ ...event, rawPath: '/health', headers: { 'x-fiscal-origin': process.env.ORIGIN_SECRET }, requestContext: { http: { method: 'GET', sourceIp: 'unit-test-ip' } } });
+    assert.equal(health.statusCode, 200);
+    const stats = JSON.parse(health.body).corpus;
+    assert.ok(stats.evidence > 0 && stats.cfop > 0 && stats.ncm > 0);
+    assert.match(stats.checksum, /^[a-f0-9]{64}$/);
     for (const mode of ['legacy', 'auto']) {
       const client = new Client({ name: 'lambda-contract', version: '1' }, { versionNegotiation: { mode } });
       const transport = new StreamableHTTPClientTransport(new URL('https://fiscal.test/mcp'), { fetch: async (url, init) => {

@@ -12,8 +12,8 @@ export function chunkLegalDocument(document: LegalDocument, maxChars = 1600): Ev
   let article: Unit | undefined;
   let current: Unit | undefined;
   for (const line of document.text.replaceAll('\r\n', '\n').split('\n').map(s => s.trim()).filter(Boolean)) {
-    const articleMatch = /^(?:Art\.?|Artigo)\s*(\d+[º°o]?(?:-[A-Z])?)\s*[.\-–:]?/i.exec(line);
-    const subordinate = /^(?:§\s*\d+[º°o]?|Parágrafo único|[IVXLCDM]+\s*[-–]|[a-z]\))/i.test(line);
+    const articleMatch = /^(?:\(\d+\)\s*)?(?:Art\.?|Artigo)\s*(\d+[º°o]?(?:-[A-Z])?)\s*[.\-–:]?/i.exec(line);
+    const subordinate = /^(?:\(\d+\)\s*)?(?:§\s*\d+[º°o]?|Parágrafo único|[IVXLCDM]+\s*[-–]|[a-z]\))/i.test(line);
     const exception = /\b(?:exceto|salvo|ressalvad[oa]s?|não se aplica|exceç(?:ão|ões))\b/i.test(line);
     if (articleMatch || subordinate || exception || !current) {
       const id = `${document.id}:unit:${units.length + 1}`;

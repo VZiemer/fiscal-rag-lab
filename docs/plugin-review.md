@@ -24,3 +24,5 @@ Casos para o revisor: código exato → ferramenta de lookup; texto ambíguo →
 - **Pending:** vídeo real, testes das ferramentas no host, verificação de identidade/domínio e atestações pelo desenvolvedor no portal.
 
 Rascunho de listagem mantém a descrição educativa e declara o corpus restrito; o ZIP não está pronto para submissão enquanto esses itens estiverem pendentes. O pacote privado continua privado; não houve upload em portal de submissão nem publicação no diretório.
+
+Atualização 0.1.2: descrições e casos positivos acompanham a carga oficial NCM/CFOP e os recortes SP/MG. A versão privada foi salva e lida novamente, com conexão MCP, prompts iniciais e política RAG-only preservados. A leitura confirmou `USER` / `PRIVATE`. Contratos remotos da nova carga passaram em ambos os protocolos: `docs/deployment/aws-official-smoke.json`. Isso não altera as pendências de teste do agente e vídeo real no Work.

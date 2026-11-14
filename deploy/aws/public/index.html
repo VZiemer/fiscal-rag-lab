@@ -4,10 +4,10 @@
 <style>body{font:18px/1.65 system-ui;max-width:760px;margin:8vh auto;padding:0 24px;color:#182c38;background:#f4f7f8}h1{line-height:1.15}a{color:#005c79}code{background:#e1e9ed;padding:3px 6px;border-radius:4px}aside{border-left:4px solid #bc6a13;padding-left:18px}li{margin:9px 0}</style>
 <main><p>LABORATÓRIO EDUCACIONAL · DEMONSTRAÇÃO PÚBLICA</p><h1>Fiscal RAG Lab</h1>
 <p>Recuperação documental com procedência, busca lexical, índices vetoriais próprios e ferramentas MCP somente leitura.</p>
-<aside>Não fornece parecer tributário, cálculo de impostos ou emissão de NF-e. O corpus inicial contém dez resumos editoriais de duas páginas da Receita sobre NCM e Classif. Não inclui a tabela completa oficial de CFOP ou NCM. Vigência das páginas é desconhecida.</aside>
+<aside>Não fornece parecer tributário, cálculo de impostos ou emissão de NF-e. A base reúne tabelas oficiais NCM/CFOP, atos CONFAZ e um recorte dos regulamentos de ICMS de São Paulo e Minas Gerais. Cobertura parcial, sem histórico completo ou garantia de atualização automática. Vigências não comprovadas permanecem desconhecidas.</aside>
 <h2>Conexão</h2><p>Endpoint HTTPS: <code id="endpoint">/mcp</code>. <a href="/health">Estado do serviço</a> · <a href="/privacy">Privacidade</a></p>
-<ul><li><code>search_regulations</code>: recuperar evidências e respectivas fontes.</li><li><code>get_cfop</code> e <code>get_ncm</code>: lookup exato; nesta edição sem tabela carregada, retornam ausência no corpus.</li><li><code>explain_rule</code>: consultar evidência pelo identificador.</li></ul>
+<ul><li><code>search_regulations</code>: recuperar evidências e respectivas fontes, com filtro de UF e data.</li><li><code>get_cfop</code> e <code>get_ncm</code>: consultar os códigos nas tabelas carregadas, preservando notas, hierarquia e procedência.</li><li><code>explain_rule</code>: consultar evidência pelo identificador.</li></ul>
 <p>O controle vetorial usa hashing lexical local; não há modelo de linguagem ou treinamento de LoRA nesta implantação.</p>
-<p>Exemplo de consulta: “Quais formatos de download NCM existem?”. Confira sempre a referência oficial retornada, a edição e as limitações.</p>
+<p>Exemplos: “Consulte o CFOP 5102”, “Consulte o NCM 0901.21.00” ou “Busque substituição tributária em Minas Gerais”. Confira sempre a referência oficial retornada, a edição e as limitações. <a href="/health">Contagens e hash da edição implantada</a>.</p>
 <p>Responsável: {{OPERATOR_NAME}}. Contato: {{OPERATOR_EMAIL}} · {{OPERATOR_SITE}}. Não envie dados pessoais, notas ou credenciais. Acesso experimental sem garantia de disponibilidade.</p></main>
 <script>document.getElementById('endpoint').textContent=location.origin+'/mcp'</script></html>

@@ -9,10 +9,11 @@ import { chunkLegalDocument } from '../../../packages/retrieval/src/legal-chunke
 import { parseCfopXlsx, parseNcmJson } from './fiscal-parsers.js';
 import { sha256, type Snapshot } from './snapshots.js';
 import type { CorpusFile } from '../../../packages/application/src/corpus-file.js';
+import { decodeOfficialHtml, extractOfficialHtml, type HtmlProfile } from './official-html.js';
 
 export interface CorpusBuildManifest {
   version: 1;
-  snapshots: { metadataFile: string; format: 'cfop-xlsx' | 'ncm-json' | 'legal-text'; documentId?: string }[];
+  snapshots: { metadataFile: string; format: 'cfop-xlsx' | 'ncm-json' | 'legal-text' | 'official-html'; documentId?: string; htmlProfile?: HtmlProfile }[];
 }
 
 export async function buildCorpus(manifest: CorpusBuildManifest, baseDirectory = '.'): Promise<CorpusFile> {
@@ -27,12 +28,20 @@ export async function buildCorpus(manifest: CorpusBuildManifest, baseDirectory =
     const { bytes: _bytes, contentType: _type, ...provenance } = metadata;
     if (item.format === 'cfop-xlsx') corpus.codes.push(...await parseCfopXlsx(bytes, provenance));
     else if (item.format === 'ncm-json') corpus.codes.push(...parseNcmJson(new TextDecoder('utf-8', { fatal: true }).decode(bytes), provenance));
-    else if (item.format === 'legal-text') {
+    else if (item.format === 'official-html') {
+      if (!item.documentId || !item.htmlProfile) throw new Error('HTML profile and documentId required');
+      corpus.evidence.push(...extractOfficialHtml(decodeOfficialHtml(bytes, metadata.contentType), item.htmlProfile, item.documentId, provenance));
+    } else if (item.format === 'legal-text') {
       const text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
       if (!item.documentId || /^\s*</.test(text) || text.startsWith('%PDF')) throw new Error('legal-text requires documentId and plain UTF-8 text, not HTML/PDF');
       corpus.evidence.push(...chunkLegalDocument({ id: item.documentId, text, provenance }));
     } else throw new Error('Unsupported snapshot parser');
   }
+  for (const code of corpus.codes) corpus.evidence.push({
+    id: `code:${code.kind}:${code.code}:${code.provenance.sourceId}:${code.provenance.checksum}:${code.provenance.validFrom ?? 'unknown'}:${code.provenance.validTo ?? 'unknown'}`, documentId: code.provenance.sourceId,
+    text: `${code.kind.toUpperCase()} ${code.code}: ${code.description}\n${code.notes ?? ''}`.trim(),
+    article: null, parentId: null, relatedIds: [], provenance: code.provenance
+  });
   new MemoryCorpus(corpus.evidence);
   new InMemoryFiscalRepository(corpus.codes);
   return corpus;

@@ -4,7 +4,7 @@ Demonstração educativa de recuperação documental, sem garantia de disponibil
 
 Não use o serviço para emitir documentos fiscais, calcular obrigações, processar dados confidenciais ou obter uma classificação definitiva de produto. Não envie dados pessoais, credenciais ou XML de notas. A aplicação oferece somente consultas de leitura e pode aplicar limites de tráfego.
 
-O corpus desta edição é restrito: dez paráfrases editoriais de páginas da Receita sobre NCM/Classif. Não contém tabelas oficiais completas CFOP/NCM. Vigência desconhecida permanece desconhecida. Confira as fontes oficiais referenciadas e seu contexto antes de usar qualquer informação.
+O corpus contém tabelas NCM/CFOP, atos CONFAZ e recortes oficiais de ICMS de São Paulo e Minas Gerais. Não contém todo o histórico fiscal, todas as normas ou todos os manuais técnicos. Há trechos excluídos por corrupção na fonte; planilhas auxiliares arquivadas sem parser não são evidências recuperáveis. Não há atualização automática. Vigência desconhecida permanece desconhecida. Confira as fontes oficiais referenciadas e seu contexto antes de usar qualquer informação.
 
 Código do projeto sob MIT; materiais de terceiros conservam suas condições próprias. A política de privacidade descreve o processamento técnico. Estas condições descrevem o uso experimental, sem declarar correção fiscal ou conformidade jurídica integral.
 
