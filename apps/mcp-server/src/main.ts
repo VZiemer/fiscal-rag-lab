@@ -10,7 +10,11 @@ const services = await loadServices(file, {
 });
 const runtime = createMcpHttpServer(services, {
   allowedHosts: (process.env.MCP_ALLOWED_HOSTS ?? 'localhost,127.0.0.1,[::1]').split(','),
-  allowedOrigins: (process.env.MCP_ALLOWED_ORIGINS ?? '').split(',').filter(Boolean)
+  allowedOrigins: (process.env.MCP_ALLOWED_ORIGINS ?? '').split(',').filter(Boolean),
+  requestsPerMinute: Number(process.env.MCP_REQUESTS_PER_MINUTE ?? '60'),
+  globalRequestsPerMinute: Number(process.env.MCP_GLOBAL_REQUESTS_PER_MINUTE ?? '600'),
+  maxConcurrent: Number(process.env.MCP_MAX_CONCURRENT ?? '16'),
+  log: event => console.log(JSON.stringify(event))
 });
 runtime.server.listen(port, process.env.MCP_HOST ?? '127.0.0.1', () => console.log(JSON.stringify({ event: 'listening', port, readOnly: true })));
 for (const signal of ['SIGINT', 'SIGTERM'] as const) process.once(signal, () => { void runtime.close(); });
