@@ -3,7 +3,7 @@
   "mcpServers": {
     "fiscal": {
       "type": "streamable-http",
-      "url": "http://127.0.0.1:3000/mcp",
+      "url": "https://d2kvl1uo6lcsgz.cloudfront.net/mcp",
       "extensions": { "com.openai": { "auth": { "type": "none" } } }
     }
   }

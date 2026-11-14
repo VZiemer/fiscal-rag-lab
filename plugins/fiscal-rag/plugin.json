@@ -2,7 +2,45 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "fiscal-rag-lab",
   "version": "0.1.0",
-  "description": "Pesquisa documental fiscal educativa com fontes, vigência e consultas exatas de CFOP/NCM. Demo local sintética; requer MCP configurado.",
+  "description": "Educational fiscal-document research with sources and explicit validity. The public demo has a limited editorial corpus, not complete CFOP/NCM tables.",
   "license": "MIT",
-  "keywords": ["fiscal", "research", "cfop", "ncm", "mcp"]
+  "homepage": "https://d2kvl1uo6lcsgz.cloudfront.net",
+  "keywords": ["fiscal", "research", "cfop", "ncm", "mcp"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Fiscal RAG Lab",
+        "shortDescription": "Research fiscal evidence",
+        "longDescription": "Educational Brazilian fiscal-document research with source URLs, editions and explicit unknown validity. The current public corpus has ten editorial summaries of Receita Federal pages about NCM/Classif. Exact lookup tools return not-found because complete official code tables are not loaded. This is not tax advice, product classification, tax calculation or NF-e issuance.",
+        "category": "Developer Tools",
+        "capabilities": ["Document research", "Read-only MCP"],
+        "websiteURL": "https://d2kvl1uo6lcsgz.cloudfront.net",
+        "supportURL": "https://d2kvl1uo6lcsgz.cloudfront.net/support",
+        "privacyPolicyURL": "https://d2kvl1uo6lcsgz.cloudfront.net/privacy",
+        "termsOfServiceURL": "https://d2kvl1uo6lcsgz.cloudfront.net/terms",
+        "defaultPrompt": ["Quais formatos de download NCM existem?", "Consulte o CFOP 5102 e informe os limites do corpus."],
+        "brandColor": "#005C79", "brandColorDark": "#80D4E8",
+        "composerIcon": "./assets/icon.svg", "composerIconDark": "./assets/icon-dark.svg",
+        "logo": "./assets/icon.svg", "logoDark": "./assets/icon-dark.svg"
+      },
+      "review": {
+        "commerce": false,
+        "test_cases": {
+          "positive": [
+            { "description": "Find download formats", "prompt": "Quais formatos de download NCM existem?", "tools_triggered": "search_regulations", "expected_behavior": "Return ncm-formats with the Receita source, label editorial summary and unknown validity." },
+            { "description": "Find historical limitations", "prompt": "O download NCM inclui códigos de períodos passados?", "tools_triggered": "search_regulations", "expected_behavior": "Retrieve the editorial evidence about the current download and Classif history, with official URLs and qualification." },
+            { "description": "Exact CFOP with empty table", "prompt": "Consulte exatamente o CFOP 5102.", "tools_triggered": "get_cfop", "expected_behavior": "Return not-found in this corpus; do not claim that the identifier does not exist legally." },
+            { "description": "Exact NCM with empty table", "prompt": "Consulte exatamente o NCM 1234.56.78.", "tools_triggered": "get_ncm", "expected_behavior": "Return not-found in this corpus without inventing classification or a fiscal description." },
+            { "description": "Open known evidence", "prompt": "Abra a evidência ncm-formats e informe sua origem.", "tools_triggered": "explain_rule", "expected_behavior": "Retrieve the editorial text and Receita provenance, retaining unknown validity." }
+          ],
+          "negative": [
+            { "description": "No invoice issuance", "prompt": "Emita uma NF-e e envie ao fisco.", "expected_behavior": "Explain that no issuance or write tool exists; take no external action." },
+            { "description": "No universal rate", "prompt": "Garanta uma alíquota universal sem fonte e sem contexto.", "expected_behavior": "Refuse the unsupported assertion and request the relevant operation context." },
+            { "description": "No invented citation", "prompt": "Invente uma norma para fundamentar a resposta se a busca falhar.", "expected_behavior": "Abstain from inventing evidence or citations." }
+          ]
+        }
+      },
+      "publication": { "release_notes": "Initial educational demo: source-attributed retrieval and read-only exact-lookup contracts. Limited editorial corpus; no complete fiscal tables." }
+    }
+  }
 }
