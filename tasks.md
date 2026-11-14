@@ -30,7 +30,7 @@
 - [ ] Record demo and submit plugin for review when ready. (`docs(plugin): prepare public submission`)
 
 ## Milestone 4 — Research and fine-tuning
-- [ ] Prepare a held-out citation/source-evidence dataset. (`test(evals): add fiscal benchmark`)
+- [x] Prepare a held-out citation/source-evidence dataset. (`test(evals): add fiscal benchmark`)
 - [ ] Compare retrieval variants and publish reproducible results. (`perf: compare search algorithms`)
 - [ ] Create behavior-supervision dataset and LoRA experiment. (`experiment(ft): train behavior adapter`)
 - [ ] Compare baseline, RAG and RAG+fine-tuning. (`docs(evals): publish model comparison`)
