@@ -6,7 +6,9 @@ Create an educational, open-source proof of concept in which custom retrieval al
 
 ## C4 model
 
-The canonical C4 source is [`c4/workspace.dsl`](c4/workspace.dsl). Render with Structurizr Lite or the Structurizr CLI. The model defines **System Context**, **Containers** and **Components** for the retrieval runtime.
+The shared C4 source is [`c4/model.json`](c4/model.json). Run `npm run docs:c4` to generate PNG/SVG views and the [`Structurizr DSL export`](c4/workspace.dsl). The views cover **System Context**, **Containers**, **Components**, and a focused **Code** view of vector-index classes. The DSL export covers levels 1–3. See [generation and interpretation](c4/README.md) and the embedded images in the [main README](../README.md#arquitetura-c4-em-quatro-níveis).
+
+MCP and retrieval run in one Node.js process (locally or in Lambda); they are modules, not separate network services. Ingestion writes text and metadata to the corpus. Embeddings and both search indexes are built when the server loads that corpus. The deployed composition uses lexical hashing and exact cosine search; IVF/HNSW and learned embeddings remain separate experiments. The updated diagrams correct the initial proposed process split to reflect this implementation.
 
 ## Logical data flow
 
@@ -14,15 +16,18 @@ The canonical C4 source is [`c4/workspace.dsl`](c4/workspace.dsl). Render with S
 flowchart LR
     S[Official sources] --> I[Ingestion worker]
     I --> P[Parse + legal chunking]
-    P --> E[Embedding provider]
     P --> M[(Metadata / source snapshots)]
-    E --> V[(Custom vector index files)]
+    M --> L[Runtime loads corpus]
+    L --> E[Embedding provider]
+    E --> V[Vector index in memory]
+    L --> BM[BM25 index in memory]
     Q[ChatGPT / MCP client] --> MCP[MCP adapter]
     MCP --> R[Retrieval application]
     R --> X[Exact code lookup]
     R --> B[BM25 / vector / RRF]
     X --> M
     B --> V
+    B --> BM
     B --> M
     R --> F[Evidence + provenance]
     F --> MCP
@@ -31,11 +36,12 @@ flowchart LR
 ## Key interfaces
 
 - `EmbeddingProvider`: text input -> fixed-dimension float vector; provider can be local or external.
-- `VectorIndex`: add/search vectors, version-specific serialization; implementations: brute-force, IVF, HNSW.
+- `VectorIndex`: add/search vectors and report size; implementations: brute-force, IVF, HNSW. Snapshot serialization is specific to the exact index, not part of the shared port or the deployed loading path.
 - `CorpusRepository`: documents, legal hierarchy, source URL, checksum, validity intervals.
-- `Retriever`: ranked evidence from exact, lexical and semantic routes.
+- `HybridRetriever`: ranked evidence from exact-code, lexical and vector routes. The published hash vectors are lexical, not learned semantic representations.
 - `FiscalRuleRepository`: deterministic CFOP/NCM data lookup.
-- `McpToolHandlers`: translate protocol requests into application use cases.
+- MCP handlers in `server.ts`: translate protocol requests into application use cases.
+- `Schema<T>` / `ObjectContract`: project-owned validation, connected to MCP through the Standard Schema adapter; Zod stays private to the validation module.
 
 ## Temporal and jurisdiction rules
 
